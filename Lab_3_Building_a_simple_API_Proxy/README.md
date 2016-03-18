@@ -156,7 +156,10 @@ b.  The ‘Transaction Map’ is interactive - click on the various
 
 a.  At this point, we will start to use the ‘Postman’ tool as a client
     to invoke our proxy and continue to use ‘Postman’ throughout the
-    rest of the labs. [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/run-collection/f0cef8dd2db670853820)
+    rest of the labs. NOTE: After you import you'll need to update the
+    environment by going to manage environments and then clicking on DevJam2.0.
+    You'll want to set the organization to your current org and then set intials
+    to your own initials. [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/run-collection/f0cef8dd2db670853820)
   
 
     -   Launch ‘Postman’
