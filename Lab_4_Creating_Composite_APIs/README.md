@@ -601,11 +601,9 @@ c.  Use Postman to test the ‘/GET hotels’ request with the following
 
     -   zipcode=98101&radius=1000
 
-    -   zipcode=98101&radius=200
-
     -   zipcode=94105&radius=400
 
-    -   No query parameters
+    -   No query parameters (Essentially rerunning the LAB 3 check)
 
 > Note : Before invoking the API, change the URL to point your API i.e.
 > **{your\_initials}**\_hotels.

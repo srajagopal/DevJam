@@ -45,14 +45,6 @@ TargetEndpoint.
   
   
 
-For these labs we'll be using POSTMAN to send requests and we've prepared a
-postman collection to make this easier. Please click on the link below to
-import these. Then whenever you're directed to use Postman the links will 
-already be setup for you. See blow:
-  
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/run-collection/f0cef8dd2db670853820)
-  
   
 
 
@@ -164,7 +156,8 @@ b.  The ‘Transaction Map’ is interactive - click on the various
 
 a.  At this point, we will start to use the ‘Postman’ tool as a client
     to invoke our proxy and continue to use ‘Postman’ throughout the
-    rest of the labs.
+    rest of the labs. [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/run-collection/f0cef8dd2db670853820)
+  
 
     -   Launch ‘Postman’
 
