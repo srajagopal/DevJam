@@ -162,6 +162,7 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
 </AssignMessage>```
   -------------------------------------------------------------------------------------------------------------
 
+
 *(You can find the policy xml* [**here**](./CreateGeoCodingRequest.xml)*. Click the “Raw” button and copy/paste into your policy editor).*
 
 Here's a brief description of the elements in this policy. You can read more about this policy in [Assign Message policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
