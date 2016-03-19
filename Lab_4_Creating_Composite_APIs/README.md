@@ -253,14 +253,10 @@ Here's a brief description of the elements that were modified in this policy. Yo
 ```
   --------------------------------------------------------------------------------------------------------
 
-> *(You can find the policy xml*
-> [**here**](./ExtractGeoCodes.xml)*.
-> Click the “Raw” button and copy/paste into your policy editor).*
->
-> Here's a brief description of the elements that were modified in this
-> policy. You can read more about this policy in [Extract Variables
-> policy](http://apigee.com/docs/api-services/reference/extract-variables-policy).
->
+*(You can find the policy xml* [**here**](./ExtractGeoCodes.xml)*. Click the “Raw” button and copy/paste into your policy editor).*
+
+Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [Extract Variables policy](http://apigee.com/docs/api-services/reference/extract-variables-policy).
+
 > **&lt;Source&gt;** - Specifies the response variable
 > ‘GeoCodingResponse’ that we created in the ServiceCallout policy. This
 > is the variable from which this policy extracts data.
@@ -281,13 +277,7 @@ Here's a brief description of the elements that were modified in this policy. Yo
 > The values of geometry.location.lat and geometry.location.lng are
 > simply two of the many fields in the returned JSON object.
 >
-> It may not be obvious, but it's important to see that ExtractVariables
-> produces two variables whose names consist of the variable prefix
-> (geocodeResponse) and the actual variable names that are specified in
-> the policy. These variables are stored in the API proxy and will be
-> available to other policies within the proxy flow, as you will see.
-> The variables are: geocodeResponse.latitude &
-> geocodeResponse.longitude
+It may not be obvious, but it's important to see that ExtractVariables produces two variables whose names consist of the variable prefix (geocodeResponse) and the actual variable names that are specified in the policy. These variables are stored in the API proxy and will be available to other policies within the proxy flow, as you will see. The variables are: geocodeResponse.latitude & geocodeResponse.longitude
 
 1)  **Using the Javascript Policy to create the Location Query to send
     to the BaaS target endpoint**
@@ -334,26 +324,13 @@ Here's a brief description of the elements that were modified in this policy. Yo
   ```
   ---------------------------------------------------------------------------------
 
-> *(You can find the javascript file content*
-> [**here**](./createLocationQuery.js)*.
-> Click the “Raw” button and copy/paste into your policy editor).*
->
-> This Javascript code uses the ‘context’ object, which is part of the
-> [Apigee Edge Javascript object
-> model](http://apigee.com/docs/api-services/reference/javascript-object-model)
-> to retrieve 3 variables - geocodeResponse.latitude,
-> geoCodeResponse.latitude, radius - that were set by policies earlier
-> in the flow.
->
-> It sets a default in case the variables are empty strings, creates a
-> new query variable called ‘baasQL’ using the API BaaS query language
-> syntax for a location query, and adds the ‘baasQL’ variable to the
-> ‘context’ object to be used later in the flow by the Assign Message
-> policy to set the query parameter before the API BaaS target endpoint
-> is invoked.
->
-> You can read more about this policy in [Javascript
-> policy](http://apigee.com/docs/api-services/reference/javascript-policy).
+*(You can find the javascript file content* [**here**](./createLocationQuery.js)*. Click the “Raw” button and copy/paste into your policy editor).*
+
+This Javascript code uses the ‘context’ object, which is part of the [Apigee Edge Javascript object model](http://apigee.com/docs/api-services/reference/javascript-object-model) to retrieve 3 variables - geocodeResponse.latitude, geoCodeResponse.latitude, radius - that were set by policies earlier in the flow.
+
+It sets a default in case the variables are empty strings, creates a new query variable called ‘baasQL’ using the API BaaS query language syntax for a location query, and adds the ‘baasQL’ variable to the ‘context’ object to be used later in the flow by the Assign Message policy to set the query parameter before the API BaaS target endpoint is invoked.
+
+You can read more about this policy in [Javascript policy](http://apigee.com/docs/api-services/reference/javascript-policy).
 
 1)  **Using the Assign Message Policy to add the Location Query to the
     query parameter before BaaS target endpoint invocation**
