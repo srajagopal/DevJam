@@ -881,3 +881,5 @@ JavaScript, Java, node.js, or external services. In addition, with our
 micro-services architecture, you can implement a set small, independent,
 decoupled, focused processes with node.js and deploy them in the gateway
 to meet your unique needs.
+
+Now [go to Lab 5](../Lab_5_Protecting_APIs/).

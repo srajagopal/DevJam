@@ -195,3 +195,5 @@ That completes our first hands-on lesson. In this short lab, you learned
 the fundamentals of API design, creating Swagger specification for an
 API also understood how to create an API proxy in Apigee Edge from an
 existing Swagger specification.
+
+Now [go to Lab 2](../Lab_2_Introduction_to_API_BaaS/).

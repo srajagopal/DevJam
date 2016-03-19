@@ -870,3 +870,5 @@ the various out-of-the-box security related policies that are available
 in Apigee Edge and to leverage a couple of those policies - API Key
 Verification and OAuth 2.0 client credentials grant - to secure your
 APIs.
+
+Now [go to Lab 7](../Lab_7_Creating_Custom_Reports/).

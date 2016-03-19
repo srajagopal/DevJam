@@ -42,10 +42,10 @@ You can visualize API proxies as shown by the graphic below. A basic
 request and response exchange between an app (HTTP client) and a backend
 service is managed in an API proxy by a ProxyEndpoint and
 TargetEndpoint.
-  
-  
 
-  
+
+
+
 
 
 ![](./media/image3.png)
@@ -160,7 +160,7 @@ a.  At this point, we will start to use the ‘Postman’ tool as a client
     environment by going to manage environments and then clicking on DevJam2.0.
     You'll want to set the organization to your current org and then set intials
     to your own initials. [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/run-collection/f0cef8dd2db670853820)
-  
+
 
     -   Launch ‘Postman’
 
@@ -191,3 +191,5 @@ undeploy it to/from an environment, and how to trace the proxy flow.
 Throughout the rest of the hands-on labs you will be working with this
 Management UI to add policies to proxies, testing and tracing these
 proxies, and learning about the power of the Apigee Edge platform.
+
+Now [go to Lab 4](../Lab_4_Creating_Composite_APIs/).

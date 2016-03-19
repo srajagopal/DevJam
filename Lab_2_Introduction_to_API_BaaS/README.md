@@ -258,3 +258,6 @@ interacted with using the BaaS portal and RESTful APIs automatically
 exposed by BaaS, and how to easily query the data including full-text
 searching. For further information refer to the API BaaS
 [*documentation*](http://apigee.com/docs/developer-services/content/add-and-edit-content).
+
+
+Now [go to Lab 3](../Lab_3_Building_a_simple_API_Proxy/).

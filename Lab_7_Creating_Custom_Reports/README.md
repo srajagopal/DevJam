@@ -368,3 +368,5 @@ are available to you.
     -   Developer Engagement
 
     -   Error Analysis reports
+
+    Now [go to Lab 8](../Lab_8_Monitoring_your_API_Health/).

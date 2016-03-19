@@ -279,3 +279,5 @@ Response Cache policy to provide a better overall experience for the API
 consumer while reducing network traffic. Obviously like any other
 policy, these policies must be used appropriately based upon your use
 cases.
+
+Now [go to Lab 6](../Lab_6_Securing_APIs/).
