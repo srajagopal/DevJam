@@ -69,12 +69,17 @@ your Instructor for organization and application details.
         in the browser and delete it. Paste the Swagger that you copied
         in its place.
 
-   c.  On the right side of the screen you will see the generated
+   c.  Note the basePath is currently set with organization and application.
+        In the screenshot below this is depicted as organization sudheendra
+        and application sandbox. Please update the organization with organiztion
+        provided you by your DevJam leader.
+
+   d.  On the right side of the screen you will see the generated
         documentation updated to reflect the API described by the
         Swagger that you just pasted.
         ![](./media/image5.png)   
 
-   d.  On the right side of the Swagger editor, in the documentation
+   e.  On the right side of the Swagger editor, in the documentation
         view, scroll down to the Responses section and click the Try
         this operation button:
 

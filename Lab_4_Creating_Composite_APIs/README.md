@@ -91,53 +91,10 @@ without screenshots unless a new concept is being introduced.
 
 **Estimated Time : 45 mins**
 
-1)  **Adding Resources to a Policy** is done from the ‘Overview’ tab of
-    the API Proxy
-
-    a.  Go to the Apigee Edge Management UI browser tab
-
-    b.  Go to the ‘{your\_initials}\_hotel’ proxy’s ‘Overview’ tab.
-
-    c.  Switch to classic proxy editor screen by clicking on "access the
-        classic version of proxy editor" on the top right corner.
-
-    d.  From the ‘resources’ section, click on the ‘+ Resources’ button
-
-    e.  In the new resource row, provide the following properties:
-
-        -   Name: **Get Individual Hotel**
-
-        -   Proxy Endpoint: **Default**
-
-        -   Method: **GET**
-
-        -   Path: **/{hotel-uuid}**
-
-> ![](./media/image3.png)
-
-a.  Add another resource with the following properties:
-
-    -   Name: **Get Hotels**
-
-    -   Proxy Endpoint: **Default**
-
-    -   Method: **GET**
-
-    -   Path: **/**
-
-    -   After setting those properties, click on the ‘Checkbox’ in the
-        ‘Actions’ column to complete adding the resource
-
-    -   Click on Save
-
-<!-- -->
-
 1)  **Adding Policies to a Proxy** is done from the ‘Develop’ tab of the
     API Proxy.
 
-    a.  Now that you have an API Proxy configured with a couple of
-        resources, you will add logic to the ‘Get Hotels’ resource
-        using policies.
+    a.  Now that you have an API Proxy configured with a couple of resources, you will add logic to the ‘findHotels’ resource using policies.
 
 > The goal is to have the proxy perform a geolocation query against our
 > ‘hotels’ BaaS data collection to return results within a certain
@@ -597,7 +554,7 @@ b.  Go to the ‘Trace’ tab and start a trace session by clicking the
 
 c.  Use Postman to test the ‘/GET hotels’ request with the following
     query parameters combinations and review the results being returned
-  
+
 
     -   zipcode=98101&radius=1000
 
