@@ -306,6 +306,7 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
         follows:
 
   --------------------------------------------------------------------------------------------------------
+
   ```xml
   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ExtractVariables async="false" continueOnError="false" enabled="true" name="Extract-Geo-Codes">
