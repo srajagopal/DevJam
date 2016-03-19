@@ -177,51 +177,30 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
     as follows:
 
   -------------------------------------------------------------------------------------------------------------
-  &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-
-  &lt;AssignMessage async="false" continueOnError="false" enabled="true" name="Create-Geo-Coding-Request"&gt;
-
-  &lt;DisplayName&gt;Create Geo Coding Request&lt;/DisplayName&gt;
-
-  &lt;AssignTo createNew="true" type="request"&gt;GeoCodingRequest&lt;/AssignTo&gt;
-
-  &lt;Set&gt;
-
-  &lt;QueryParams&gt;
-
-  &lt;QueryParam name="address"&gt;{request.queryparam.zipcode}&lt;/QueryParam&gt;
-
-  &lt;QueryParam name="region"&gt;US&lt;/QueryParam&gt;
-
-  &lt;QueryParam name="sensor"&gt;false&lt;/QueryParam&gt;
-
-  &lt;/QueryParams&gt;
-
-  &lt;Verb&gt;GET&lt;/Verb&gt;
-
-  &lt;/Set&gt;
-
-  &lt;!-- Set variables for use in the flow --&gt;
-
-  &lt;AssignVariable&gt;
-
-  &lt;Name&gt;zipcode&lt;/Name&gt;
-
-  &lt;Ref&gt;request.queryparam.zipcode&lt;/Ref&gt;
-
-  &lt;/AssignVariable&gt;
-
-  &lt;AssignVariable&gt;
-
-  &lt;Name&gt;radius&lt;/Name&gt;
-
-  &lt;Value&gt;0&lt;/Value&gt;
-
-  &lt;Ref&gt;request.queryparam.radius&lt;/Ref&gt;
-
-  &lt;/AssignVariable&gt;
-
-  &lt;/AssignMessage&gt;
+  ```xml
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="Create-Geo-Coding-Request">
+    <DisplayName>Create Geo Coding Request</DisplayName>
+    <AssignTo createNew="true" type="request">GeoCodingRequest</AssignTo>
+    <Set>
+        <QueryParams>
+            <QueryParam name="address">{request.queryparam.zipcode}</QueryParam>
+            <QueryParam name="region">US</QueryParam>
+            <QueryParam name="sensor">false</QueryParam>
+        </QueryParams>
+        <Verb>GET</Verb>
+    </Set>
+    <!-- Set variables for use in the flow -->
+    <AssignVariable>
+        <Name>zipcode</Name>
+        <Ref>request.queryparam.zipcode</Ref>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>radius</Name>
+        <Value>0</Value>
+        <Ref>request.queryparam.radius</Ref>
+    </AssignVariable>
+</AssignMessage>```
   -------------------------------------------------------------------------------------------------------------
 
 > *(You can find the policy xml*
@@ -327,33 +306,23 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
         follows:
 
   --------------------------------------------------------------------------------------------------------
-  &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 
-  &lt;ExtractVariables async="false" continueOnError="false" enabled="true" name="Extract-Geo-Codes"&gt;
-
-  &lt;DisplayName&gt;Extract Geo Codes&lt;/DisplayName&gt;
-
-  &lt;Source&gt;GeoCodingResponse&lt;/Source&gt;
-
-  &lt;VariablePrefix&gt;geocodeResponse&lt;/VariablePrefix&gt;
-
-  &lt;JSONPayload&gt;
-
-  &lt;Variable name="latitude"&gt;
-
-  &lt;JSONPath&gt;\$.results\[0\].geometry.location.lat&lt;/JSONPath&gt;
-
-  &lt;/Variable&gt;
-
-  &lt;Variable name="longitude"&gt;
-
-  &lt;JSONPath&gt;\$.results\[0\].geometry.location.lng&lt;/JSONPath&gt;
-
-  &lt;/Variable&gt;
-
-  &lt;/JSONPayload&gt;
-
-  &lt;/ExtractVariables&gt;
+  ```xml
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="Extract-Geo-Codes">
+    <DisplayName>Extract Geo Codes</DisplayName>
+    <Source>GeoCodingResponse</Source>
+  	<VariablePrefix>geocodeResponse</VariablePrefix>
+  	<JSONPayload>
+    	<Variable name="latitude">
+       		<JSONPath>$.results[0].geometry.location.lat</JSONPath>
+    	</Variable>
+    	<Variable name="longitude">
+       		<JSONPath>$.results[0].geometry.location.lng</JSONPath>
+    	</Variable>
+  	</JSONPayload>
+</ExtractVariables>
+```
   --------------------------------------------------------------------------------------------------------
 
 > *(You can find the policy xml*
@@ -420,6 +389,7 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
         in the ‘Code: Create Location Query’ panel:
 
   ---------------------------------------------------------------------------------
+  ```javascript
   var latitude = context.getVariable("geocodeResponse.latitude"),
 
   longitude = context.getVariable("geocodeResponse.longitude"),
@@ -427,14 +397,13 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
   radius = context.getVariable("radius");
 
   // set default (0 meters)
-
   radius = (radius == "") ? "0" : radius;
 
   // set BaaS query
-
   var baasQL = "location within " + radius + " of " + latitude + "," + longitude;
 
   context.setVariable("baasQL", baasQL);
+  ```
   ---------------------------------------------------------------------------------
 
 > *(You can find the javascript file content*
@@ -479,35 +448,23 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
         Parameters’ panel as follows:
 
   --------------------------------------------------------------------------------------------------------
-  &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-
-  &lt;AssignMessage async="false" continueOnError="false" enabled="true" name="Set-Query-Parameters"&gt;
-
-  &lt;DisplayName&gt;Set Query Parameters&lt;/DisplayName&gt;
-
-  &lt;Remove&gt;
-
-  &lt;QueryParams&gt;
-
-  &lt;QueryParam name="zipcode"/&gt;
-
-  &lt;QueryParam name="radius"/&gt;
-
-  &lt;/QueryParams&gt;
-
-  &lt;/Remove&gt;
-
-  &lt;Set&gt;
-
-  &lt;QueryParams&gt;
-
-  &lt;QueryParam name="ql"&gt;{baasQL}&lt;/QueryParam&gt;
-
-  &lt;/QueryParams&gt;
-
-  &lt;/Set&gt;
-
-  &lt;/AssignMessage&gt;
+  ```xml
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="Set-Query-Parameters">
+  <DisplayName>Set Query Parameters</DisplayName>
+  <Remove>
+    <QueryParams>
+      <QueryParam name="zipcode"/>
+      <QueryParam name="radius"/>
+    </QueryParams>
+  </Remove>
+  <Set>
+    <QueryParams>
+      <QueryParam name="ql">{baasQL}</QueryParam>
+    </QueryParams>
+  </Set>
+</AssignMessage>
+```
   --------------------------------------------------------------------------------------------------------
 
 > *(You can find policy xml*
@@ -614,24 +571,21 @@ b.  From the ‘New Policy’ drop-down, select the ‘Javascript’ policy and
 c.  Add the following code to the ‘Create-Final-Response.js’ script:
 
   -----------------------------------------------------------------------------------------------------------------------
+  ```javascript
   var hotelsResponse = context.getVariable("response.content"),
 
   zipcode = context.getVariable("zipcode"),
-
   radius = context.getVariable("radius"),
 
   finalResponse = {};
 
   // initialize hotels response
-
   finalResponse.hotels = {};
 
   // add queryparams used as part of the hotels response
-
   finalResponse.hotels.queryparams = JSON.parse('{ ' + '"zipcode" : "' + zipcode + '", "radius" : "' + radius + '" }');
 
   // add the hotels response
-
   if (hotelsResponse != null) {
 
   var hotelsJSON = JSON.parse(hotelsResponse);
@@ -639,7 +593,6 @@ c.  Add the following code to the ‘Create-Final-Response.js’ script:
   finalResponse.hotels.resultsMetadata = {};
 
   // set results count
-
   finalResponse.hotels.resultsMetadata.count = 0;
 
   if (hotelsJSON.count != null && hotelsJSON.count != "") {
@@ -649,30 +602,24 @@ c.  Add the following code to the ‘Create-Final-Response.js’ script:
   }
 
   // set current results cursor
-
   if (hotelsJSON.params != null && hotelsJSON.params.cursor != null && hotelsJSON.params.cursor != "") {
 
   finalResponse.hotels.resultsMetadata.currentCursor = hotelsJSON.params.cursor\[0\];
-
   }
 
   // set next results cursor
-
   if (hotelsJSON.cursor != null && hotelsJSON.cursor != "") {
 
   finalResponse.hotels.resultsMetadata.nextCursor = hotelsJSON.cursor;
-
   }
 
   // set the list of hotels
-
   finalResponse.hotels.entities = hotelsJSON.entities;
-
   }
 
   // update the response that will be returned to the client
-
   context.setVariable("response.content", JSON.stringify(finalResponse));
+  ```
   -----------------------------------------------------------------------------------------------------------------------
 
 > *(You can find the javascript file content*
@@ -685,6 +632,7 @@ c.  Add the following code to the ‘Create-Final-Response.js’ script:
 > format being created and returned is as follows:
 
   -------------------------------------------
+  ```json
   {
 
   “hotels” : {
@@ -712,6 +660,7 @@ c.  Add the following code to the ‘Create-Final-Response.js’ script:
   }
 
   }
+  ```
   -------------------------------------------
 
 a.  Save the changes to the API Proxy, wait for it to successfully
