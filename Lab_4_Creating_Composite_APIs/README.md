@@ -166,33 +166,17 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
 
 Here's a brief description of the elements in this policy. You can read more about this policy in [Assign Message policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
 
-> **&lt;AssignMessage name&gt;** - Gives this policy a name. The name is
-> used when the policy is referenced in a flow.
->
-> **&lt;AssignTo&gt;** - Creates a named variable called
-> ’GeoCodingRequest’of type ‘Request’. This variable encapsulates the
-> request object that will be sent by the ServiceCallout policy.
->
-> **&lt;Set&gt;&lt;QueryParams&gt;** - Sets the query parameters that
-> are needed for the service callout API call. In this case, the Google
-> Geocoding API needs to know the location, which is expressed with a
-> zipcode. The API calling client supplies this information, and we
-> simply extract it here. The region and sensor parameters are by the
-> API, and we just hardcode it to certain values here.
->
-> **&lt;Verb&gt;** - In this case, we are making a simple GET request to
-> the API.
->
-> **&lt;AssignVariable&gt;** - zipcode and radius are new variables
-> being created to store values being passed to the API. In this
-> example, the variables will be accessed later in the proxy flow.
->
-> **Note**: The properties associated with the ‘Assign Message’ policy
-> could have been modified using the ‘Property Inspector’ panel that’s
-> presented in the ‘Develop’ tab on the right. Any changes made in the
-> ‘Code’ panel are reflected in the ‘Property Inspector’ panel and
-> vice-versa. We will use the ‘Property Inspector’ panel to set
-> properties for some of the policies as the lesson progresses.
+**&lt;AssignMessage name&gt;** - Gives this policy a name. The name is used when the policy is referenced in a flow.
+
+**&lt;AssignTo&gt;** - Creates a named variable called ’GeoCodingRequest’of type ‘Request’. This variable encapsulates the request object that will be sent by the ServiceCallout policy.
+
+**&lt;Set&gt;&lt;QueryParams&gt;** - Sets the query parameters that are needed for the service callout API call. In this case, the Google Geocoding API needs to know the location, which is expressed with a zipcode. The API calling client supplies this information, and we simply extract it here. The region and sensor parameters are by the API, and we just hardcode it to certain values here.
+
+**&lt;Verb&gt;** - In this case, we are making a simple GET request to the API.
+
+**&lt;AssignVariable&gt;** - zipcode and radius are new variables being created to store values being passed to the API. In this example, the variables will be accessed later in the proxy flow.
+
+**Note**: The properties associated with the ‘Assign Message’ policy could have been modified using the ‘Property Inspector’ panel that’s presented in the ‘Develop’ tab on the right. Any changes made in the ‘Code’ panel are reflected in the ‘Property Inspector’ panel and vice-versa. We will use the ‘Property Inspector’ panel to set properties for some of the policies as the lesson progresses.
 
 1)  **Using the Service Callout Policy to invoke the Google GeoCoding
     API**
@@ -219,26 +203,15 @@ Here's a brief description of the elements in this policy. You can read more abo
 
         -   URL: **http://maps.googleapis.com/maps/api/geocode/json**
 
-> *(You can find the policy xml*
-> [**here**](./CallGeoCodingAPI.xml)*.
-> Click the “Raw” button and copy/paste into your policy editor).*
->
-> Here's a brief description of the elements that were modified in this
-> policy. You can read more about this policy in [Service Callout
-> policy](http://apigee.com/docs/api-services/reference/service-callout-policy).
->
-> **&lt;Request variable&gt;** - This is the variable ‘GeoCodingRequest’
-> that was created in the AssignMessage policy in the previous step. It
-> encapsulates the request going to the Google Geocoding API.
->
-> **&lt;Response&gt;** - This element names a variable
-> ‘GeoCodingResponse’ in which the response from the Google Geocoding
-> API will be stored. As you will see, this variable will be accessed
-> later by the ExtractVariables policy.
->
-> **&lt;HTTPTargetConnection&gt;&lt;URL&gt;** - Specifies the target URL
-> to be used by the service callout - in this case the URL of the Google
-> Geocoding API: ‘http://maps.googleapis.com/maps/api/geocode/json’
+*(You can find the policy xml* [**here**](./CallGeoCodingAPI.xml)*. Click the “Raw” button and copy/paste into your policy editor).*
+
+Here's a brief description of the elements that were modified in this policy. You can read more about this policy in [Service Callout policy](http://apigee.com/docs/api-services/reference/service-callout-policy).
+
+**&lt;Request variable&gt;** - This is the variable ‘GeoCodingRequest’ that was created in the AssignMessage policy in the previous step. It encapsulates the request going to the Google Geocoding API.
+
+**&lt;Response&gt;** - This element names a variable ‘GeoCodingResponse’ in which the response from the Google Geocoding API will be stored. As you will see, this variable will be accessed later by the ExtractVariables policy.
+
+**&lt;HTTPTargetConnection&gt;&lt;URL&gt;** - Specifies the target URL to be used by the service callout - in this case the URL of the Google Geocoding API: ‘http://maps.googleapis.com/maps/api/geocode/json’
 
 1)  **Using the Extract Message Policy to parse the service callout
     response**
