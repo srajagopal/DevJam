@@ -7,7 +7,7 @@ Welcome to the apigee DevJam list. Herein you'll find labs, presentations and ev
 **List of Labs**
 
  * [Lab1: Design first](./Lab_1_Designing_APIs_using_Swagger)
- * [Lab2: Introdcution to Backend as a Service](./Lab_2_Introduction_to_API_BaaS)
+ * [Lab2: Introduction to Backend as a Service](./Lab_2_Introduction_to_API_BaaS)
  * [Lab3: Build your first API proxy](./Lab_3_Building_a_simple_API_Proxy)
  * [Lab4: Create a composite API](./Lab_4_Creating_Composite_APIs)
  * [Lab5: Protecting your APIs](./Lab_5_Protecting_APIs)
