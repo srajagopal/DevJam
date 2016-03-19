@@ -174,16 +174,20 @@ a.  Once the two policies have been added and you have clicked “Save”.
 > Also bump up the “rate” of Spike Arrest to some arbitrarily high
 > number so you can run a few requests through.
 >
-> <?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-> <SpikeArrest async="false" continueOnError="false" enabled="true"
-> name="Spike-Arrest-10pm"&gt;
-> <DisplayName&gt;Spike Arrest 10pm&lt;/DisplayName&gt;
-> <Properties/&gt;
-> <Identifier ref="request.header.some-header-name"/&gt;
-> <MessageWeight ref="request.header.weight"/&gt;
-> **&lt;Rate&gt;1000pm&lt;/Rate&gt;**
->
-> </SpikeArrest&gt;)
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <SpikeArrest async="false" continueOnError="false" enabled="true" name="Spike-Arrest-10pm">
+    <DisplayName>Spike Arrest 10pm</DisplayName>
+    <Properties/>
+    <Identifier ref="request.header.some-header-name"/>
+    <MessageWeight ref="request.header.weight"/>
+
+    <Rate>1000pm</Rate>
+
+</SpikeArrest>
+```
 
 1.  Review the Trace for the proxy and notice that “Extract Variables”
     and “Statistics Collector” policies get executed only for the GET
@@ -278,18 +282,20 @@ a.  Invoke ‘/GET hotels’ appending a different UUID (with a hotel from
 >
 > Also bump up the “rate” of Spike Arrest to some arbitrarily high
 > number so you can run a few requests through.
->
-> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-> &lt;SpikeArrest async="false" continueOnError="false" enabled="true"
-> name="Spike-Arrest-10pm"&gt;
-> &lt;DisplayName&gt;Spike Arrest 10pm&lt;/DisplayName&gt;
-> &lt;Properties/&gt;
-> &lt;Identifier ref="request.header.some-header-name"/&gt;
-> &lt;MessageWeight ref="request.header.weight"/&gt;
->
-> **&lt;Rate&gt;1000pm&lt;/Rate&gt;**
->
-> &lt;/SpikeArrest&gt;)
+>)
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <SpikeArrest async="false" continueOnError="false" enabled="true" name="Spike-Arrest-10pm">
+    <DisplayName>Spike Arrest 10pm</DisplayName>
+    <Properties/>
+    <Identifier ref="request.header.some-header-name"/>
+    <MessageWeight ref="request.header.weight"/>
+
+    <Rate>1000pm</Rate>
+
+</SpikeArrest>
+```
 
 2.  Go back to the Management UI and navigate to Analytics / Reports
     from the top menu.
