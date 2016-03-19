@@ -204,19 +204,15 @@ a.  Examine the XML configuration in the ‘Code’ panel (or properties
     this:
 
   -------------------------------------------------------------------------------------------------
-  &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-
-  &lt;VerifyAPIKey async="false" continueOnError="false" enabled="true" name="Verify-API-Key"&gt;
-
-  &lt;DisplayName&gt;Verify API Key&lt;/DisplayName&gt;
-
-  &lt;FaultRules/&gt;
-
-  &lt;Properties/&gt;
-
-  &lt;APIKey ref="request.queryparam.apikey"/&gt;
-
-  &lt;/VerifyAPIKey&gt;
+  ```xml
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyAPIKey async="false" continueOnError="false" enabled="true" name="Verify-API-Key">
+    <DisplayName>Verify API Key</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <APIKey ref="request.queryparam.apikey"/>
+</VerifyAPIKey>
+```
   -------------------------------------------------------------------------------------------------
 
 > *(You can find the policy xml*
@@ -257,27 +253,19 @@ a.  For the ‘Remove APIKey QP’ policy, change the XML configuration of
     the policy using the ‘Code: Remove APIKey QP’ panel as follows:
 
   ----------------------------------------------------------------------------------------------------
-  &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-
-  &lt;AssignMessage async="false" continueOnError="false" enabled="true" name="Remove-APIKey-QP"&gt;
-
-  &lt;DisplayName&gt;Remove APIKey QP&lt;/DisplayName&gt;
-
-  &lt;Remove&gt;
-
-  &lt;QueryParams&gt;
-
-  &lt;QueryParam name="apikey"&gt;&lt;/QueryParam&gt;
-
-  &lt;/QueryParams&gt;
-
-  &lt;/Remove&gt;
-
-  &lt;IgnoreUnresolvedVariables&gt;true&lt;/IgnoreUnresolvedVariables&gt;
-
-  &lt;AssignTo createNew="false" transport="http" type="request"/&gt;
-
-  &lt;/AssignMessage&gt;
+  ```xml
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="Remove-APIKey-QP">
+    <DisplayName>Remove APIKey QP</DisplayName>
+    <Remove>
+        <QueryParams>
+            <QueryParam name="apikey"></QueryParam>
+        </QueryParams>
+    </Remove>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>
+```
   ----------------------------------------------------------------------------------------------------
 
 > (You can find the policy xml
@@ -310,6 +298,7 @@ a.  You will notice that the following fault is returned since an API
     Key has not been provided as a request query parameter:
 
   ------------------------------------------------------------------------------
+  ```json
   {
 
   fault: {
@@ -325,6 +314,7 @@ a.  You will notice that the following fault is returned since an API
   }
 
   }
+  ```
   ------------------------------------------------------------------------------
 
 > The above response shows that the API Key Verification policy is being
@@ -640,29 +630,20 @@ i.  Review the XML configuration and/or the properties associated with
     the ‘Validate OAuth v2 Token’ policy.
 
   -----------------------------------------------------------------------------------------------------
-  &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-
-  &lt;OAuthV2 async="false" continueOnError="false" enabled="true" name="Validate-OAuth-v2-Token"&gt;
-
-  &lt;DisplayName&gt;Validate OAuth v2 Token&lt;/DisplayName&gt;
-
-  &lt;FaultRules/&gt;
-
-  &lt;Properties/&gt;
-
-  &lt;Attributes/&gt;
-
-  &lt;ExternalAuthorization&gt;false&lt;/ExternalAuthorization&gt;
-
-  &lt;Operation&gt;VerifyAccessToken&lt;/Operation&gt;
-
-  &lt;SupportedGrantTypes/&gt;
-
-  &lt;GenerateResponse enabled="true"/&gt;
-
-  &lt;Tokens/&gt;
-
-  &lt;/OAuthV2&gt;
+  ```xml
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="Validate-OAuth-v2-Token">
+    <DisplayName>Validate OAuth v2 Token</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Attributes/>
+    <ExternalAuthorization>false</ExternalAuthorization>
+    <Operation>VerifyAccessToken</Operation>
+    <SupportedGrantTypes/>
+    <GenerateResponse enabled="true"/>
+    <Tokens/>
+</OAuthV2>
+```
   -----------------------------------------------------------------------------------------------------
 
 > *(You can find the policy xml*
@@ -705,27 +686,19 @@ a.  For the ‘Remove Authorization Header’ policy, change the XML
     Header’ panel as follows:
 
   ---------------------------------------------------------------------------------------------------------------
-  &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-
-  &lt;AssignMessage async="false" continueOnError="false" enabled="true" name="Remove-Authorization-Header"&gt;
-
-  &lt;DisplayName&gt;Remove Authorization Header&lt;/DisplayName&gt;
-
-  &lt;Remove&gt;
-
-  &lt;Headers&gt;
-
-  &lt;Header name="Authorization"&gt;&lt;/Header&gt;
-
-  &lt;/Headers&gt;
-
-  &lt;/Remove&gt;
-
-  &lt;IgnoreUnresolvedVariables&gt;true&lt;/IgnoreUnresolvedVariables&gt;
-
-  &lt;AssignTo createNew="false" transport="http" type="request"/&gt;
-
-  &lt;/AssignMessage&gt;
+  ```xml
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="Remove-Authorization-Header">
+    <DisplayName>Remove Authorization Header</DisplayName>
+    <Remove>
+        <Headers>
+            <Header name="Authorization"></Header>
+        </Headers>
+    </Remove>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>
+```
   ---------------------------------------------------------------------------------------------------------------
 
 > *(You can find the policy xml*
@@ -762,6 +735,7 @@ i.  As expected, a fault will be returned since a valid OAuth Token has
     not been provided as part of the request:
 
   ------------------------------------------
+  ```json
   {
 
   fault: {
@@ -777,6 +751,7 @@ i.  As expected, a fault will be returned since a valid OAuth Token has
   }
 
   }
+  ```
   ------------------------------------------
 
 > The above response shows that the API Key Verification policy is being
@@ -819,37 +794,39 @@ i.  Review the response of the ‘/POST OAuth Token - Client
     use in the next step.
 
   ------------------------------------------------------------
+  ```json
   {
 
-  issued\_at: "1414962637000",
+  issued_at: "1414962637000",
 
-  application\_name: "ef723b8b-fdb1-4aae-9418-096d8ab7fec7",
+  application_name: "ef723b8b-fdb1-4aae-9418-096d8ab7fec7",
 
   scope: "",
 
   status: "approved",
 
-  api\_product\_list: "\[Hospitality\]",
+  api_product_list: "[Hospitality]",
 
-  expires\_in: "3599",
+  expires_in: "3599",
 
   developer.email: "your@email.id",
 
-  organization\_id: "0",
+  organization_id: "0",
 
-  token\_type: "BearerToken",
+  token_type: "BearerToken",
 
-  client\_id: "P24PNGrXN0gTNdVi6giT12Dq0vrG3ruB",
+  client_id: "P24PNGrXN0gTNdVi6giT12Dq0vrG3ruB",
 
-  access\_token: "**j1AA2PeAtKOMCZa9tuCdDDsRqn8J**",
+  access_token: "**j1AA2PeAtKOMCZa9tuCdDDsRqn8J**",
 
-  organization\_name: "demo37",
+  organization_name: "demo37",
 
-  refresh\_token\_expires\_in: "0",
+  refresh_token_expires_in: "0",
 
-  refresh\_count: "0"
+  refresh_count: "0"
 
   }
+  ```
   ------------------------------------------------------------
 
 i.  Start a Trace session for the ‘{your\_initials}\_hotels’ proxy
