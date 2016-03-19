@@ -135,9 +135,8 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
     Create-Geo-Coding-Request’ section, which appears underneath the Map
     as follows:
 
-  -------------------------------------------------------------------------------------------------------------
-  ```xml
-  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AssignMessage async="false" continueOnError="false" enabled="true" name="Create-Geo-Coding-Request">
     <DisplayName>Create Geo Coding Request</DisplayName>
     <AssignTo createNew="true" type="request">GeoCodingRequest</AssignTo>
@@ -159,15 +158,14 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
         <Value>0</Value>
         <Ref>request.queryparam.radius</Ref>
     </AssignVariable>
-</AssignMessage>```
-  -------------------------------------------------------------------------------------------------------------
-
+</AssignMessage>
+```
 
 *(You can find the policy xml* [**here**](./CreateGeoCodingRequest.xml)*. Click the “Raw” button and copy/paste into your policy editor).*
 
 Here's a brief description of the elements in this policy. You can read more about this policy in [Assign Message policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
 
-**&lt;AssignMessage name&gt;** - Gives this policy a name. The name is used when the policy is referenced in a flow.
+**<AssignMessage name>** - Gives this policy a name. The name is used when the policy is referenced in a flow.
 
 **&lt;AssignTo&gt;** - Creates a named variable called ’GeoCodingRequest’of type ‘Request’. This variable encapsulates the request object that will be sent by the ServiceCallout policy.
 
