@@ -25,49 +25,28 @@ Edge***).
 Policy types
 ------------
 
-> Technically, a policy is an XML-formatted configuration file. Each
-> policy type's structure (for example, the required and optional
-> configuration elements) is defined by an XML schema.
->
-> Edge Policy types are grouped into the following functional
-> categories:
+Technically, a policy is an XML-formatted configuration file. Each policy type's structure (for example, the required and optional configuration elements) is defined by an XML schema.
+
+Edge Policy types are grouped into the following functional categories:
 
 ### *Traffic management*
 
-> Policies in the traffic management category enable you to control the
-> flow of request and response messages through an API proxy. These
-> policies support both operational- and business-level control. They
-> give you control over raw throughput, and can also control traffic on
-> a per-app basis. Traffic management policy types enable you to enforce
-> quotas, and they also help you to mitigate denial of service attacks.
+Policies in the traffic management category enable you to control the flow of request and response messages through an API proxy. These policies support both operational- and business-level control. They give you control over raw throughput, and can also control traffic on a per-app basis. Traffic management policy types enable you to enforce quotas, and they also help you to mitigate denial of service attacks.
 
 ### *Mediation*
 
-> Policies in the mediation category enable you to actively manipulate
-> messages as they flow through API proxies. They enable you to
-> transform message formats, from XML to JSON (and vice-versa), or to
-> transform one XML format to another XML format. They also enable you
-> to parse messages, to generate new messages and to change values on
-> outbound messages. Mediation policies also interact with basic
-> services exposed by API Services, enabling you to retrieve data about
-> apps, developers, security tokens, and API products at runtime.
+Policies in the mediation category enable you to actively manipulate messages as they flow through API proxies. They enable you to transform message formats, from XML to JSON (and vice-versa), or to transform one XML format to another XML format. They also enable you to parse messages, to generate new messages and to change values on outbound messages. Mediation policies also interact with basic services exposed by API Services, enabling you to retrieve data about apps, developers, security tokens, and API products at runtime.
 
 ### *Security*
 
-> Policies in the security category support authentication,
-> authorization, as well as content-based security.
+Policies in the security category support authentication, authorization, as well as content-based security.
 
 ### *Extension*
 
-> Policies in the extension category enable you to tap into the
-> extensibility of API Services to implement custom behavior in the
-> programming language of your choice.
->
-> Each Policy type is documented in detail in the [Policy reference
-> overview](http://apigee.com/docs/api-services/reference/reference-overview-policy).
-> This topic demonstrates general interaction, showing you how to create
-> Policies, and how to attach them to Flows in an API proxy
-> configuration.
+Policies in the extension category enable you to tap into the extensibility of API Services to implement custom behavior in the programming language of your choice.
+
+Each Policy type is documented in detail in the [Policy reference overview](http://apigee.com/docs/api-services/reference/reference-overview-policy).
+This topic demonstrates general interaction, showing you how to create Policies, and how to attach them to Flows in an API proxy configuration.
 
 **Objectives**
 
@@ -91,34 +70,19 @@ without screenshots unless a new concept is being introduced.
 
 **Estimated Time : 45 mins**
 
-1)  **Adding Policies to a Proxy** is done from the ‘Develop’ tab of the
-    API Proxy.
+1)  **Adding Policies to a Proxy** is done from the ‘Develop’ tab of the API Proxy.
 
-    a.  Now that you have an API Proxy configured with a couple of resources, you will add logic to the ‘findHotels’ resource using policies.
+Now that you have an API Proxy configured with a couple of resources, you will add logic to the ‘findHotels’ resource using policies.
 
-> The goal is to have the proxy perform a geolocation query against our
-> ‘hotels’ BaaS data collection to return results within a certain
-> radius of a zipcode (zipcode and radius both being query parameters
-> provided when calling the ‘/v1/{your\_initials}\_hotels’ API).
->
-> API BaaS supports the ability to retrieve entities within a specified
-> distance of any geocoordinate based on its location property:
->
-> location within &lt;distance\_in\_meters&gt; of &lt;latitude&gt;,
-> &lt;longitude&gt;
->
-> As you can see, you need to provide the latitude and longitude
-> information to perform the query.
->
-> For mobile applications meant for smartphones, obtaining geocode
-> information is easy and can be provided directly as part of an API
-> call. For this lesson, assume that this API interface is being created
-> for devices and applications that cannot easily provide the
-> geocoordinate information, but simply requests the user to provide the
-> zipcode. In such a situation, the first thing is to obtain the
-> geo-coordinates for the zipcode provided before doing further
-> processing. Below are the high level steps to implement this in the
-> proxy:
+The goal is to have the proxy perform a geolocation query against our ‘hotels’ BaaS data collection to return results within a certain radius of a zipcode (zipcode and radius both being query parameters provided when calling the ‘/v1/{your\_initials}\_hotels’ API).
+
+API BaaS supports the ability to retrieve entities within a specified distance of any geocoordinate based on its location property:
+
+location within <distance\_in\_meters> of <latitude>, <longitude>
+
+As you can see, you need to provide the latitude and longitude information to perform the query.
+
+For mobile applications meant for smartphones, obtaining geocode information is easy and can be provided directly as part of an API call. For this lesson, assume that this API interface is being created for devices and applications that cannot easily provide the geocoordinate information, but simply requests the user to provide the zipcode. In such a situation, the first thing is to obtain the geo-coordinates for the zipcode provided before doing further processing. Below are the high level steps to implement this in the proxy:
 
 -   Retrieve the zipcode and radius from the request query parameters
 
@@ -133,30 +97,25 @@ without screenshots unless a new concept is being introduced.
 -   Add the location query as a query parameter before the target BaaS
     service is invoked
 
-> A pictorial representation of the logic is depicted below:
+A pictorial representation of the logic is depicted below:
 
 ![](./media/image4.png)
 
-> For the service callout to convert the zipcode to the geocoordinate,
-> you will use the [*Google GeoCoding
-> API*](https://developers.google.com/maps/documentation/geocoding/).
->
-> Now let’s implement the policies.
+For the service callout to convert the zipcode to the geocoordinate, you will use the [*Google GeoCoding API*](https://developers.google.com/maps/documentation/geocoding/).
+
+Now let’s implement the policies.
 
 a.  Switch to the ‘Develop’ tab of the API Proxy
 
 b.  From the ‘Navigator’ pane, select ‘Proxy Endpoints → Default → Get
     Hotels’
 
-<!-- -->
-
 1)  **Using Assign Message Policy to prepare the service callout
     request**
 
-    a.  From the ‘New Policy’ drop-down, select the ‘Assign Message’
-        policy
+a.  From the ‘New Policy’ drop-down, select the ‘Assign Message’ policy
 
-> ![](./media/image5.png)
+![](./media/image5.png)
 
 a.  In the ‘New Policy - Assign Message’ dialog box provide the
     following information:
@@ -203,14 +162,10 @@ b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
 </AssignMessage>```
   -------------------------------------------------------------------------------------------------------------
 
-> *(You can find the policy xml*
-> [**here**](./CreateGeoCodingRequest.xml)*.
-> Click the “Raw” button and copy/paste into your policy editor).*
->
-> Here's a brief description of the elements in this policy. You can
-> read more about this policy in [Assign Message
-> policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
->
+*(You can find the policy xml* [**here**](./CreateGeoCodingRequest.xml)*. Click the “Raw” button and copy/paste into your policy editor).*
+
+Here's a brief description of the elements in this policy. You can read more about this policy in [Assign Message policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
+
 > **&lt;AssignMessage name&gt;** - Gives this policy a name. The name is
 > used when the policy is referenced in a flow.
 >
