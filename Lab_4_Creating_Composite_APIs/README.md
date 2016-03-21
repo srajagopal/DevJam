@@ -70,7 +70,7 @@ without screenshots unless a new concept is being introduced.
 
 **Estimated Time : 45 mins**
 
-1)  **Adding Policies to a Proxy** is done from the ‘Develop’ tab of the API Proxy.
+**Adding Policies to a Proxy** is done from the ‘Develop’ tab of the API Proxy.
 
 Now that you have an API Proxy configured with a couple of resources, you will add logic to the ‘findHotels’ resource using policies.
 
@@ -103,34 +103,24 @@ A pictorial representation of the logic is depicted below:
 
 For the service callout to convert the zipcode to the geocoordinate, you will use the [*Google GeoCoding API*](https://developers.google.com/maps/documentation/geocoding/).
 
-Now let’s implement the policies.
+#### Now let’s implement the policies.
 
-a.  Switch to the ‘Develop’ tab of the API Proxy
+1.  Switch to the ‘Develop’ tab of the API Proxy
 
-b.  From the ‘Navigator’ pane, select ‘Proxy Endpoints → Default → Get
+1.  From the ‘Navigator’ pane, select ‘Proxy Endpoints → Default → Get
     Hotels’
 
-1)  **Using Assign Message Policy to prepare the service callout
-    request**
+1.  We'll use the Assign Message Poolicy to set some parameters for the service callout to google
 
-a.  From the ‘New Policy’ drop-down, select the ‘Assign Message’ policy
-
-![](./media/image5.png)
-
-a.  In the ‘New Policy - Assign Message’ dialog box provide the
-    following information:
-
+  1.  From the ‘New Policy’ drop-down, select the ‘Assign Message’ policy
+    ![](./media/image5.png)
+  1.  In the ‘New Policy - Assign Message’ dialog box provide the following information:
     -   Policy Display Name: **Create Geo Coding Request**
-
     -   Policy Name: **Create-Geo-Coding-Request**
-
     -   Attach Policy: **Checked**
-
     -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-
     -   Segment: **Request**
-
-b.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
+  1.  Click on the ‘Create Geo Coding Request’ policy in the pipeline and
     modify the XML configuration in the ‘Code:
     Create-Geo-Coding-Request’ section, which appears underneath the Map
     as follows:
@@ -177,29 +167,17 @@ Here's a brief description of the elements in this policy. You can read more abo
 
 **Note**: The properties associated with the ‘Assign Message’ policy could have been modified using the ‘Property Inspector’ panel that’s presented in the ‘Develop’ tab on the right. Any changes made in the ‘Code’ panel are reflected in the ‘Property Inspector’ panel and vice-versa. We will use the ‘Property Inspector’ panel to set properties for some of the policies as the lesson progresses.
 
-1)  **Using the Service Callout Policy to invoke the Google GeoCoding
-    API**
+#### Using the Service Callout Policy to invoke the Google GeoCoding API
 
-    a.  From the ‘New Policy’ drop-down, select the ‘Service Callout’
-        policy and add it with the following properties:
-
+    1.  From the ‘New Policy’ drop-down, select the ‘Service Callout’ policy and add it with the following properties:
         -   Policy Display Name: **Call Geo Coding API**
-
         -   Policy Name: **Call-Geo-Coding-API**
-
         -   Attach Policy: **Checked**
-
         -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-
         -   Segment: **Request**
-
-    b.  For the ‘Call Geo Coding API’ policy, change the values of the
-        following properties in the ‘Property Inspector’:
-
+    2.  For the ‘Call Geo Coding API’ policy, change the values of the following properties in the ‘Property Inspector’:
         -   Request variable: **GeoCodingRequest**
-
         -   Response: **GeoCodingResponse**
-
         -   URL: **http://maps.googleapis.com/maps/api/geocode/json**
 
 *(You can find the policy xml* [**here**](./CallGeoCodingAPI.xml)*. Click the “Raw” button and copy/paste into your policy editor).*
@@ -212,25 +190,14 @@ Here's a brief description of the elements that were modified in this policy. Yo
 
 **&lt;HTTPTargetConnection&gt;&lt;URL&gt;** - Specifies the target URL to be used by the service callout - in this case the URL of the Google Geocoding API: ‘http://maps.googleapis.com/maps/api/geocode/json’
 
-1)  **Using the Extract Message Policy to parse the service callout
-    response**
-
-    a.  From the ‘New Policy’ drop-down, select the ‘Extract Variables’
-        policy and add it with the following properties:
-
+#### Using the Extract Message Policy to parse the service callout response
+    1.  From the ‘New Policy’ drop-down, select the ‘Extract Variables’ policy and add it with the following properties:
         -   Policy Display Name: **Extract Geo Codes**
-
         -   Policy Name: **Extract-Geo-Codes**
-
         -   Attach Policy: **Checked**
-
         -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-
         -   Segment: **Request**
-
-    b.  For the ‘Extract Geo Codes’ policy, change the XML configuration
-        of the policy using the ‘Code: Extract Geo Codes’ panel as
-        follows:
+    2.  For the ‘Extract Geo Codes’ policy, change the XML configuration of the policy using the ‘Code: Extract Geo Codes’ panel as follows:
 
   --------------------------------------------------------------------------------------------------------
 
@@ -278,39 +245,24 @@ Here's a brief description of the elements that were modified in this policy. Yo
 >
 It may not be obvious, but it's important to see that ExtractVariables produces two variables whose names consist of the variable prefix (geocodeResponse) and the actual variable names that are specified in the policy. These variables are stored in the API proxy and will be available to other policies within the proxy flow, as you will see. The variables are: geocodeResponse.latitude & geocodeResponse.longitude
 
-1)  **Using the Javascript Policy to create the Location Query to send
-    to the BaaS target endpoint**
-
-    a.  From the ‘New Policy’ drop-down, select the ‘Javascript’ policy
-        and add it with the following properties:
-
-        -   Policy Display Name: **Create Location Query**
-
-        -   Policy Name: **Create-Location-Query**
-
-        -   Script File: **Create new script**
-
-        -   Script Name: **Create-Location-Query.js**
-
-        -   Attach Policy: **Checked**
-
-        -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-
-        -   Segment: **Request**
-
-    b.  Once the policy has been added, from the ‘Navigator’ panel go to
-        ‘Scripts → Javascript’ section and select the
-        ‘Create-Location-Query.js’ script file
-
-    c.  Add the following code to the ‘Create-Location-Query.js’ script
-        in the ‘Code: Create Location Query’ panel:
+#### Using the Javascript Policy to create the Location Query to send to the BaaS target endpoint
+    1.  From the ‘New Policy’ drop-down, select the ‘Javascript’ policy and add it with the following properties:
+      - Policy Display Name: **Create Location Query**
+      - Policy Name: **Create-Location-Query**
+      - Script File: **Create new script**
+      -    Script Name: **Create-Location-Query.js**
+      -    Attach Policy: **Checked**
+      -    Flow: **Flow Get Hotels, Proxy Endpoint default**
+      -    Segment: **Request**
+    2.  Once the policy has been added, from the ‘Navigator’ panel go to
+      - `Scripts → Javascript` section and select the
+      - `Create-Location-Query.js` script file
+    3.  Add the following code to the ‘Create-Location-Query.js’ script in the ‘Code: Create Location Query’ panel:
 
   ---------------------------------------------------------------------------------
-  ```javascript
+```javascript
   var latitude = context.getVariable("geocodeResponse.latitude"),
-
   longitude = context.getVariable("geocodeResponse.longitude"),
-
   radius = context.getVariable("radius");
 
   // set default (0 meters)
@@ -331,25 +283,14 @@ It sets a default in case the variables are empty strings, creates a new query v
 
 You can read more about this policy in [Javascript policy](http://apigee.com/docs/api-services/reference/javascript-policy).
 
-1)  **Using the Assign Message Policy to add the Location Query to the
-    query parameter before BaaS target endpoint invocation**
-
-    a.  From the ‘New Policy’ drop-down, select the ‘Assign Message’
-        policy and add it with the following properties:
-
+#### Using the Assign Message Policy to add the Location Query to the query parameter before BaaS target endpoint invocation**
+    1.  From the ‘New Policy’ drop-down, select the ‘Assign Message’ policy and add it with the following properties:
         -   Policy Display Name: **Set Query Parameters**
-
         -   Policy Name: **Set-Query-Parameters**
-
         -   Attach Policy: **Checked**
-
         -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-
         -   Segment: **Request**
-
-    b.  For the ‘Set Query Parameters’ policy, change the XML
-        configuration of the policy using the ‘Code: Set Query
-        Parameters’ panel as follows:
+    2.  For the ‘Set Query Parameters’ policy, change the XML configuration of the policy using the ‘Code: Set Query Parameters’ panel as follows:
 
   --------------------------------------------------------------------------------------------------------
   ```xml
@@ -388,8 +329,7 @@ You can read more about this policy in [Javascript policy](http://apigee.com/doc
 > that the ‘baasQL’ variable was set by the previous Javascript policy
 > as part of the ‘context’ object.
 
-1)  **Testing the API Proxy with the location query after deploying
-    changes**
+#### Testing the API Proxy with the location query after deploying changes
 
 > All the policies depicted in the diagram earlier in this lesson for
 > the request flow have been implemented. Your ‘Get Hotels’ Proxy should
@@ -402,25 +342,15 @@ You can read more about this policy in [Javascript policy](http://apigee.com/doc
 > the behavior of the flow to see if the results being returned from the
 > API BaaS are as expected.
 
-a.  Click on the ‘Save’ button to save and deploy the changes to the
-    ‘{your\_initials}\_hotels’ API Proxy
-
-> ![](./media/image7.png)
-
-a.  Wait for the ‘Successfully saved API Proxy’ message to appear and
+1.  Click on the ‘Save’ button to save and deploy the changes to the ‘{your\_initials}\_hotels’ API Proxy
+  > ![](./media/image7.png)
+1.  Wait for the ‘Successfully saved API Proxy’ message to appear and
     verify that your proxy is deployed to the ‘test’ environment
-
-b.  Go to the ‘Trace’ tab and start a trace session by clicking the
+1.  Go to the ‘Trace’ tab and start a trace session by clicking the
     ‘Start Trace Session’ button
-
-c.  Use Postman to test the ‘/GET hotels’ request with the following
-    query parameters combinations and review the results being returned
-
-
+1.  Use Postman to test the ‘/GET hotels’ request with the following query parameters combinations and review the results being returned
     -   zipcode=98101&radius=1000
-
     -   zipcode=94105&radius=400
-
     -   No query parameters (Essentially rerunning the LAB 3 check)
 
 > Note : Before invoking the API, change the URL to point your API i.e.
@@ -430,17 +360,12 @@ c.  Use Postman to test the ‘/GET hotels’ request with the following
 > various query parameter combinations are different as the
 > location-based query finds hotels that match the criteria.
 
-a.  Switch back to the ‘Trace’ tab in the Apigee Edge Management UI.
-    Review the executed policies and associated headers & variable data
-    to better understand the flow
-
-b.  Note that when the proxy is called without any query parameters now,
-    it returns an fault indicating that the ‘zipcode’ query parameter
-    could not be resolved
+1. Switch back to the ‘Trace’ tab in the Apigee Edge Management UI. Review the executed policies and associated headers & variable data to better understand the flow
+1. Note that when the proxy is called without any query parameters now, it returns an fault indicating that the ‘zipcode’ query parameter could not be resolved
 
 <!-- -->
 
-1)  **Modifying the response sent to the API client**
+#### Modifying the response sent to the API client
 
 > Many times the response coming from the backend target endpoint is not
 > exactly what you want to send to the calling client. The response may
@@ -452,27 +377,16 @@ b.  Note that when the proxy is called without any query parameters now,
 > a simple Javascript policy, similar to the one used before to create
 > the location query variable, to create a customized response.
 
-a.  Go to the ‘Develop’ tab of your proxy in the Apigee Edge
-    Management UI.
-
-b.  From the ‘New Policy’ drop-down, select the ‘Javascript’ policy and
-    add it with the following properties:
-
+1. Go to the ‘Develop’ tab of your proxy in the Apigee Edge Management UI.
+1. From the ‘New Policy’ drop-down, select the ‘Javascript’ policy and add it with the following properties:
     -   Policy Display Name: **Create Final Response**
-
     -   Policy Name: **Create-Final-Response**
-
     -   Script File: **Create new script**
-
     -   Script Name: **Create-Final-Response.js**
-
     -   Attach Policy: **Checked**
-
     -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-
     -   Segment: **Response**
-
-c.  Add the following code to the ‘Create-Final-Response.js’ script:
+1.  Add the following code to the ‘Create-Final-Response.js’ script:
 
   -----------------------------------------------------------------------------------------------------------------------
   ```javascript
@@ -567,11 +481,9 @@ c.  Add the following code to the ‘Create-Final-Response.js’ script:
   ```
   -------------------------------------------
 
-a.  Save the changes to the API Proxy, wait for it to successfully
-    deploy and test again using Postman as described in Step 8 earlier
-    in the lesson.
+Save the changes to the API Proxy, wait for it to successfully deploy and test again using Postman as described in Step 8 earlier in the lesson.
 
-**Section Summary**
+### Section Summary
 
 That completes the policy oriented approach to build composite APIs. You
 learned how to use a variety of transformation and extensibility
@@ -585,7 +497,7 @@ sending it to the API consumer. Alternatively you can achieve this by
 using programmability feature of Apigee Edge to implement this
 functionality. We will see that in the next section.
 
-**Creating Composite Services with Node.js**
+### Creating Composite Services with Node.js
 
 In this lab see how Edge supports programmability with Node.js. Running
 on Edge, Node.js apps take advantage of Edge's enterprise-grade cloud
@@ -611,7 +523,7 @@ applications into the Edge platform. Some common use cases include:
 -   Rapidly develop prototypes of new APIs using frameworks like
     Express, Argo, and Usergrid.
 
-**Section Objectives**
+#### Section Objectives
 
 The goal of this section is to get you familiar with using a node.js
 application within Apigee Edge. To illustrate this better, we will
@@ -632,111 +544,66 @@ apps with Apigee Edge.
 
 **Estimated Time: 15 mins**
 
-1)  **Creating an API Proxy** for a node.js backend that you want to
-    expose requires you to provide host the application in Apigee.
+#### Creating an API Prox for a node.js backend that you want to expose requires you to provide host the application in Apigee.
 
-    a.  Open up a browser tab and log in to http://enterprise.apigee.com
-
-    b.  From the Organization drop-down in the top-right corner, select
-        the organization assigned to you.
-
-    c.  From the Environment drop-down, select ‘test’
-
-    d.  From the main menu, select APIs → API Proxies
+    1.  Open up a browser tab and log in to http://enterprise.apigee.com
+    2.  From the Organization drop-down in the top-right corner, select the organization assigned to you.
+    3.  From the Environment drop-down, select ‘test’
+    4.  From the main menu, select APIs → API Proxies
 
 > ![](./media/image9.png)
 
-a.  To create a new API proxy, select the + API Proxy button to add a
-    new proxy.
+1.  To create a new API proxy, select the + API Proxy button to add a new proxy.
+1.  On the New API Proxy form that is displayed, provide information needed to generate an API proxy.
+  > ![](./media/image10.png)
+  >
+  > Go through the proxy set-up process specifying
+  >
+  > Proxy Name: **{your\_initials}\_mashup**
+  >
+  > Project Base Path: **/v1/{your\_initials}\_mashup**
+  >
+  > Source : **“Hello World” Sample**
+  >
+  > Authorization: **Pass through (none)**
+  >
+  > Take the defaults for other values.
+  >
+  > **Note**: Replace **{your-initials}** with the actual initials.
+  >
+  > **Example:** If you name is ‘John Doe’, your API proxy name would be
+  > ‘jd\_mashup’.
+1.  Click on **Build and Deploy** to build and deploy the proxy.
 
-b.  On the New API Proxy form that is displayed, provide information
-    needed to generate an API proxy.
-
-> ![](./media/image10.png)
->
-> Go through the proxy set-up process specifying
->
-> Proxy Name: **{your\_initials}\_mashup**
->
-> Project Base Path: **/v1/{your\_initials}\_mashup**
->
-> Source : **“Hello World” Sample**
->
-> Authorization: **Pass through (none)**
->
-> Take the defaults for other values.
->
-> **Note**: Replace **{your-initials}** with the actual initials.
->
-> **Example:** If you name is ‘John Doe’, your API proxy name would be
-> ‘jd\_mashup’.
-
-a.  Click on **Build and Deploy** to build and deploy the proxy.
-
-b.  Once the proxy has been deployed, open it by clicking the link to
-    view in editor
+1.  Once the proxy has been deployed, open it by clicking the link to view in editor
 
 <!-- -->
 
-1)  **Using an existing** node.js application that you want to expose
-    requires edit the source code.
+#### Using an existing node.js application that you want to expose requires edit the source code.
 
-    a.  Switch to new proxy editor by clicking on “access the new
-        version of proxy editor”.
-
-    b.  Switch to the “Develop” tab.
-
-    c.  Navigate to the “Scripts” section to view the sample node.js
-        source code that is created by default.
-
-> ![](./media/image11.png)
-
-a.  Replace the code by copying the source you find
+1.  Switch to new proxy editor by clicking on “access the new version of proxy editor”.
+1.  Switch to the “Develop” tab.
+1.  Navigate to the “Scripts” section to view the sample node.js source code that is created by default.
+  > ![](./media/image11.png)
+1.  Replace the code by copying the source you find
     [*here*](./nodeMashup.js).
     Click the “**Raw**” button and copy/paste into your policy editor.
-
-b.  Edit the source code and replace **{your-org}** with the actual name
-    of your API BaaS organization name.
-
-> ![](./media/image12.png)
-
-a.  Take a minute to review the code. This is an extremely simple
-    node.js application, which takes zipcode, country and radius as
-    query parameters. It calls Google’s geolocation API to determine the
-    latitude and longitude of the given zipcode and country. It then
-    uses the latitude and longitude along with radius to query hotels
-    collection in BaaS. As you may notice, we are using the BaaS
-    location query capability to filter matching hotels. Then finally
-    the code constructs a final JSON response with latitude, longitude
-    and matching hotels. Now let’s save and try to invoke this API to
-    see it working.
+1.  Edit the source code and replace **{your-org}** with the actual name of your API BaaS organization name.
+  > ![](./media/image12.png)
+1.  Take a minute to review the code. This is an extremely simple node.js application, which takes zipcode, country and radius as query parameters. It calls Google’s geolocation API to determine the latitude and longitude of the given zipcode and country. It then uses the latitude and longitude along with radius to query hotels collection in BaaS. As you may notice, we are using the BaaS location query capability to filter matching hotels. Then finally the code constructs a final JSON response with latitude, longitude and matching hotels. Now let’s save and try to invoke this API to see it working.
 
 <!-- -->
 
-1)  **Testing the API Proxy with the location query after deploying
-    changes**
+#### Testing the API Proxy with the location query after deploying changes
 
-    a.  Click on the ‘Save’ button to save and deploy the changes to the
-        ‘{your\_initials}\_mashup’ API Proxy.
-
-    b.  Wait for the ‘Successfully saved API Proxy’ message to appear
-        and verify that your proxy is deployed to the ‘test’ environment
-
-    c.  Go to the ‘Trace’ tab and start a trace session by clicking the
-        ‘Start Trace Session’ button
-
-    d.  Use Postman to test the ‘/GET mashup’ request with the following
-        query parameters combinations and review the results being
-        returned
-
-        -   zipcode=98101&country=US&radius=1000
-
-        -   zipcode=98101&country=US&radius=200
-
-        -   zipcode=94105&country=US&radius=400
-
-        -   No query parameters
-
+1.  Click on the ‘Save’ button to save and deploy the changes to the ‘{your\_initials}\_mashup’ API Proxy.
+1.  Wait for the ‘Successfully saved API Proxy’ message to appear and verify that your proxy is deployed to the ‘test’ environment
+1.  Go to the ‘Trace’ tab and start a trace session by clicking the ‘Start Trace Session’ button
+1.  Use Postman to test the ‘/GET mashup’ request with the following query parameters combinations and review the results being returned
+  -   zipcode=98101&country=US&radius=1000
+  -   zipcode=98101&country=US&radius=200
+  -   zipcode=94105&country=US&radius=400
+  -   No query parameters
 > Note : Before invoking the API, change the URL to point your API.\
 > i.e. **{your\_initials}**\_mashup.
 >
@@ -744,26 +611,18 @@ a.  Take a minute to review the code. This is an extremely simple
 > various query parameter combinations are different as the location
 > based query finds hotels that match the criteria.
 
-**Section Summary**
+#### Section Summary
 
 You learned how to deploy an existing node.js application in Apigee Edge
 and expose it as an API. You can think of using node.js with Apigee Edge
 when you have some of these common problems -
-
 -   building highly customized standalone APIs and backend services.
-
--   building backend logic for API BaaS to leverage cloud data storage
-    and management, user management, push notifications, and more.
-
--   solve complex orchestration and mobile optimization problems using
-    Apigee policies with the advantage of a scriptable target endpoint.
-
+-   building backend logic for API BaaS to leverage cloud data storage and management, user management, push notifications, and more.
+-   solve complex orchestration and mobile optimization problems using Apigee policies with the advantage of a scriptable target endpoint.
 -   building composite services and mashups.
+-   Rapidly develop prototypes of new APIs using frameworks like Express, Argo, and Usergrid.
 
--   Rapidly develop prototypes of new APIs using frameworks like
-    Express, Argo, and Usergrid.
-
-**Summary**
+###Summary
 
 That completes this hands-on lesson. In this lab you learned how APIs
 developed with Apigee Edge can leverage the out-of-the-box, configurable
