@@ -169,16 +169,16 @@ Here's a brief description of the elements in this policy. You can read more abo
 
 #### Using the Service Callout Policy to invoke the Google GeoCoding API
 
-    1.  From the ‘New Policy’ drop-down, select the ‘Service Callout’ policy and add it with the following properties:
-        -   Policy Display Name: **Call Geo Coding API**
-        -   Policy Name: **Call-Geo-Coding-API**
-        -   Attach Policy: **Checked**
-        -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-        -   Segment: **Request**
-    2.  For the ‘Call Geo Coding API’ policy, change the values of the following properties in the ‘Property Inspector’:
-        -   Request variable: **GeoCodingRequest**
-        -   Response: **GeoCodingResponse**
-        -   URL: **http://maps.googleapis.com/maps/api/geocode/json**
+1.  From the ‘New Policy’ drop-down, select the ‘Service Callout’ policy and add it with the following properties:
+  -   Policy Display Name: **Call Geo Coding API**
+  -   Policy Name: **Call-Geo-Coding-API**
+  -   Attach Policy: **Checked**
+  -   Flow: **Flow Get Hotels, Proxy Endpoint default**
+  -   Segment: **Request**
+2.  For the ‘Call Geo Coding API’ policy, change the values of the following properties in the ‘Property Inspector’:
+  -   Request variable: **GeoCodingRequest**
+  -   Response: **GeoCodingResponse**
+  -   URL: **http://maps.googleapis.com/maps/api/geocode/json**
 
 *(You can find the policy xml* [**here**](./CallGeoCodingAPI.xml)*. Click the “Raw” button and copy/paste into your policy editor).*
 
@@ -191,13 +191,13 @@ Here's a brief description of the elements that were modified in this policy. Yo
 **&lt;HTTPTargetConnection&gt;&lt;URL&gt;** - Specifies the target URL to be used by the service callout - in this case the URL of the Google Geocoding API: ‘http://maps.googleapis.com/maps/api/geocode/json’
 
 #### Using the Extract Message Policy to parse the service callout response
-    1.  From the ‘New Policy’ drop-down, select the ‘Extract Variables’ policy and add it with the following properties:
-        -   Policy Display Name: **Extract Geo Codes**
-        -   Policy Name: **Extract-Geo-Codes**
-        -   Attach Policy: **Checked**
-        -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-        -   Segment: **Request**
-    2.  For the ‘Extract Geo Codes’ policy, change the XML configuration of the policy using the ‘Code: Extract Geo Codes’ panel as follows:
+1.  From the ‘New Policy’ drop-down, select the ‘Extract Variables’ policy and add it with the following properties:
+  -   Policy Display Name: **Extract Geo Codes**
+  -   Policy Name: **Extract-Geo-Codes**
+  -   Attach Policy: **Checked**
+  -   Flow: **Flow Get Hotels, Proxy Endpoint default**
+  -   Segment: **Request**
+2.  For the ‘Extract Geo Codes’ policy, change the XML configuration of the policy using the ‘Code: Extract Geo Codes’ panel as follows:
 
   --------------------------------------------------------------------------------------------------------
 
@@ -246,33 +246,33 @@ Here's a brief description of the elements that were modified in this policy. Yo
 It may not be obvious, but it's important to see that ExtractVariables produces two variables whose names consist of the variable prefix (geocodeResponse) and the actual variable names that are specified in the policy. These variables are stored in the API proxy and will be available to other policies within the proxy flow, as you will see. The variables are: geocodeResponse.latitude & geocodeResponse.longitude
 
 #### Using the Javascript Policy to create the Location Query to send to the BaaS target endpoint
-    1.  From the ‘New Policy’ drop-down, select the ‘Javascript’ policy and add it with the following properties:
-      - Policy Display Name: **Create Location Query**
-      - Policy Name: **Create-Location-Query**
-      - Script File: **Create new script**
-      -    Script Name: **Create-Location-Query.js**
-      -    Attach Policy: **Checked**
-      -    Flow: **Flow Get Hotels, Proxy Endpoint default**
-      -    Segment: **Request**
-    2.  Once the policy has been added, from the ‘Navigator’ panel go to
-      - `Scripts → Javascript` section and select the
-      - `Create-Location-Query.js` script file
-    3.  Add the following code to the ‘Create-Location-Query.js’ script in the ‘Code: Create Location Query’ panel:
+1.  From the ‘New Policy’ drop-down, select the ‘Javascript’ policy and add it with the following properties:
+  - Policy Display Name: **Create Location Query**
+  - Policy Name: **Create-Location-Query**
+  - Script File: **Create new script**
+  -    Script Name: **Create-Location-Query.js**
+  -    Attach Policy: **Checked**
+  -    Flow: **Flow Get Hotels, Proxy Endpoint default**
+  -    Segment: **Request**
+2.  Once the policy has been added, from the ‘Navigator’ panel go to
+  - `Scripts → Javascript` section and select the
+  - `Create-Location-Query.js` script file
+3.  Add the following code to the ‘Create-Location-Query.js’ script in the ‘Code: Create Location Query’ panel:
 
   ---------------------------------------------------------------------------------
 ```javascript
-  var latitude = context.getVariable("geocodeResponse.latitude"),
-  longitude = context.getVariable("geocodeResponse.longitude"),
-  radius = context.getVariable("radius");
+var latitude = context.getVariable("geocodeResponse.latitude"),
+longitude = context.getVariable("geocodeResponse.longitude"),
+radius = context.getVariable("radius");
 
-  // set default (0 meters)
-  radius = (radius == "") ? "0" : radius;
+// set default (0 meters)
+radius = (radius == "") ? "0" : radius;
 
-  // set BaaS query
-  var baasQL = "location within " + radius + " of " + latitude + "," + longitude;
+// set BaaS query
+var baasQL = "location within " + radius + " of " + latitude + "," + longitude;
 
-  context.setVariable("baasQL", baasQL);
-  ```
+context.setVariable("baasQL", baasQL);
+```
   ---------------------------------------------------------------------------------
 
 *(You can find the javascript file content* [**here**](./createLocationQuery.js)*. Click the “Raw” button and copy/paste into your policy editor).*
@@ -284,16 +284,16 @@ It sets a default in case the variables are empty strings, creates a new query v
 You can read more about this policy in [Javascript policy](http://apigee.com/docs/api-services/reference/javascript-policy).
 
 #### Using the Assign Message Policy to add the Location Query to the query parameter before BaaS target endpoint invocation**
-    1.  From the ‘New Policy’ drop-down, select the ‘Assign Message’ policy and add it with the following properties:
-        -   Policy Display Name: **Set Query Parameters**
-        -   Policy Name: **Set-Query-Parameters**
-        -   Attach Policy: **Checked**
-        -   Flow: **Flow Get Hotels, Proxy Endpoint default**
-        -   Segment: **Request**
-    2.  For the ‘Set Query Parameters’ policy, change the XML configuration of the policy using the ‘Code: Set Query Parameters’ panel as follows:
+1.  From the ‘New Policy’ drop-down, select the ‘Assign Message’ policy and add it with the following properties:
+  -   Policy Display Name: **Set Query Parameters**
+  -   Policy Name: **Set-Query-Parameters**
+  -   Attach Policy: **Checked**
+  -   Flow: **Flow Get Hotels, Proxy Endpoint default**
+  -   Segment: **Request**
+2.  For the ‘Set Query Parameters’ policy, change the XML configuration of the policy using the ‘Code: Set Query Parameters’ panel as follows:
 
-  --------------------------------------------------------------------------------------------------------
-  ```xml
+--------------------------------------------------------------------------------------------------------
+```xml
   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AssignMessage async="false" continueOnError="false" enabled="true" name="Set-Query-Parameters">
   <DisplayName>Set Query Parameters</DisplayName>
@@ -310,7 +310,7 @@ You can read more about this policy in [Javascript policy](http://apigee.com/doc
   </Set>
 </AssignMessage>
 ```
-  --------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 
 > *(You can find policy xml*
 > [**here**](./SetQueryParameters.xml)*.
@@ -349,17 +349,15 @@ You can read more about this policy in [Javascript policy](http://apigee.com/doc
 1.  Go to the ‘Trace’ tab and start a trace session by clicking the
     ‘Start Trace Session’ button
 1.  Use Postman to test the ‘/GET hotels’ request with the following query parameters combinations and review the results being returned
-    -   zipcode=98101&radius=1000
-    -   zipcode=94105&radius=400
-    -   No query parameters (Essentially rerunning the LAB 3 check)
-
-> Note : Before invoking the API, change the URL to point your API i.e.
-> **{your\_initials}**\_hotels.
->
-> Notice that the responses being returned by the API BaaS for the
-> various query parameter combinations are different as the
-> location-based query finds hotels that match the criteria.
-
+  -   zipcode=98101&radius=1000
+  -   zipcode=94105&radius=400
+  -   No query parameters (Essentially rerunning the LAB 3 check)
+  > Note : Before invoking the API, change the URL to point your API i.e.
+  > **{your\_initials}**\_hotels.
+  >
+  > Notice that the responses being returned by the API BaaS for the
+  > various query parameter combinations are different as the
+  > location-based query finds hotels that match the criteria.
 1. Switch back to the ‘Trace’ tab in the Apigee Edge Management UI. Review the executed policies and associated headers & variable data to better understand the flow
 1. Note that when the proxy is called without any query parameters now, it returns an fault indicating that the ‘zipcode’ query parameter could not be resolved
 
@@ -509,19 +507,11 @@ of third-party Node.js modules in your APIs.
 
 Enterprise developers have found many creative ways to integrate Node.js
 applications into the Edge platform. Some common use cases include:
-
 -   Build highly customized standalone APIs and backend services.
-
--   Build backend logic for API BaaS to leverage cloud data storage and
-    management, user management, push notifications, and more.
-
--   Solve complex orchestration and mobile optimization problems using
-    Apigee policies with the advantage of a scriptable target endpoint.
-
+-   Build backend logic for API BaaS to leverage cloud data storage and management, user management, push notifications, and more.
+-   Solve complex orchestration and mobile optimization problems using Apigee policies with the advantage of a scriptable target endpoint.
 -   Build composite services and mashups.
-
--   Rapidly develop prototypes of new APIs using frameworks like
-    Express, Argo, and Usergrid.
+-   Rapidly develop prototypes of new APIs using frameworks like Express, Argo, and Usergrid.
 
 #### Section Objectives
 
@@ -546,13 +536,11 @@ apps with Apigee Edge.
 
 #### Creating an API Prox for a node.js backend that you want to expose requires you to provide host the application in Apigee.
 
-    1.  Open up a browser tab and log in to http://enterprise.apigee.com
-    2.  From the Organization drop-down in the top-right corner, select the organization assigned to you.
-    3.  From the Environment drop-down, select ‘test’
-    4.  From the main menu, select APIs → API Proxies
-
-> ![](./media/image9.png)
-
+1.  Open up a browser tab and log in to http://enterprise.apigee.com
+2.  From the Organization drop-down in the top-right corner, select the organization assigned to you.
+3.  From the Environment drop-down, select ‘test’
+4.  From the main menu, select APIs → API Proxies
+  > ![](./media/image9.png)
 1.  To create a new API proxy, select the + API Proxy button to add a new proxy.
 1.  On the New API Proxy form that is displayed, provide information needed to generate an API proxy.
   > ![](./media/image10.png)
@@ -574,7 +562,6 @@ apps with Apigee Edge.
   > **Example:** If you name is ‘John Doe’, your API proxy name would be
   > ‘jd\_mashup’.
 1.  Click on **Build and Deploy** to build and deploy the proxy.
-
 1.  Once the proxy has been deployed, open it by clicking the link to view in editor
 
 <!-- -->
