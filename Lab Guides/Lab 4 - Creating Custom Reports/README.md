@@ -58,7 +58,7 @@ created. Let's add a policy **-**
 
 a.  Go to the Apigee Edge Management UI browser tab
 
-b.  Go to the ‘{your\_initials}\_hotel’ proxy’s ‘Develop’ tab
+b.  Go to the ‘{your_initials}\_hotel’ proxy’s ‘Develop’ tab
 
 c.  Click on ‘Get Hotel by uuid’
 
@@ -83,10 +83,10 @@ f.  For the ‘Extract Variables’ policy, change the XML configuration of
   <DisplayName>Extract Variables</DisplayName>
   <JSONPayload>
   <Variable name="hotelRating">
-  <JSONPath>\$.entities\[0\].hotelRating</JSONPath>
+  <JSONPath>$.entities[0].hotelRating</JSONPath>
   </Variable>
   <Variable name="hotelCity">
-  <JSONPath>\$.entities\[0\].city</JSONPath>
+  <JSONPath>$.entities[0].city</JSONPath>
   </Variable>
   </JSONPayload>
   <Source clearPayload="false">response</Source>
@@ -121,8 +121,8 @@ a.  For the ‘Statistics Collector’ policy, change the XML configuration
   <DisplayName>Statistics Collector</DisplayName>
   <Properties/>
   <Statistics>
-  <Statistic name="devjam\_{your\_initials}\_city" ref="hotelCity" type="String">NO\_CITY</Statistic>
-  <Statistic name="devjam\_{your\_initials}\_rating" ref="hotelRating" type="Float">NO\_RATING</Statistic>
+  <Statistic name="devjam_{your_initials}\_city" ref="hotelCity" type="String">NO_CITY</Statistic>
+  <Statistic name="devjam_{your_initials}\_rating" ref="hotelRating" type="Float">NO_RATING</Statistic>
   </Statistics>
   </StatisticsCollector>
   ```
@@ -131,14 +131,14 @@ a.  For the ‘Statistics Collector’ policy, change the XML configuration
 [**here**](https://gist.github.com/prithpal/28dd0378ac9bdb88d922)*.
 Click the “Raw” button and copy/paste into your policy editor).*
 
-You will see devjam\_**{your\_initials}**\_city, as a dimension in a
-custom report, whereas devjam\_**{your\_initials}**\_rating as a
+You will see devjam_**{your_initials}**_city, as a dimension in a
+custom report, whereas devjam_**{your_initials}**_rating as a
 metric.
 
 a.  Once the two policies have been added and you have clicked “Save”.
   **Testing the Statistics collector policy by generating some load**
 
-1.  Start a Trace session for the ‘{your\_initials}\_hotels’ proxy
+1.  Start a Trace session for the ‘{your_initials}_hotels’ proxy
 
 2.  Send a ‘/GET hotels’ request from Postman. This will return the list
     of hotels from BaaS collection.
@@ -148,9 +148,9 @@ a.  Once the two policies have been added and you have clicked “Save”.
 4.  Append that the copied UUID to the URL of ‘/GET hotels’ request and
     send another request from Postman. For eg -
 
-http://**{org}-{env}**.apigee.net/v1/**{your\_initials}**\_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
+http://**{org}-{env}**.apigee.net/v1/**{your_initials}**_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
 
-NOTE : replace your org, env and **{your\_initials}**\_hotels with
+NOTE : replace your org, env and **{your_initials}**_hotels with
 your Edge Org and Environment and proxy names.
 
 Bump up the “rate” of Spike Arrest to some arbitrarily high number so
@@ -217,7 +217,7 @@ a.  Dimensions: devjam\_**{your\_initials}**\_city\
     dimensions which Edge collects for you, for every request,
     including response time, payload size, and so on.
 
-b.  Filters: devjam\_**{your initials**}\_cityname != ‘na’\
+b.  Filters: devjam_**{your initials**}_cityname != ‘na’\
     (this will ensure only traffic that used this dimension will
     display on your report)
 
@@ -241,9 +241,9 @@ c.  You should now see something like the following:
         > and send another request from Postman.
 
 For eg -
-http://**{org}-{env}**.apigee.net/v1/**{your\_initials}**\_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
+http://**{org}-{env}**.apigee.net/v1/**{your_initials}**_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
 
-NOTE : replace your org, env and **{your\_initials}**\_hotels with
+NOTE : replace your org, env and **{your_initials}**_hotels with
 your Edge Org and Environment and proxy names.
 
 a.  Invoke ‘/GET hotels’ appending a different UUID (with a hotel from
@@ -277,7 +277,7 @@ name="Spike-Arrest-10pm">
 
 > ![](./media/image19.png)
 
-c.  Add a filter ((devjam\_cityname ne 'null') and (devjam\_cityname ne
+c.  Add a filter ((devjam_cityname ne 'null') and (devjam_cityname ne
     > '(not set)')) in your custom report. This will remove any unknown
     > cities from the report .
 
