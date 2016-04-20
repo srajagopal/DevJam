@@ -387,8 +387,9 @@ templates*](http://apigee.com/docs/developer-services/content/using-smartdocs-do
 
     a.  The API specification can be of Swagger 1.2, Swagger 2.0 (JSON
         or YAML) or WADL formats. In this example, we will use Swagger 2.0
-        – YAML. Select the **hotels-openapi.yaml** file from the lab
-        material
+        – YAML.
+        Open the **hotels-openapi.yaml** file from the lab material in a text editor and change the {baas_org} on line 14 to match your baas org and save the file.
+        Back in the dev portal administrator, select the **hotels-openapi.yaml** file
 
 > ![](./media/image45.png)
 
