@@ -131,14 +131,14 @@ a.  For the ‘Statistics Collector’ policy, change the XML configuration
 [**here**](https://gist.github.com/prithpal/28dd0378ac9bdb88d922)*.
 Click the “Raw” button and copy/paste into your policy editor).*
 
-You will see devjam_**{your_initials}**_city, as a dimension in a
+You will see devjam_**{your_initials}**__city, as a dimension in a
 custom report, whereas devjam_**{your_initials}**_rating as a
 metric.
 
 a.  Once the two policies have been added and you have clicked “Save”.
   **Testing the Statistics collector policy by generating some load**
 
-1.  Start a Trace session for the ‘{your_initials}_hotels’ proxy
+1.  Start a Trace session for the ‘**{your_initials}**_hotels’ proxy
 
 2.  Send a ‘/GET hotels’ request from Postman. This will return the list
     of hotels from BaaS collection.
@@ -148,7 +148,7 @@ a.  Once the two policies have been added and you have clicked “Save”.
 4.  Append that the copied UUID to the URL of ‘/GET hotels’ request and
     send another request from Postman. For eg -
 
-http://**{org}-{env}**.apigee.net/v1/**{your_initials}**_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
+http://**{org}-{env}**.apigee.net/v1/**{your_initials}**_hotels\/800bacba-14d0-11e5-a120-5d76c8c39ab3
 
 NOTE : replace your org, env and **{your_initials}**_hotels with
 your Edge Org and Environment and proxy names.
