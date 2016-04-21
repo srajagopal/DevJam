@@ -224,7 +224,7 @@ and generate keys:
 
 **Publishing an API Product**
 
-1)  From the Apigee Edge Management UI, go to Publish → API Products
+1)  From the Apigee Edge Management UI, go to Publish → Products
 
 2)  Click on ‘+ Product’ button to add a new product
 
@@ -359,8 +359,7 @@ source for the API structure. For more information, see [*About SmartDoc
 models and
 templates*](http://apigee.com/docs/developer-services/content/using-smartdocs-document-apis#models).
 
-    a.  Log in to your portal as a user with admin or content
-        creation privileges.
+    a.  Ask you instructor to change your developer user to have administrator access in the portal. Logout and then back in to the developer portal.
 
     b.  Select **Content > SmartDocs** in the Drupal administration menu.
 

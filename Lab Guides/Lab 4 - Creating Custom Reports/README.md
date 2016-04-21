@@ -121,8 +121,8 @@ a.  For the ‘Statistics Collector’ policy, change the XML configuration
   <DisplayName>Statistics Collector</DisplayName>
   <Properties/>
   <Statistics>
-  <Statistic name="devjam_{your_initials}\_city" ref="hotelCity" type="String">NO_CITY</Statistic>
-  <Statistic name="devjam_{your_initials}\_rating" ref="hotelRating" type="Float">NO_RATING</Statistic>
+  <Statistic name="devjam_{your_initials}_city" ref="hotelCity" type="String">NO_CITY</Statistic>
+  <Statistic name="devjam_{your_initials}_rating" ref="hotelRating" type="Float">NO_RATING</Statistic>
   </Statistics>
   </StatisticsCollector>
   ```
@@ -199,13 +199,11 @@ c.  Chart Type: Column
 
 d.  Aggregation Interval: Per-Minute
 
-e.  Environment: {your env} test or prod
-
-f.  Metrics: Traffic - Sum of traffic Target Response Time - Average
+e.  Metrics: Traffic - Sum of traffic, Target Response Time - Average
 
 > This will create a multidimensional report.
 
-a.  Dimensions: devjam\_**{your\_initials}**\_city\
+a.  Dimensions: devjam\_**{your\_initials}**\_city
     This is the name of the variable which we created in earlier using
     the Statistics Collector policy to capture the city name from the
     response payload. Using the Statistics Collector policy, you can
@@ -217,13 +215,11 @@ a.  Dimensions: devjam\_**{your\_initials}**\_city\
     dimensions which Edge collects for you, for every request,
     including response time, payload size, and so on.
 
-b.  Filters: devjam_**{your initials**}_cityname != ‘na’\
+b.  Filters: devjam_**{your initials**}_cityname != ‘(not set)’
     (this will ensure only traffic that used this dimension will
     display on your report)
 
-c.  You should now see something like the following:
-
-> ![](./media/image20.png)
+c.  Hit the save button to save and open the report - use the environment dropdown to switch to the test environment.
 
 2.  There probably is not much data that Edge Analytics has collected,
     > so you many not see anything meaningful quite yet. But let’s
@@ -269,22 +265,14 @@ name="Spike-Arrest-10pm">
 
     a.  Click on the “Popular Destination” report.
 
-    b.  Edge Analytics performs aggregation on a regular interval,
-        asynchronously with respect to incoming API requests.
-        Therefore, you may have to wait a bit to see the data appear
-        in the chart. After a cycle of aggregation occurs, you will
-        see:
+    b.  Edge Analytics performs aggregation on a regular interval, asynchronously with respect to incoming API requests. Therefore, you may have to wait a bit to see the data appear in the chart. After a cycle of aggregation occurs, you will see:
 
 > ![](./media/image19.png)
-
-c.  Add a filter ((devjam_cityname ne 'null') and (devjam_cityname ne
-    > '(not set)')) in your custom report. This will remove any unknown
-    > cities from the report .
 
 The final configuration of the custom report will look like the
 following :
 
-> ![](./media/image22.png){width="6.5in" height="4.458333333333333in"}
+> ![](./media/image22.png)
 
 **Summary**
 
@@ -305,5 +293,3 @@ are available to you.
     -   Traffic reports on the Geo-map
     -   Developer Engagement
     -   Error Analysis reports
-
-
