@@ -132,7 +132,7 @@ or about 1 request allowed every 100 milliseconds . A second
 request inside of 100ms will fail. Also, an 11th request within a
 second will fail.
 
-* **Testing the Spike Arrest Policy** Use Postman to quickly send more than 10 requests in a minute and observe that certain requests will receive an error with the errorCode “policies.ratelimit.SpikeArrestViolation”
+* **Testing the Spike Arrest Policy** Use Postman to quickly send more than 2 requests in 6 seconds and observe that certain requests will receive an error with the errorCode “policies.ratelimit.SpikeArrestViolation”
 
 * **Adding Response Cache Policy** Reduce external service calls, reduce network traffic and improve performance
    * Go to the Apigee Edge Management UI browser tab.
