@@ -148,7 +148,7 @@ a.  Once the two policies have been added and you have clicked “Save”.
 4.  Append that the copied UUID to the URL of ‘/GET hotels’ request and
     send another request from Postman. For eg -
 
-http://**{org}-{env}**.apigee.net/v1/**{your_initials}**_hotels\/800bacba-14d0-11e5-a120-5d76c8c39ab3
+http://**{org}-{env}**.apigee.net/v1/**{your_initials}**_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
 
 NOTE : replace your org, env and **{your_initials}**_hotels with
 your Edge Org and Environment and proxy names.
