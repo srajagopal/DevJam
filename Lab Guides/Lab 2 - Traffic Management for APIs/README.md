@@ -74,7 +74,7 @@ created in the previous lesson.
     * Click on “**+ Step**” on the Request Flow.
 ![](./media/image32.png)
     * Select the ‘Spike Arrest’ policy with the following properties:
-    
+
       > Display Name: **Spike Arrest 10pm**
 
       > Name: **Spike-Arrest-10pm**
@@ -87,7 +87,7 @@ Proxy.
 ![](./media/image20.png)
 
 **NOTE:** The value was changed from 30 per second to 10 per minute.
-   
+
    * Save the changes to the proxy and ensure that it is deployed successfully to the ‘test’ environment. Your configuration should look like this -
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -132,7 +132,7 @@ or about 1 request allowed every 100 milliseconds . A second
 request inside of 100ms will fail. Also, an 11th request within a
 second will fail.
 
-* **Testing the Spike Arrest Policy** Use Postman to quickly send more than 10 requests in a minute and observe that certain requests will receive an error with the errorCode “policies.ratelimit.SpikeArrestViolation”
+* **Testing the Spike Arrest Policy** Use Postman to quickly send more than 2 requests in 6 seconds and observe that certain requests will receive an error with the errorCode “policies.ratelimit.SpikeArrestViolation”
 
 * **Adding Response Cache Policy** Reduce external service calls, reduce network traffic and improve performance
    * Go to the Apigee Edge Management UI browser tab.
@@ -144,7 +144,7 @@ second will fail.
    * Select the ‘Response Cache’ policy with the following properties:
 
    >  Policy Display Name: **Cache Hotels Data**
-   
+
    >  Policy Name: **Cache-Hotels-Data**
 
 ![](./media/image26.png)
@@ -160,15 +160,15 @@ The Response Cache policy needs a Cache Resource that can be used to cache the d
    * Your Target Endpoints → Default → PostFlow should look as follows:
 ![](./media/image27.png)
    * Save the changes to the API Proxy, wait for it to successfully deploy.
-   
+
 * **Testing the Response Cache Policy** Start the API Trace and send a test ‘/GET hotels’ request from Postman with the following query parameters:
-   
+
    > zipcode=98101&radius=200
 
 **NOTE:** Before invoking, please change the URL to point to your API proxy.
 
  <span id="h.3znysh7" class="anchor"></span>
- 
+
    * Wait for 6 to 10 seconds (to avoid the Spike Arrest policy from stopping your requests) and send the same request again from Postman.
    * Go back to the Trace view and review the transaction map of both the requests including the overall elapsed time to process both requests.
 
@@ -179,7 +179,7 @@ The second execution flow should look as follows:
 
 ![](./media/image29.png)
 
-After configuring the Response Cache policy, as expected, after the initial request, the second and all other requests for the next 300 seconds will be served from the cache and hence avoid executing any other policies. Since the service callout, target service and other transformation policies are not executed, the overall transaction time has also dropped significantly.
+After configuring the Response Cache policy, as expected, after the initial request, the second and all other requests for the next 3600 seconds will be served from the cache and hence avoid executing any other policies. Since the service callout, target service and other transformation policies are not executed, the overall transaction time has also dropped significantly.
 
 ##Summary
 That completes this hands-on lesson. You learned how to use the Spike Arrest to protect the environment from traffic spikes and to use the Response Cache policy to provide a better overall experience for the API consumer while reducing network traffic. Obviously like any other policy, these policies must be used appropriately based upon your use cases.

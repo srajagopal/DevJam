@@ -38,7 +38,7 @@ spec, or API deployment:
     > A toolkit for modeling and building rich, enterprise-class APIs in
     > Node.js on your laptop.
 
--   [*http://editor.swagger.io*](http://editor.swagger.io) - 
+-   [*http://editor.swagger.io*](http://editor.swagger.io) -
     > This editor is the basis for the ones used in the above two projects, but it
     > also includes code generators for a number of other languages.
 
@@ -123,14 +123,14 @@ API, you attach Policies to request and response Flows.
 
 In an API proxy configuration, there are two types of endpoints:
 
--   **ProxyEndpoint:** 
+-   **ProxyEndpoint:**
     > This configuration manages interactions with apps
     > that consume your API. You configure the ProxyEndpoint to define
     > the URL of your API. You usually attach Policies to the
     > ProxyEndpoint to enforce security, quota checks, and other types
     > of access control and rate-limiting.
 
--   **TargetEndpoint:** 
+-   **TargetEndpoint:**
     > This configuration manages interactions with
     > your backend services on behalf of consumer apps. You configure
     > the TargetEndpoint to forward request messages to the proper
@@ -176,7 +176,7 @@ lab shows you how to build proxies.
     *  From the Organization drop-down in the top-right corner, select the organization assigned to you.
     *  From the Environment drop-down, select **test**
     *  From the main menu, select APIs → API Proxies
-    
+
  ![](./media/image45.png)
 
     * To create a new API proxy, select the + API Proxy button to add a new proxy.
@@ -198,12 +198,12 @@ lab shows you how to build proxies.
 ![](./media/image34.png)
 >
 > Existing API:
-> **https://api.usergrid.com/{your-BaaS-org}/sandbox/hotels**
+> **https://api.usergrid.com/{your-BaaS-org}/sandbox**
 >
 > Proxy Name: **{your\_initials}\_hotels**
 >
 > Project Base Path: **/v1/{your\_initials}\_hotels**
-> 
+>
 **Note**: Replace **{your-BaaS-org}** with the actual name of your API BaaS organization. Replace **{your-initials}** with the initials of your name.
 
     * Select **all operations** from the OpenAPI spec to proxy
@@ -228,6 +228,7 @@ lab shows you how to build proxies.
 ![](./media/image51.png)
     * Once on the **Trace** tab, pick the correct environment from the **Deployment to Trace** drop-down. In your case there should only be one environment to pick - **Environment test, Revision 1**.
 ![](./media/image05.png)
+    * Add **/hotels** to the end of the URL  
     * Click on the **Start Trace Session** button.
     * After the trace session starts, click on the **Send** button in the **Send Requests** section.
 ![](./media/image08.png)
