@@ -183,11 +183,14 @@ Overview](http://apigee.com/docs/developer-services/content/publishing-overview)
 The following table defines some of the terms used to register apps
 and generate keys:
 
-  Term              Definition
-  ----------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  **Term Definitions**
+  -----------------
   **API product**   A bundle of API proxies combined with a service plan that sets limits on access to those APIs. API products are the central mechanism that Apigee Edge uses for authorization and access control to your APIs. For more, see [API Products](http://apigee.com/docs/developer-services/content/what-api-product)[](http://apigee.com/docs/developer-services/content/what-api-product)
+
   **Developer**     The API consumer. Developers write apps the make requests to your APIs. For more, see Developer
+
   **App**           A client-side app that a developer registers to access an API product. Registering the app with the API product generates the API key for accessing the APIs in that product.
+
   **API key**       A string with authorization information that a client-side app uses to access the resources exposed by the API product. The API key is generated when a registered app is associated with an API product.
 
 With the above brief introduction to API Products, Developers and
@@ -199,33 +202,32 @@ can skip this step.
 
 1)  **Publishing an API Product**
 
-    a.  From the Apigee Edge Management UI, go to Publish → API Products
+    a. From the Apigee Edge Management UI, go to Publish → API Products
 
     b. Click on ‘+ Product’ button to add a new product
 
     c. In the ‘Product Details’ section of the new product screen,
-        enter or select the following values for the various fields:
+    enter or select the following values for the various fields:
 
-        -   Display Name: **{Your\_Initials}\_Hospitality Basic
-            Product**
-        -   Description: **API Bundle for a basic Hospitality App.**
-        -   Environment: **Test**
-        -   Access: **Public**
-        -   Key Approval Type: **Automatic**
+        -   Display Name: {Your_Initials}_Hospitality Basic Product
+        -   Description: API Bundle for a basic Hospitality App.
+        -   Environment: Test
+        -   Access: Public
+        -   Key Approval Type: Automatic
 > ![](./media/image20.png)
 
     d.  In the ‘Resources’ section select the following values for the
         various fields:
-        -   API Proxy: **{your\_initial}\_hotels**
-        -   Revision: **1**
-        -   Resource Path: **/**
+        -   API Proxy: {your_initials}_hotels
+        -   Revision: 1
+        -   Resource Path: /
 
 > ![](./media/image21.png)
 
     e.  Click on ‘Import Resources’ to add the ‘/’ resource of your proxy to
         the API product
 
-    f. **Repeat** the above two steps for the ‘/\*\*’ resource
+    f. Repeat the above two steps for the ‘/**’ resource
 
     g. Click ‘Save’ to save the API Product. The new product should now be
        listed on the ‘Products’ page.
@@ -254,26 +256,26 @@ Developers typically have several ways of registering:
 
 -   By a back-end administrator using the Edge management UI.
 
-You will be learning more about how Developers can go through a
-self-service registration process using Developer Services Portal in
-later lessons. For the continuity of this lesson, the following steps
+We covered how Developers can go through a
+self-service registration process using the Developer Services Portal in
+lab 3. For the continuity of this lesson, the following steps
 describe the process of registering Developers and Developer Apps
 using the Apigee Edge Management UI.
 
-    a.  From the Apigee Edge Management UI, go to Publish → Developers
+    a. From the Apigee Edge Management UI, go to Publish → Developers
 
     b. Click on ‘+ Developer’ button to add a new product
 
     c. Add a new developer with the following properties:
-        -   First Name: **Your First Name**
-        -   Last Name: **Your Last Name**
-        -   Email: **{your email\_id}**
-        -   Username: **{firstname\_lastname}**
+        -   First Name: Your First Name
+        -   Last Name: Your Last Name
+        -   Email: {your email_id}        
+        -   Username: {firstname_lastname}
 
-    > ![](./media/image22.png)
+  > ![](./media/image22.png)
 
-    d.  Click ‘Save’ to save the Developer. The new developer should now be
-         listed on the ‘Developer’ page.
+    d.  Click ‘Save’ to save the Developer. The new developer should now
+    be listed on the ‘Developer’ page.
 
     NOTE : If you have already created a Developer App as part of the lab-3,
     you can skip this step.
@@ -286,40 +288,39 @@ generates the API key for the API products associated with the app.
 You can then distribute the key to app developers so they can access
 the features in the API products from the app.
 
-As mentioned earlier, you will learn about self-registering apps as a
-developer using Developer Services Portal in later lessons. For the
+We covered how to go about self-registering apps as a
+developer using Developer Services Portal in Lab 3. For the
 continuity of this lesson, the following steps describe the process of
 registering Developer Apps using the Apigee Edge Management UI.
 
-    a.  From the Apigee Edge Management UI, go to Publish → Developer Apps
+    a. From the Apigee Edge Management UI, go to Publish → Developer Apps
 
     b. Click on ‘+ Developer App’ button to add a new product
 
-    c. In the ‘Developer App Details’ section, enter or select the
-       following values for the various fields:
+    c. In the ‘Developer App Details’ section, enter or select
+    the following values for the various fields:
 
-        -   Display Name: **{Your\_Initials}\_iExplore App**
-        -   Developer: **{Your\_name}**
-        -   Callback URL: **Leave it blank**
+        -   Display Name: {Your_Initials}_iExplore App
+        -   Developer: {Your_name}
+        -   Callback URL: Leave it blank
 
-    e. In the ‘Products’ section, click on the ‘+ Product’ button
+    d. In the ‘Products’ section, click on the ‘+ Product’ button
 
-    f.  From the ‘Product’ drop-down, select the product you created.
+    e. From the ‘Product’ drop-down, select the product you created.
 
-    g. Click the ‘check-mark’ button in the ‘Actions’ column to accept the
-        changes
+    f. Click the ‘check-mark’ button in the ‘Actions’ column to accept
+    the changes
 
 > ![](./media/image23.png)
 
-    h.  Click ‘Save’ to save the Developer App. The new app should now be
-        listed on the ‘Developer Apps’ page
+    g. Click ‘Save’ to save the Developer App. The new app should now be
+    listed on the ‘Developer Apps’ page
 
-    i. From the ‘Developer Apps’ page, select your App.
+    h. From the ‘Developer Apps’ page, select your App.
 
-    j. In the ‘Products’ section, next to the entry for
-        ‘{Your\_Initials}\_Hospitality Basic Product,’ click ‘Show’ in the
-        ‘Consumer Key’ and ‘Consumer Secret’ columns to display the
-        generated keys
+    i. In the ‘Products’ section, next to the entry for
+    ‘{Your_Initials}_Hospitality Basic Product,’ click ‘Show’ in
+    the ‘Consumer Key’ and ‘Consumer Secret’ columns to display the generated keys
 
 **Note:** Since you selected ‘Key Approval Type: Automatic’ when you
 created the API product, the API key is automatically approved and you
@@ -376,32 +377,29 @@ endpoints](http://apigee.com/docs/api-services/content/oauth-endpoints)
 and [authorizing requests using OAuth
 2.0](http://apigee.com/docs/api-services/reference/authorize-requests-using-oauth-20).
 
-3)  **Adding an OAuth 2.0 Token Validation Policy **
+4)  **Adding an OAuth 2.0 Token Validation Policy**
 
     a.  Go to the Apigee Edge Management UI browser tab
 
-    b. Since you will be adding an OAuth v2.0 policy, the API Key
-        Verification policy is no longer necessary. Delete the ‘Verify
-        API Key’ policy from the ‘{your\_initials}\_hotels’ proxy
-        default proxy endpoint preflow.
+    b.  Since you will be adding an OAuth v2.0 policy, the API Key
+    Verification policy is no longer necessary. Delete the ‘Verify API Key’
+    policy from the ‘{your_initials}_hotels’ proxy default proxy endpoint preflow.
 
 > ![](./media/image24.png)
 
     c.  Using the “+Step” from the ‘Develop’ tab of the
-        ‘{your\_initials}\_hotels’ proxy, add the ‘OAuth v2.0’ policy with
-        the following properties:
+    ‘{your_initials}_hotels’ proxy, add the ‘OAuth v2.0’ policy with the following properties:
 
-        -   Policy Display Name: **Validate OAuth v2 Token**
+        -   Policy Display Name: Validate OAuth v2 Token
+        -   Policy Name: Validate-OAuth-v2-Token
 
-        -   Policy Name: **Validate-OAuth-v2-Token**
-
-    ![](./media/image15.png)
+> ![](./media/image15.png)
 
     d.  The ‘Validate OAuth v2 Token’ policy will get added after the
-        ‘Response Cache’ policy. **Drag and move** the ‘Validate OAuth v2
+        ‘Response Cache’ policy. Drag and move the ‘Validate OAuth v2
         Token’ policy to be before the ‘Remove APIKey QP’ policy
 
-    ![](./media/image25.png)
+> ![](./media/image25.png)
 
     e.  Review the XML configuration and/or the properties associated with
         the ‘Validate OAuth v2 Token’ policy.
@@ -432,20 +430,20 @@ The value of the {ExternalAuthorization} element is set to
 ‘false,’ indicating that Apigee Edge should validate the OAuth Token
 rather than delegating it to an external validator.
 
-    f.  **Removing the Authorization Header After Validating the OAuth Token**
+    f.  Removing the Authorization Header After Validating the OAuth Token
 
         i.  Using “+ Step” from the “Develop” tab of the
-            ‘{your\_initials}\_hotels’ proxy, add the ‘Assign Message’
+            ‘{your_initials}_hotels’ proxy, add the ‘Assign Message’
             policy with the following properties on the Proxy End point,
             Request flow :
 
-            -   Policy Display Name:**Remove Authorization Header**
-            -   Policy Name: **Remove-Authorization-Header**
+            -   Policy Display Name: Remove Authorization Header
+            -   Policy Name: Remove-Authorization-Header
 
 > ![](./media/image18.png)
 
         ii.  The ‘Remove Authorization Header’ policy will get added after the
-            ‘Response Cache’ policy. **Drag and move** the ‘Remove
+            ‘Response Cache’ policy. Drag and move the ‘Remove
             Authorization Header’ policy to be before the ‘Response Cache’
             policy
 
@@ -482,113 +480,101 @@ invalid token error.
 Note : You could also have this functionality as part of the “Remove
 APIKey QP” policy.
 
-    h.  **Testing the OAuth 2.0 Token Validation Policy without a Token**
+5) **Testing the Oauth2.0 Token Validation Policy**
 
-        i.  Copy the ‘Consumer Key’ associated with the
-            ‘{your\_initials}\_iExplore App’ by going to Publish →
-            Developer Apps → {your\_initials}\_iExplore App
+    a.  Testing the OAuth 2.0 Token Validation Policy without a Token
 
-        ii. Start a Trace session for the ‘{your\_initials}\_hotels’ proxy
+        i. Start a Trace session for the ‘{your_initials}_hotels’ proxy
 
-        iii. Send a test ‘/GET hotels’ request from Postman with the
-            following query parameters:
-            zipcode=98101&radius=200&apikey=**{Your\_Initials}\_iExplore
-            App Consumer Key.**
+        ii. Send a test ‘/GET hotels’ request from Postman with the following query parameters:
+         zipcode=98101&radius=200
 
-**Note :** Replace ‘hotels’ API proxy to point to **{your\_initials}**\_hotel
+        Note : Replace ‘hotels’ API proxy to point to {your_initials}_hotel
 
-        iv.  As expected, a fault will be returned since a valid OAuth Token has
-            not been provided as part of the request:
+        iii.  As expected, a fault will be returned since a valid OAuth
+        Token has not been provided as part of the request:
 
-          ```
-          {
-          fault: {
-          faultstring: "Invalid access token",
-          detail: {
-          errorcode: "oauth.v2.InvalidAccessToken"
-          }
-          }
-          }
-          ```
+  ```
+  {
+  fault: {
+  faultstring: "Invalid access token",
+  detail: {
+  errorcode: "oauth.v2.InvalidAccessToken"
+  }
+  }
+  }
+  ```
 
-        The above response shows that the API Key Verification policy is being
-        enforced as expected.
+        The above response shows that the OAuth2 Verification policy is being enforced as expected.
 
         iv.  Review the Trace for the proxy and the returned response to ensure
-             that the flow is working as expected.
+        that the flow is working as expected.
 
-        vi. Stop the Trace session for the ‘{your\_initials}\_hotels’ proxy
+        v. Stop the Trace session for the ‘{your_initials}_hotels’ proxy
 
-<!-- -->
-
-    i.  **Testing the OAuth 2.0 Token Validation Policy with a Valid Token**
+    b.  Testing the OAuth 2.0 Token Validation Policy with a Valid Token
 
         i.  You will obtain a valid oauth token by directly calling the
             ’oauth’ API proxy token endpoint and passing the consumer key
-            and consumer secret of the ‘{your\_initials}\_iExplore
+            and consumer secret of the ‘{your_initials}_iExplore
             App’ app.
 
         ii. Send a test ‘/POST OAuth Token - Client Cred’ request from
             Postman after setting appropriate values in the
             ‘x-www-form-urlencoded’ section of the request:
-            -   client\_id: **{your\_initials}\_iExplore App Consumer Key**
-            -   client\_secret: **{your\_initials}\_iExplore App Consumer
-                Secret**
-            -   grant\_type: **client\_credentials (this should be added as
-                query param)**
+            -   client_id: {your_initials}_iExplore App Consumer Key**
+            -   client_secret: {your_initials}_iExplore App Consumer
+                Secret
+            -   grant_type: client_credentials (this should be added as
+                query param)
 
 > ![](./media/image27.png)
 
-**Note**: Copy-paste the Consumer Key and Consumer Secret from the
-{your\_initials}\_iExplore App’s detail page. As you copy-paste,
-remove any spaces before and after the values of the Consumer Key and
-Consumer Secret.
+**Note**: Copy-paste the Consumer Key and Consumer Secret from the {your_initials}_iExplore App’s detail page. As you copy-paste, remove any spaces before and after the values of the Consumer Key and Consumer Secret.
 
-    j.  Review the response of the ‘/POST OAuth Token - Client
-        Cred’ request. Copy the value of the ‘access\_token’ attribute to
+    c.  Review the response of the ‘/POST OAuth Token - Client
+        Cred’ request. Copy the value of the ‘access_token’ attribute to
         use in the next step.
 
   ```
   {
-  issued\_at: "1414962637000",
-  application\_name: "ef723b8b-fdb1-4aae-9418-096d8ab7fec7",
+  issued_at: "1414962637000",
+  application_name: "ef723b8b-fdb1-4aae-9418-096d8ab7fec7",
   scope: "",
   status: "approved",
-  api\_product\_list: "\[Hospitality\]",
-  expires\_in: "3599",
+  api_product_list: "[Hospitality]",
+  expires_in: "3599",
   developer.email: "your@email.id",
-  organization\_id: "0",
-  token\_type: "BearerToken",
-  client\_id: "P24PNGrXN0gTNdVi6giT12Dq0vrG3ruB",
-  access\_token: "**j1AA2PeAtKOMCZa9tuCdDDsRqn8J**",
-  organization\_name: "demo37",
-  refresh\_token\_expires\_in: "0",
-  refresh\_count: "0"
+  organization_id: "0",
+  token_type: "BearerToken",
+  client_id: "P24PNGrXN0gTNdVi6giT12Dq0vrG3ruB",
+  access_token: "**j1AA2PeAtKOMCZa9tuCdDDsRqn8J**",
+  organization_name: "demo37",
+  refresh_token_expires_in: "0",
+  refresh_count: "0"
   }
   ```
 
-    k.  Start a Trace session for the ‘{your\_initials}\_hotels’ proxy
+    d.  Start a Trace session for the ‘{your_initials}_hotels’ proxy
 
-    l. Set up the ‘/GET hotels’ request in Postman with the following query
-       parameters **AND header**:
-        -   **Query Parameters**:
-            -   zipcode: **98101**
-            -   radius: **200**
+    e. Set up the ‘/GET hotels’ request in Postman with the following
+    query parameters AND header:
+        -   Query Parameters:
+            -   zipcode: 98101
+            -   radius: 200
 
-        -   **Header:**
-            -   Authorization**: Bearer {access\_token}**
+        -   Header:
+            -   Authorization**: Bearer {access_token}
 
 > ![](./media/image28.png)
 
-**Note**:
+    **Note**:
 
--   Replace the API proxy URL with **{your\_initials}**\_hotels URL.
--   Replace the **{access\_token}** with the value of the
-    ‘access\_token’ from the response in the step above.
-    i.  Send the Postman request.
-    ii. Review the Trace for the proxy and the returned response to
-        ensure that the flow is working as expected.
-    iii. Stop the Trace session for the ‘{your\_initials}\_hotels’ proxy
+    -   Replace the API proxy URL with {your_initials}_hotels URL.
+    -   Replace the {access_token} with the value of the ‘access_token’ from the response in the step above.
+
+    Send the Postman request, and review the Trace for the proxy and the returned
+    response to ensure that the flow is working as expected.
 
 **Summary**
 
