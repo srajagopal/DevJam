@@ -93,8 +93,7 @@ API BaaS supports the ability to retrieve entities within a specified
 distance of any geocoordinate based on its location property:
 
 ```
-location within {distance\_in\_meters} of {latitude},
-{longitude}
+location within {distance_in_meters} of {latitude},{longitude}
 ```
 
 As you can see, you need to provide the latitude and longitude
@@ -131,30 +130,26 @@ API*](https://developers.google.com/maps/documentation/geocoding/)
 Now let’s implement the policies.
 
 1)  Switch to the ‘Develop’ tab of the API Proxy
+
 2)  From the ‘Navigator’ pane, select ‘Proxy Endpoints → Default → Find
     all Hotels’
 
 
-3)  **Using Assign Message Policy** to prepare the service callout
+3)  **Use an Assign Message Policy** to prepare the service callout
     request
 
-
-    a.  Click on Proxy Endpoints > PreFlow.
-
-> ![](./media/image09.png)
-
-    b. Click on “**+ Step**” on the Request Flow
+    a. Click on “+ Step” on the Request Flow
 
 > ![](./media/image07.png)
 
-    c. Select the ‘Assign Message’ policy with the following properties:
+    b. Select the ‘Assign Message’ policy with the following properties:
 
 > ![](./media/image13.png)
 
 -  Policy Display Name: **Create Geo Coding Request**
 -  Policy Name: **Create-Geo-Coding-Request**
 
-    d. Click on the ‘Create Geo Coding Request’ policy in the pipeline and
+    c. Click on the ‘Create Geo Coding Request’ policy in the pipeline and
       modify the XML configuration in the ‘Code:
       Create-Geo-Coding-Request’ section, which appears underneath the
       Map as follows:
@@ -193,24 +188,24 @@ Here's a brief description of the elements in this policy. You can
 read more about this policy in [Assign Message
 policy](http://apigee.com/docs/api-services/reference/assign-message-policy).
 
-**<AssignMessage name>** - Gives this policy a name. The name is
+**&lt;AssignMessage name&gt;** - Gives this policy a name. The name is
 used when the policy is referenced in a flow.
 
-**<AssignTo>** - Creates a named variable called
+**&lt;AssignTo&gt;** - Creates a named variable called
 ’GeoCodingRequest’of type ‘Request’. This variable encapsulates the
 request object that will be sent by the ServiceCallout policy.
 
-**<Set><QueryParams>** - Sets the query parameters that
+**&lt;Set&gt;&lt;QueryParams&gt;** - Sets the query parameters that
 are needed for the service callout API call. In this case, the Google
 Geocoding API needs to know the location, which is expressed with a
 zipcode. The API calling client supplies this information, and we
 simply extract it here. The region and sensor parameters are by the
 API, and we just hardcode it to certain values here.
 
-**<Verb>** - In this case, we are making a simple GET request to
+**&lt;Verb&gt;** - In this case, we are making a simple GET request to
 the API.
 
-**<AssignVariable>** - zipcode and radius are new variables
+**&lt;AssignVariable&gt;** - zipcode and radius are new variables
 being created to store values being passed to the API. In this
 example, the variables will be accessed later in the proxy flow.
 
@@ -221,21 +216,20 @@ presented in the ‘Develop’ tab on the right. Any changes made in the
 vice-versa. We will use the ‘Property Inspector’ panel to set
 properties for some of the policies as the lesson progresses.
 
-4)  **Using the Service Callout Policy to invoke the Google GeoCoding
-    > API**
+4)  **Use the Service Callout Policy to invoke the Google GeoCoding API**
 
     a.  From the ‘New Policy’ drop-down, select the ‘Service Callout’
         policy and add it with the following properties:
 
-        -   Policy Display Name: **Call Geo Coding API**
-        -   Policy Name: **Call-Geo-Coding-API**
+        -   Policy Display Name: Call Geo Coding API
+        -   Policy Name: Call-Geo-Coding-API
 
     b.  For the ‘Call Geo Coding API’ policy, change the values of the
         following properties in the ‘Property Inspector’:
 
-        -   Request variable: **GeocodingRequest**
-        -   Response: **GeocodingResponse**
-        -   URL: **http://maps.googleapis.com/maps/api/geocode/json**
+        -   Request variable: GeoCodingRequest
+        -   Response: GeoCodingResponse
+        -   URL: http://maps.googleapis.com/maps/api/geocode/json
 
   ```
   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -257,27 +251,27 @@ Here's a brief description of the elements that were modified in this
 policy. You can read more about this policy in [Service Callout
 policy](http://apigee.com/docs/api-services/reference/service-callout-policy).
 
-**<Request variable>** - This is the variable ‘GeocodingRequest’
+**&lt;Request variable&gt;** - This is the variable ‘GeoCodingRequest’
 that was created in the AssignMessage policy in the previous step. It
 encapsulates the request going to the Google Geocoding API.
 
-**<Response>** - This element names a variable
-‘GeocodingResponse’ in which the response from the Google Geocoding
+**&lt;Response&gt;** - This element names a variable
+‘GeoCodingResponse’ in which the response from the Google Geocoding
 API will be stored. As you will see, this variable will be accessed
 later by the ExtractVariables policy.
 
-**<HTTPTargetConnection><URL>** - Specifies the target URL
+**&lt;HTTPTargetConnection&gt;&lt;URL&gt;** - Specifies the target URL
 to be used by the service callout - in this case the URL of the Google
 Geocoding API: ‘http://maps.googleapis.com/maps/api/geocode/json’
 
-5)  **Using the Extract Message Policy to parse the service callout
+5)  **Use the Extract Message Policy to parse the service callout
     response**
 
     a.  From the ‘New Policy’ drop-down, select the ‘Extract Variables’
         > policy and add it with the following properties:
 
-        -   Policy Display Name: **Extract Geo Codes**
-        -   Policy Name: **Extract-Geo-Codes**
+        -   Policy Display Name: Extract Geo Codes
+        -   Policy Name: Extract-Geo-Codes
 
     b.  For the ‘Extract Geo Codes’ policy, change the XML configuration
         of the policy using the ‘Code: Extract Geo Codes’ panel as
@@ -291,10 +285,10 @@ Geocoding API: ‘http://maps.googleapis.com/maps/api/geocode/json’
   <VariablePrefix>geocodeResponse</VariablePrefix>
   <JSONPayload>
   <Variable name="latitude">
-  <JSONPath>$.results\[0].geometry.location.lat</JSONPath>
+  <JSONPath>$.results[0].geometry.location.lat</JSONPath>
   </Variable>
   <Variable name="longitude">
-  <JSONPath>$.results\[0].geometry.location.lng</JSONPath>
+  <JSONPath>$.results[0].geometry.location.lng</JSONPath>
   </Variable>
   </JSONPayload>
   </ExtractVariables>
@@ -309,7 +303,7 @@ policy. You can read more about this policy in [Extract Variables
 policy](http://apigee.com/docs/api-services/reference/extract-variables-policy).
 
 **<Source>** - Specifies the response variable
-‘GeocodingResponse’ that we created in the ServiceCallout policy. This
+‘GeoCodingResponse’ that we created in the ServiceCallout policy. This
 is the variable from which this policy extracts data.
 
 **<VariablePrefix>** - The variable prefix ‘geocodeResponse’
@@ -336,16 +330,16 @@ available to other policies within the proxy flow, as you will see.
 The variables are: geocodeResponse.latitude &
 geocodeResponse.longitude
 
-6)  **Using the Javascript Policy to create the Location Query to send
+6)  **Use the Javascript Policy to create the Location Query to send
     to the BaaS target endpoint**
 
     a.  From the ‘New Policy’ drop-down, select the ‘Javascript’ policy
         and add it with the following properties:
 
-        -   Policy Display Name: **Create Location Query**
-        -   Policy Name: **Create-Location-Query**
-        -   Script File: **Create new script**
-        -   Script Name: **Create-Location-Query.js**
+        -   Policy Display Name: Create Location Query
+        -   Policy Name: Create-Location-Query
+        -   Script File: Create new script
+        -   Script Name: Create-Location-Query.js
 
     b.  Once the policy has been added, from the ‘Navigator’ panel go to
         ‘Scripts → Javascript’ section and select the
@@ -388,14 +382,14 @@ is invoked.
 You can read more about this policy in [Javascript
 policy](http://apigee.com/docs/api-services/reference/javascript-policy).
 
-7)  **Using the Assign Message Policy to add the Location Query to the
+7)  **Use the Assign Message Policy to add the Location Query to the
     query parameter before BaaS target endpoint invocation**
 
     a.  From the ‘New Policy’ drop-down, select the ‘Assign Message’
         policy and add it with the following properties:
 
-        -   Policy Display Name: **Set Query Parameters**
-        -   Policy Name: **Set-Query-Parameters**
+        -   Policy Display Name: Set Query Parameters
+        -   Policy Name: Set-Query-Parameters
 
     b.  For the ‘Set Query Parameters’ policy, change the XML
         configuration of the policy using the ‘Code: Set Query
@@ -451,17 +445,17 @@ the behavior of the flow to see if the results being returned from the
 API BaaS are as expected.
 
     a.  Click on the ‘Save’ button to save and deploy the changes to the
-        ‘{your\_initials}\_hotels’ API Proxy
+        ‘{your_initials}_hotels’ API Proxy
 
 > ![](./media/image17.png)
 
-    c.  Wait for the ‘Successfully saved API Proxy’ message to appear and
+    b.  Wait for the ‘Successfully saved API Proxy’ message to appear and
         verify that your proxy is deployed to the ‘test’ environment
 
-    d.  Go to the ‘Trace’ tab and start a trace session by clicking the
+    c.  Go to the ‘Trace’ tab and start a trace session by clicking the
         ‘Start Trace Session’ button
 
-    e.  Use Postman to test the ‘/GET hotels’ request with the following
+    d.  Use Postman to test the ‘/GET hotels’ request with the following
         query parameters combinations and review the results being
         returned
     -   zipcode=98101&radius=1000
@@ -470,7 +464,7 @@ API BaaS are as expected.
     -   No query parameters
 
 Note : Before invoking the API, change the URL to point your API i.e.
-{your\_initials}\_hotels.
+{your_initials}_hotels.
 
 Notice that the responses being returned by the API BaaS for the
 various query parameter combinations are different as the
@@ -499,14 +493,14 @@ a simple Javascript policy, similar to the one used before to create
 the location query variable, to create a customized response.
 
     a.  Go to the ‘Develop’ tab of your proxy in the Apigee Edge
-        Management UI.
+        Management UI, and add a new policy to the response of the Find All Hotels flow.
 
     b.  From the ‘New Policy’ drop-down, select the ‘Javascript’ policy and
         add it with the following properties:
-        -   Policy Display Name: **Create Final Response**
-        -   Policy Name: **Create-Final-Response**
-        -   Script File: **Create new script**
-        -   Script Name: **Create-Final-Response.js**
+        -   Policy Display Name: Create Final Response
+        -   Policy Name: Create-Final-Response
+        -   Script File: Create new script
+        -   Script Name: Create-Final-Response.js
 
     c.  Add the following code to the ‘Create-Final-Response.js’ script:
 
@@ -550,7 +544,7 @@ the location query variable, to create a customized response.
       context.setVariable("response.content", JSON.stringify(finalResponse));
       ```
 
-    *(You can find the javascript file content*
+  *(You can find the javascript file content*
     [**here**](https://gist.github.com/prithpal/69c870bc5971d067fb8d)*.
     Click the “Raw” button and copy/paste into your policy editor).*
 
