@@ -250,11 +250,9 @@ Ask your Instructor for Organization and application details.
 
 > ![](./media/image16.png)
 
-    h.  Browse further down for that entity to the ‘Edit Entity’ section.
-    This section presents the JSON format of the entity
-    i.  In the ‘Edit Entity’ section, change the value of
+    h. Change the value of
     'locationDescription’ attribute to “Near museums and stadiums” and
-    then click ‘Validate JSON’
+    then click 'Validate JSON'
 
 > ![](./media/image15.png)
 
@@ -262,7 +260,7 @@ Ask your Instructor for Organization and application details.
     k.  Click on ‘Hide Details’ for the entity and browse to the top
 
 **Extra Credit:** Add a new entity to the ‘hotels’ data collection
-using the ‘CREATE’ operation available in the BaaS portal.
+using the ‘POST’ operation available in the BaaS portal.
 
 ***Hint:*** Remove the uuid and type attributes in case you copy-paste
 from an existing entity.
@@ -275,39 +273,39 @@ from an existing entity.
     subsequent calls
 
     a.  Open up another browser tab and go to
-        > http://api.usergrid.com/**{your-org}**/sandbox/hotels
+        > http://api.usergrid.com/{your-org}/sandbox/hotels
 
-Replace **{your-org}** with the actual name of your API BaaS
+  Replace **{your-org}** with the actual name of your API BaaS
 organization name.
 
-**Note**: The ‘hospitality’ App created for these lab exercises has
-been configured so that the Guest role has full permissions (that is,
-/\*\* for GET, POST, PUT, and DELETE) to all the data collections in
-the App. As with any other app, you can secure the application by
-updating its roles and permissions. For more on working with
-permissions and roles, see [Managing access by defining permission
-rules](http://apigee.com/docs/app-services/content/managing-access-defining-permission-rules).
+  **Note**: The 'sandbox' App created for these lab exercises has
+  been configured so that the Guest role has full permissions (that is,
+  /\*\* for GET, POST, PUT, and DELETE) to all the data collections in
+  the App. As with any other app, you can secure the application by
+  updating its roles and permissions. For more on working with
+  permissions and roles, see [Managing access by defining permission
+  rules](http://apigee.com/docs/app-services/content/managing-access-defining-permission-rules).
 
-    a.  Effectively you’ve called the GET API for the ‘hotels’ data
+    b.  Effectively you’ve called the GET API for the ‘hotels’ data
     collection by calling the above URL. Review the information
     presented in JSON format. This is the same information you
     previously saw on the BaaS portal.
 
-    b.  Browse towards the bottom of the response. You’ll notice that by
+    c.  Browse towards the bottom of the response. You’ll notice that by
     default BaaS provides 10 entities at a time. This can be verified
     by looking at the attribute "count" : 10
 
-    c.  Now call the GET API as follows with the limits parameter
+    d.  Now call the GET API as follows with the limits parameter
 
-> http://api.usergrid.com/**{your-org}**/sandbox/hotels?limit=5
+> http://api.usergrid.com/{your-org}/sandbox/hotels?limit=5
 
 Replace **{your-org}** with the actual name of your API BaaS
 organization name.
 
-    d.  Review the results and you’ll notice that BaaS has returned 5 hotels
+    e.  Review the results and you’ll notice that BaaS has returned 5 hotels
     instead of 10 this time around
 
-    e.  To page forward to the next set of results, copy the value of the
+    f.  To page forward to the next set of results, copy the value of the
     ‘cursor’ attributed provided at the bottom of the results and call
     the GET API again after adding the query parameter ‘cursor={cursor
     value}’ to the URL.
@@ -323,7 +321,7 @@ organization name.
 
     a.  Go back to the BaaS portal
 
-    b.  While in the ‘hotels’ collection, use the ‘READ’ method to query
+    b.  While in the ‘hotels’ collection, use the ‘GET’ method to query
         for hotels in the city of Burlingame
 
 > ![](./media/image18.png)
@@ -334,12 +332,10 @@ organization name.
     d.  Try a few of the following other queries to get a better
     understanding of how data querying works in BaaS:
 
-    -   select name, postalCode where city = ‘Burlingame’
-    -   select \* where hotelRating = 5
-    -   select \* where hotelRating = 5 and city = ‘Seattle’
-    -   select \* where hotelRating = 5 or city = ‘Seattle’
-    -   <span id="h.44sinio" class="anchor"></span>select \* where
-        shortDescription contains ‘Amazon’
+    -   select * where hotelRating = 3
+    -   select * where hotelRating = 3 and city = 'Seattle'
+    -   select * where hotelRating = 3 or city = 'Seattle'
+    -   select * where shortDescription contains 'Pike'
 
     e.  These queries can also be provided as parameters to the GET API by
     using the ‘ql’ query parameter. Switch to the browser tab used to
@@ -347,7 +343,7 @@ organization name.
 
     f.  Call the GET API as follows to get hotels in the city of Burlingame
 
-> http://api.usergrid.com/**{your-org}**/sandbox/hotels?ql=select%20\*%20where%20city=%27Burlingame%27
+> http://api.usergrid.com/{your-org}/sandbox/hotels?ql=select%20\*%20where%20city=%27Burlingame%27
 
 Replace **{your-org}** with the actual name of your API BaaS
 organization name.
