@@ -161,7 +161,7 @@ you can run a few requests through.
 4.  Append that the copied UUID to the URL of ‘/GET hotels’ request and
     send another request from Postman. For eg -
 
-  http://{org}-{env}.apigee.net/v1/{your_initials}_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
+  http://{org}-{env}.apigee.net/v1/{your_initials}_hotels/hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
 
   NOTE : replace your org, env and {your_initials}_hotels with
   your Edge Org and Environment and proxy names. If you completed lab 3 you will also need to add your apikey as a query parameter.
@@ -207,7 +207,7 @@ you can run a few requests through.
     dimensions which Edge collects for you, for every request,
     including response time, payload size, and so on.
 
-  h.  Hit the save button to save and open the report - use the environment dropdown to switch to the test environment. Edge Analytics performs aggregation on a regular interval, asynchronously with respect to incoming API requests. Therefore, you may have to wait a bit to see the data appear in the chart. After a cycle of aggregation occurs, you will see: 
+  h.  Hit the save button to save and open the report - use the environment dropdown to switch to the test environment. Edge Analytics performs aggregation on a regular interval, asynchronously with respect to incoming API requests. Therefore, you may have to wait a bit to see the data appear in the chart. After a cycle of aggregation occurs, you will see:
 
   > ![](./media/image19.png)
 
