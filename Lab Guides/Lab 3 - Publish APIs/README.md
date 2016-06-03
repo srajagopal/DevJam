@@ -35,24 +35,25 @@ of a developer to an app and to an API:
 
 ![](./media/image47.png)
 
-1)  **Adding an API Key Verification Policy**
-    a.  Go to the Apigee Edge Management UI browser tab
-    b.  Select your API proxy
-    c.  Click on the develop tab
+1)  **Adding an API Key Verification Policy**<br/>
+&nbsp;&nbsp;a.  Go to the Apigee Edge Management UI browser tab<br/>
+&nbsp;&nbsp;b.  Select your API proxy<br/>
+&nbsp;&nbsp;c.  Click on the develop tab
 
 > ![](./media/image50.png)
 
-  a.  Click on Proxy Endpoints -> PreFlow
+&nbsp;&nbsp;d.  Click on Proxy Endpoints -> PreFlow
 
 > ![](./media/image49.png)
 
-  b.  Click on “+ Step” on the Request Flow
+&nbsp;&nbsp;e.  Click on “+ Step” on the Request Flow
 
-> ![](./media/image52.png){width="4.25in" height="0.8045942694663167in"}
+> ![](./media/image52.png)
 
-  c.  Select the ‘Verify API Key’ policy with the following properties:
-    i.  Policy Display Name: **Verify API Key**
-    ii. Policy Name: **Verify-API-Key**
+&nbsp;&nbsp;f.  Select the ‘Verify API Key’ policy with the following properties:
+
+&nbsp;&nbsp;&nbsp;&nbsp;i.  Policy Display Name: **Verify API Key**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ii. Policy Name: **Verify-API-Key**
 
 > ![](./media/image51.png)
 
@@ -70,10 +71,7 @@ scenario, we verify the API Key before the Response Cache policy to
 ensure that an API Consumer whose API Key may have been revoked is not
 able to get the data from the cache.
 
-  d.  Examine the XML configuration in the ‘Code’ panel (or properties
-      using the ‘Property Inspector’ panel) associated with the ‘Verify
-      API Key’ policy. The XML for the policy should look something like
-      this:
+&nbsp;&nbsp;g.  Examine the XML configuration in the ‘Code’ panel (or properties using the ‘Property Inspector’ panel) associated with the ‘Verify API Key’ policy. The XML for the policy should look something like this:
 
   ```
   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -89,7 +87,7 @@ able to get the data from the cache.
 [**here**](https://gist.github.com/prithpal/02ee175cc1e00a2de610)*.
 Click the “Raw” button and copy/paste into your policy editor).*
 
-Note the <APIKey> element, which identifies where the policy
+Note the &lt;APIKey&gt; element, which identifies where the policy
 should check for the API key. In this example, the policy looks for
 the API key in a query parameter named 'apikey'. API keys can be
 located in a query parameter, a form parameter, or an HTTP header.
@@ -99,27 +97,24 @@ policy](http://apigee.com/docs/api-services/reference/verify-api-key-policy)[.](
 
 2)  **Removing the API Key from the query parameters**
 
-    a.  Click on “+ Step” on the Request Flow
+&nbsp;&nbsp;a.  Click on “+ Step” on the Request Flow
 
 > ![](./media/image53.png)
 
-  b.  Select ‘Assign Message’ policy with the following properties:
+&nbsp;&nbsp;b.  Select ‘Assign Message’ policy with the following properties:
 
-    i.  Policy Display Name: **Remove APIKey QP**
-    ii. Policy Name: **Remove-APIKey-QP**
+&nbsp;&nbsp;&nbsp;&nbsp;i.  Policy Display Name: **Remove APIKey QP**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ii. Policy Name: **Remove-APIKey-QP**
 
 > ![](./media/image58.png)
 
-  c.  The ‘Remove APIKey QP’ policy will get added after the ‘Response
-      Cache’ policy. **Drag and move** the ‘Remove APIKey QP’ policy to
-      be before the ‘Response Cache’ policy
+&nbsp;&nbsp;c.  The ‘Remove APIKey QP’ policy will get added after the ‘Response Cache’ policy. **Drag and move** the ‘Remove APIKey QP’ policy to be before the ‘Response Cache’ policy
 
 ![](./media/image56.png)
 
-  d.  **Save** the configuration
+&nbsp;&nbsp;d.  **Save** the configuration
 
-  e.  For the ‘Remove APIKey QP’ policy, change the XML configuration of
-     the policy using the ‘Code: Remove APIKey QP’ panel as follows:
+&nbsp;&nbsp;e.  For the ‘Remove APIKey QP’ policy, change the XML configuration of the policy using the 'Code' panel as follows:
 
   ```
   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -153,16 +148,13 @@ Proxy has been able to make a request with appropriate parameters and
 get a response back. Now that you have added the API Key Verification
 policy, that will no longer be the case.
 
-  a.  Start the Trace session for the ‘{your\_initials}\_hotels’ proxy
+&nbsp;&nbsp;a.  Start the Trace session for the ‘**{your\_initials}**\_hotels’ proxy
 
-  b.  Now that the API Key Verification policy has been added to the
-      proxy, try and send a test ‘/GET hotels’ request from Postman with
-      the following query parameters: zipcode=98101&radius=200.
+&nbsp;&nbsp;b.  Now that the API Key Verification policy has been added to the proxy, try and send a test ‘/GET hotels’ request from Postman with the following query parameters: **zipcode=98101&radius=200**
 
 **Note**: Replace the URL of hotels API with **{your\_initials}**\_hotels
 
-  c.  You will notice that the following fault is returned since an API
-      Key has not been provided as a request query parameter:
+&nbsp;&nbsp;c.  You will notice that the following fault is returned since an API Key has not been provided as a request query parameter:
 
   ```
   {
@@ -175,50 +167,30 @@ policy, that will no longer be the case.
   }
   ```
 
-The above response shows that the API Key Verification policy is being
-enforced as expected.
+The above response shows that the API Key Verification policy is being enforced as expected.
 
-  e.  Review the Trace for the proxy and the returned response to ensure
-      that the flow is working as expected.
+&nbsp;&nbsp;d.  Review the Trace for the proxy and the returned response to ensure that the flow is working as expected.
 
-  f.  Stop the Trace session for the proxy
+&nbsp;&nbsp;e.  Stop the Trace session for the proxy
 
 **API Products**
 
-API products enable you to bundle and distribute your APIs to multiple
-developer groups simultaneously, without having to modify code. An API
-product consists of a list of API resources (URIs) combined with a
-Service Plan (rate-limiting policy settings) plus any custom metadata
-required by the API provider. API products provide the basis for access
-control in Apigee, since they provide control over the set of API
-resources that apps are allowed to consume.
+API products enable you to bundle and distribute your APIs to multiple developer groups simultaneously, without having to modify code. An API product consists of a list of API resources (URIs) combined with a Service Plan (rate-limiting policy settings) plus any custom metadata required by the API provider. API products provide the basis for access control in Apigee, since they provide control over the set of API resources that apps are allowed to consume.
 
 ![](./media/image57.png)
 
-As part of the app provisioning workflow, developer selects from a list
-of API products. This selection of an API product is usually made in the
-context of a developer portal. The developer app is provisioned with a
-key and secret (generated by and stored on Apigee Edge) that enable the
-app to access the URIs bundled in the selected API product. To access
-API resources bundled in an API product, the app must present the API
-key issued by Apigee Edge. Apigee Edge will resolve the key that is
-presented against an API product, and then check associated API
-resources and quota settings.
+As part of the app provisioning workflow, developer selects from a list of API products. This selection of an API product is usually made in the context of a developer portal. The developer app is provisioned with a key and secret (generated by and stored on Apigee Edge) that enable the app to access the URIs bundled in the selected API product. To access API resources bundled in an API product, the app must present the API key issued by Apigee Edge. Apigee Edge will resolve the key that is presented against an API product, and then check associated API resources and quota settings.
 
-The API supports multiple API products per app key--your developers can
-consume multiple API products without requiring multiple keys. Also, a
-key can be 'promoted' from one API product to another. This enables you
-to promote developers from 'free' to 'premium' API products seamlessly
-and without user interruption.
+The API supports multiple API products per app key - your developers can consume multiple API products without requiring multiple keys. Also, a key can be 'promoted' from one API product to another. This enables you to promote developers from 'free' to 'premium' API products seamlessly and without user interruption.
 
 The following table defines some of the terms used to register apps
 and generate keys:
 
 ***API product***   A bundle of API proxies combined with a service plan that sets limits on access to those APIs. API products are the central mechanism that Apigee Edge uses for authorization and access control to your APIs. For more, see [API Products](http://apigee.com/docs/developer-services/content/what-api-product)[](http://apigee.com/docs/developer-services/content/what-api-product)
 
-***Developer***     The API consumer. Developers write apps the make requests to your APIs. For more, see Developer
+***Developer***     The API consumer. Developers write apps the make requests to your APIs.
 
-**App***            A client-side app that a developer registers to access an API product. Registering the app with the API product generates the API key for accessing the APIs in that product.
+***App***            A client-side app that a developer registers to access an API product. Registering the app with the API product generates the API key for accessing the APIs in that product.
 
 ***API key***       A string with authorization information that a client-side app uses to access the resources exposed by the API product. The API key is generated when a registered app is associated with an API product.
 
@@ -228,63 +200,49 @@ and generate keys:
 
 2)  Click on ‘+ Product’ button to add a new product
 
-3)  In the ‘Product Details’ section of the new product screen, enter or
-    select the following values for the various fields:
+3)  In the ‘Product Details’ section of the new product screen, enter or select the following values for the various fields:
 
-    a.  Display Name: **{Your\_Initials}\_Hospitality Basic Product **
-    b.  Description: **API Bundle for a basic Hospitality App.**
-    c.  Environment: **Test**
-    d.  Access: **Public**
-    e.  Key Approval Type: **Automatic**
+&nbsp;&nbsp;a.  Display Name: **{Your_Initials}_Hospitality Basic Product**<br/>
+&nbsp;&nbsp;b.  Description: **API Bundle for a basic Hospitality App.**<br/>
+&nbsp;&nbsp;c.  Environment: **Test**<br/>
+&nbsp;&nbsp;d.  Access: **Public**<br/>
+&nbsp;&nbsp;e.  Key Approval Type: **Automatic**
 
 ![](./media/image59.png)
 
 4)  In the ‘Resources’ section select the following values for the
     various fields:
 
-    a.  API Proxy: **{your\_initial}\_hotels **
-    b.  Revision: **1**
-    c.  Resource Path: **/**
+&nbsp;&nbsp;a.  API Proxy: **{your\_initial}\_hotels **<br/>
+&nbsp;&nbsp;b.  Revision: **1**<br/>
+&nbsp;&nbsp;c.  Resource Path: **/**
 
 > ![](./media/image60.png)
 
-5)  Click on **‘Import Resources’** to add the **‘/’** resource of your
-    proxy to the API product
+5)  Click on **‘Import Resources’** to add the **‘/’** resource of your proxy to the API product
 
 6)  Repeat the above two steps for the **‘/\*\*’** resource
 
-7)  Click **‘Save’** to save the API Product**.** The new product should
-    now be listed on the ‘Products’ page.
+7)  Click **‘Save’** to save the API Product**.** The new product should now be listed on the ‘Products’ page.
 
 **Developer Portal**
 
-Developer portals with social publishing features are increasingly being
-used for communication with the developer community. This includes
-communicating static content, such as API documentation and
-terms-of-use, as well as dynamic community-contributed content such as
-blogs and forums.
+Developer portals with social publishing features are increasingly being used for communication with the developer community. This includes communicating static content, such as API documentation and
+terms-of-use, as well as dynamic community-contributed content such as blogs and forums.
 
 As an API provider, you need a way to expose your APIs, educate
 developers about your APIs, sign up developers, and let developers
-register apps. Exposing your APIs to developers is only part of creating
-a truly dynamic community. You also need a way for your developer
-community to provide feedback, make support and feature requests, and
-submit their own content that can be accessed by other developers.
+register apps. Exposing your APIs to developers is only part of creating a truly dynamic community. You also need a way for your developer community to provide feedback, make support and feature requests, and submit their own content that can be accessed by other developers.
 
 ![](./media/image61.png)
 
 **Developers**
 
-Developers access your APIs through apps. When the developer registers
-an app, they receive a single API key that allows them to access all of
-the API products associated with the app. However, developers must be
-registered before they can register an app.
-
-
+Developers access your APIs through apps. When the developer registers an app, they receive a single API key that allows them to access all of the API products associated with the app. However, developers must be registered before they can register an app.
 
 **Register a developer from the developer portal**
 
-1)  The user selects **Register** on the developer portal home page
+1)  Ask your instructor for the URL for the developer portal. On the developer portal home page select **Register**
 
 > ![](./media/image62.png)
 
@@ -292,28 +250,20 @@ registered before they can register an app.
 
 > ![](./media/image63.png)
 
-3)  The user enters the required information and selects **Create new
-    account**.
-    Depending on the new account registration settings, when the new
-    account is created, the user is sent an automated welcome email.
+3)  Enter the required information and select **Create new account**. Depending on the new account registration settings, when the new account is created, you could be sent an automated welcome email.
 
 **NOTE**: If you see this message:
 
 > ![](./media/image64.png)
 
 Then the developer portal administrator MUST approve the developer
-before the developer can sign in.
+before the developer can sign in. If you see this message ask your instructor to approve your developer account - once that is done then login to the portal.
 
 **Register an app from the developer portal:**
 
-Developers register apps to access your API products. When a developer
-registers an app, the developer selects the API products to associate
-with the app and Edge generates an API key. Each app has a single API
-key that provides access to all API products associated with the app.
+Developers register apps to access your API products. When a developer registers an app, the developer selects the API products to associate with the app and Edge generates an API key. Each app has a single API key that provides access to all API products associated with the app.
 
-Apps allow you to control who can access your APIs. You can revoke an
-app's key, preventing it from accessing all API products. Or you can
-revoke access to a single API product associated with the app.
+Apps allow you to control who can access your APIs. You can revoke an app's key, preventing it from accessing all API products. Or you can revoke access to a single API product associated with the app.
 
 ![](./media/image65.png)
 
@@ -325,28 +275,22 @@ revoke access to a single API product associated with the app.
 
 > ![](./media/image39.png)
 
-6)  Enter details for the application
+6)  Enter details for the application and hit **Create App**
 
 > ![](./media/image40.png)
 
 > NOTE: Select the product that you created in the previous step.
 
-6)  View the Consumer Key (aka API Key) and Consumer Secret (aka
+7)  Open your new app to view the Consumer Key (aka API Key) and Consumer Secret (aka
     API Secret)
 
-> ![](./media/image41.png){width="4.50340113735783in"
-> height="2.6423797025371827in"}
+> ![](./media/image41.png)
 
-7)  Test the API
+8)  Test the API
 
-    a.  Start the Trace session for the ‘**{your\_initials}\_hotels**’
-        proxy
+&nbsp;&nbsp;a.  Start the Trace session for the ‘**{your\_initials}\_hotels**’ proxy
 
-    b.  Now that the API Key Verification policy has been added to the
-        proxy, try and send a test ‘/GET hotels’ request from Postman
-        with the following query parameters:
-        **zipcode=98101&radius=200&apikey={apikey from the dev
-        portal}**
+&nbsp;&nbsp;b.  Now that the API Key Verification policy has been added to the proxy, try and send a test ‘/GET hotels’ request from Postman with the following query parameters: **zipcode=98101&radius=200&apikey={apikey from the dev portal}**
 
 > Note: Replace the URL of hotels API with **{your\_initials}**\_hotel
 
@@ -359,22 +303,18 @@ source for the API structure. For more information, see [*About SmartDoc
 models and
 templates*](http://apigee.com/docs/developer-services/content/using-smartdocs-document-apis#models).
 
-    a.  Ask you instructor to change your developer user to have administrator access in the portal. Logout and then back in to the developer portal.
+&nbsp;&nbsp;a.  Ask you instructor to change your developer user to have administrator access in the portal. Logout and then back in to the developer portal.
 
-    b.  Select **Content > SmartDocs** in the Drupal administration menu.
+&nbsp;&nbsp;b.  Select **Content > SmartDocs** in the Drupal administration menu.
 
 > ![](./media/image42.png)
 
-    c.  Select **New model** at the top of the page
+&nbsp;&nbsp;c.  Select **New model** at the top of the page
 
-    d.  Enter the following fields:
-    -   **Name**: The model name that will be displayed across the site.
-    -   **Internal name**: As you type the **Name**, the internal
-        name displays. The internal name for the model that must be
-        unique among all models.  The internal name must contain only
-        lowercase letters, numbers, and hyphens with no spaces.
-        Select**Edit** to edit this name.
-    -   **Description**: A description of the model.
+&nbsp;&nbsp;d.  Enter the following fields:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- **Name**: The model name that will be displayed across the site.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- **Internal name**: As you type the **Name**, the internal name displays. The internal name for the model that must be unique among all models.  The internal name must contain only lowercase letters, numbers, and hyphens with no spaces. Select **Edit** to edit this name.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- **Description**: A description of the model.
 
 > ![](./media/image43.png)
 
@@ -384,35 +324,31 @@ templates*](http://apigee.com/docs/developer-services/content/using-smartdocs-do
 
 ![](./media/image44.png)
 
-    a.  The API specification can be of Swagger 1.2, Swagger 2.0 (JSON
-        or YAML) or WADL formats. In this example, we will use Swagger 2.0
-        – YAML.
-        Open the **hotels-openapi.yaml** file from the lab material in a text editor and change the {baas_org} on line 14 to match your baas org and save the file.
-        Back in the dev portal administrator, select the **hotels-openapi.yaml** file
+&nbsp;&nbsp;a.  The API specification can be of Swagger 1.2, Swagger 2.0 (JSON or YAML) or WADL formats. In this example, we will use Swagger 2.0 – YAML.<br/>
+Open the **hotels-openapi.yaml** file from the lab material in a text editor and change the {baas_org} on line 14 to match your baas org and save the file.<br/>
+Back in the dev portal administrator, select the **hotels-openapi.yaml** file
 
 > ![](./media/image45.png)
 
-    b.  Click on ‘**Import’**
+&nbsp;&nbsp;b.  Click on ‘**Import’**
 
-    c.  Select all the Operations//Methods that should be published (we will
-        select all)
+&nbsp;&nbsp;c.  Select all the Operations//Methods that should be published (we will select all)
 
 > ![](./media/image33.png)
 
-    d.  Click on ‘**Update**’
+&nbsp;&nbsp;d.  Click on ‘**Update**’
 
-    e.  Click on ‘View API Documentation’ to see the published documentation
+&nbsp;&nbsp;e.  Click on ‘View API Documentation’ to see the published documentation
 
 > ![](./media/image34.png)
 
-    f.  Click on ‘**hotels-get**’
+&nbsp;&nbsp;f.  Click on ‘**hotels-get**’
 
 > ![](./media/image35.png)
 
-    g.  Enter ‘**application/json**’ as the Content-Type. Leave the radius
-        and zipcode empty
+&nbsp;&nbsp;g.  Enter ‘**application/json**’ as the Content-Type. Leave the radius and zipcode empty
 
-    h.  Click on ‘**Send this request**’
+&nbsp;&nbsp;h.  Click on ‘**Send this request**’
 
 > ![](./media/image36.png)
 
@@ -420,6 +356,4 @@ templates*](http://apigee.com/docs/developer-services/content/using-smartdocs-do
 
 In this exercise, you learnt about how API keys can be used as an
 application identifier, how APIs can be packaged in the form of
-Products. You also saw how to publish API documentation to the developer
-portal and finally, how developers are onboarded and how developer
-applications are registered.
+Products. You also saw how to publish API documentation to the developer portal and finally, how developers are onboarded and how developer applications are registered.

@@ -43,7 +43,7 @@ status code. Let’s get started -
 
 3.  Click ’Add Probe’ to add a new monitoring probe to your API.
 
-> ![](./media/image19.jpg)
+  > ![](./media/image19.jpg)
 
 4.  For creating a probe, let’s use the following values
 
@@ -56,19 +56,19 @@ status code. Let’s get started -
     -   Http Method : Get
     -   Response &gt; Asset &gt; HTTP Code - 2XX
 
-> ![](./media/image22.png)
+  > ![](./media/image22.png)
 
 5.  Click on “Next”.
 
 6.  Define Alerts by configuring the following values :
 
--   Run Every : 30 seconds
--   Raise Alert : enable “If Failure exceeds” and set the value as 5
+  -   Run Every : 30 seconds
+  -   Raise Alert : enable “If Failure exceeds” and set the value as 5
     consecutive times.
--   Notification Destination : Choose Email and provide **your email
+  -   Notification Destination : Choose Email and provide **your email
     address**.
 
-> ![](./media/image21.png)
+  > ![](./media/image21.png)
 
 7.  Click on “Next”.
 
@@ -76,24 +76,24 @@ status code. Let’s get started -
 
 9.  Click on “I’m Done”.
 
-> ![](./media/image24.png)
+  > ![](./media/image24.png)
 
 10.  This will create a probe in API Health. You can view all your Probes
     from the API Health dashboard.
 
-![](./media/image23.png)
+  >![](./media/image23.png)
 
 11.  As the Hotels API proxy is protected, all call will fail with 4xx
     errors and you will receive alerts (like the one below) on the
     configured email address.
 
-> ![](./media/image26.png)
+  > ![](./media/image26.png)
 
 12.  You can deactivate the probe, from API Health dashboard.
 
-> ![](./media/image25.jpg)
+  > ![](./media/image25.jpg)
 
-1.  **Viewing graphical reports on API Health** -
+13.  Viewing graphical reports on API Health
 
     -   By clicking a step name on the API Health dashboard, you're
         shown graphs of average response times and success rates for
@@ -101,19 +101,19 @@ status code. Let’s get started -
         select other steps in the probe to view composite graphs of
         all steps.
 
-> ![](./media/image29.png)
+  > ![](./media/image29.png)
 
-> ![](./media/image27.png)
+  > ![](./media/image27.png)
 
--   By clicking a probe name on the API Health dashboard, you're shown
+  -   By clicking a probe name on the API Health dashboard, you're shown
     composite graphs of average response times and success rates for
     all steps in the probe. You can also deselect steps to compare
     only the ones you want, and you can filter the view by time period
     and location the calls were made from.
 
-> ![](./media/image28.png)
+  > ![](./media/image28.png)
 
-> ![](./media/image30.png)
+  > ![](./media/image30.png)
 
 **Summary**
 
@@ -142,7 +142,7 @@ Now lets change the probe definition.
 
 ```
 Header Name : Authorization
-Header Value : Bearer {Access\_Token}
+Header Value : Bearer {Access_Token}
 ```
 
 Note : Replace **{Access\_Token}** with the actual Access token you
@@ -155,5 +155,3 @@ obtained in the previous step.
 
 5)  This probe should not generate any errors. You will notice errors
     when the access token expires.
-
-

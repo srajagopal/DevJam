@@ -56,25 +56,24 @@ the response payload. As part of this we will add a couple of policies
 including a Statistics Collector to the existing proxy that we have just
 created. Let's add a policy **-**
 
-a.  Go to the Apigee Edge Management UI browser tab
+1.  Go to the Apigee Edge Management UI browser tab
 
-b.  Go to the ‘{your_initials}\_hotel’ proxy’s ‘Develop’ tab
+2.  Go to the ‘{your_initials}\_hotel’ proxy’s ‘Develop’ tab
 
-c.  Click on ‘Get Hotel by uuid’
+3.  Click on ‘Get Hotel by uuid’
 
-d.  Click on “**+ Step**” on the Response Flow
+4.  Click on “**+ Step**” on the Response Flow
 
-> ![](./media/image21.png)
+  > ![](./media/image21.png)
 
-e.  Select the ‘Extract Variables’ policy with the following properties:
+5.  Select the ‘Extract Variables’ policy with the following properties:
 
-    i.  Policy Display Name: **Extract Variables**
+  > Policy Display Name: **Extract Variables**<br/>
+  > Policy Name: **Extract-Variables**
 
-    ii. Policy Name: **Extract-Variables**
+  > ![](./media/image27.png)
 
-> ![](./media/image27.png)
-
-f.  For the ‘Extract Variables’ policy, change the XML configuration of
+6.  For the ‘Extract Variables’ policy, change the XML configuration of
     the policy as follows :
 
   ```
@@ -93,26 +92,26 @@ f.  For the ‘Extract Variables’ policy, change the XML configuration of
   </ExtractVariables>
   ```
 
-*(You can find the policy xml*
+  *(You can find the policy xml*
 [**here**](https://gist.github.com/prithpal/ab704e5dea4a77b97497)*.
 Click the “Raw” button and copy/paste into your policy editor).*
 
-The JSONPath expression above extracts city & rating information from
-the response returned the hotels API and assigns it to variables
-“hotelRating” and “hotelCity” respectively.
+  The JSONPath expression above extracts city & rating information from
+  the response returned the hotels API and assigns it to variables
+  “hotelRating” and “hotelCity” respectively.
 
-f.  Select the ‘Statistics Collector’ policy with the following
+7.  Select the ‘Statistics Collector’ policy with the following
     properties:
 
-    i.  Policy Display Name: **Statistics Collector**
-    ii. Policy Name: **Statistics Collector**
+  > Policy Display Name: **Statistics Collector**<br/>
+  > Policy Name: **Statistics Collector**
 
-**Note :** Make sure you have Statistics collector policy after
+  **Note :** Make sure you have Statistics collector policy after
 Extract Variable policy on the response path (as shown below).
 
-> ![](./media/image17.png)
+  > ![](./media/image17.png)
 
-a.  For the ‘Statistics Collector’ policy, change the XML configuration
+8.  For the ‘Statistics Collector’ policy, change the XML configuration
     of the policy as follows :
 
   ```
@@ -127,18 +126,32 @@ a.  For the ‘Statistics Collector’ policy, change the XML configuration
   </StatisticsCollector>
   ```
 
-*(You can find the policy xml*
+  *(You can find the policy xml*
 [**here**](https://gist.github.com/prithpal/28dd0378ac9bdb88d922)*.
 Click the “Raw” button and copy/paste into your policy editor).*
 
-You will see devjam_**{your_initials}**__city, as a dimension in a
+  Replace {your_initials} with your initials. Note that you will see devjam_**{your_initials}**_city, as a dimension in a
 custom report, whereas devjam_**{your_initials}**_rating as a
 metric.
 
-a.  Once the two policies have been added and you have clicked “Save”.
-  **Testing the Statistics collector policy by generating some load**
+  As we will want to send in a few test messages then bump up the “rate” of Spike Arrest to some arbitrarily high number so
+you can run a few requests through.
 
-1.  Start a Trace session for the ‘**{your_initials}**_hotels’ proxy
+  ```
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <SpikeArrest async="false" continueOnError="false" enabled="true"name="Spike-Arrest-10pm">
+  <DisplayName>Spike Arrest 10pm</DisplayName>
+  <Properties/>
+  <Identifier ref="request.header.some-header-name"/>
+  <MessageWeight ref="request.header.weight"/>
+  <Rate>1000pm</Rate>
+  </SpikeArrest>
+  ```
+9. Save your proxy by hitting “Save”, and now you can test the Statistics collector policy by generating some load
+
+**Test the Statistics Collector Policy**
+
+1.  Start a Trace session for the ‘{your_initials}_hotels’ proxy
 
 2.  Send a ‘/GET hotels’ request from Postman. This will return the list
     of hotels from BaaS collection.
@@ -148,62 +161,41 @@ a.  Once the two policies have been added and you have clicked “Save”.
 4.  Append that the copied UUID to the URL of ‘/GET hotels’ request and
     send another request from Postman. For eg -
 
-http://**{org}-{env}**.apigee.net/v1/**{your_initials}**_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
+  http://{org}-{env}.apigee.net/v1/{your_initials}_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
 
-NOTE : replace your org, env and **{your_initials}**_hotels with
-your Edge Org and Environment and proxy names.
+  NOTE : replace your org, env and {your_initials}_hotels with
+  your Edge Org and Environment and proxy names. If you completed lab 3 you will also need to add your apikey as a query parameter.
 
-Bump up the “rate” of Spike Arrest to some arbitrarily high number so
-you can run a few requests through.
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<SpikeArrest async="false" continueOnError="false" enabled="true"name="Spike-Arrest-10pm">
-<DisplayName>Spike Arrest 10pm</DisplayName>
-<Properties/>
-<Identifier ref="request.header.some-header-name"/>
-<MessageWeight ref="request.header.weight"/>
-<Rate>1000pm</Rate>**
-</SpikeArrest>
-```
-
-1.  Review the Trace for the proxy and notice that “Extract Variables”
+5.  Review the Trace for the proxy and notice that “Extract Variables”
     and “Statistics Collector” policies get executed only for the GET
     request with UUID.
 
-2.  Try to invoke ‘/GET hotels’ with different (valid and invalid)
-    UUID combinations.
+6.  Invoke the ‘/GET hotels’ with different
+    UUIDs to generate some test data. Try and pick ones that both have a city of Seattle and Burlingame
 
-**Creating Custom Reports**
+**Creating a Custom Report**
 
 1.  Login to the Apigee Edge Management User Interface (Management UI).
     On the top menu, click on the Analytics item and then click
     on “Reports”. When on that page click on the '+ Custom Report'
     button on the top right.
 
-> ![](./media/image13.png)
+  > ![](./media/image13.png)
 
 2.  Define the custom report - Enter the values as indicated below and
     click on the blue “Save” button.
 
-> ![](./media/image24.png)
+  a.  Report Name: {your initials} Popular Destination
 
-> ![](./media/image18.png)
+  b.  Report Description: This report shows the most popular destination queried.
 
-a.  Report Name: {your initials} Popular Destination
+  c.  Chart Type: Column
 
-b.  Report Description: This report shows the most popular
-    > destination queried.
+  d.  Add two Metrics: Traffic - Sum, devjam_{your_intials}_rating - Average
 
-c.  Chart Type: Column
+  > This will create a multidimensional report.
 
-d.  Aggregation Interval: Per-Minute
-
-e.  Metrics: Traffic - Sum of traffic, Target Response Time - Average
-
-> This will create a multidimensional report.
-
-a.  Dimensions: devjam\_**{your\_initials}**\_city
+  f.  Dimensions: devjam_{your_initials}_city
     This is the name of the variable which we created in earlier using
     the Statistics Collector policy to capture the city name from the
     response payload. Using the Statistics Collector policy, you can
@@ -215,64 +207,14 @@ a.  Dimensions: devjam\_**{your\_initials}**\_city
     dimensions which Edge collects for you, for every request,
     including response time, payload size, and so on.
 
-b.  Filters: devjam_**{your initials**}_cityname != ‘(not set)’
-    (this will ensure only traffic that used this dimension will
-    display on your report)
+  h.  Hit the save button to save and open the report - use the environment dropdown to switch to the test environment. Edge Analytics performs aggregation on a regular interval, asynchronously with respect to incoming API requests. Therefore, you may have to wait a bit to see the data appear in the chart. After a cycle of aggregation occurs, you will see: 
 
-c.  Hit the save button to save and open the report - use the environment dropdown to switch to the test environment.
+  > ![](./media/image19.png)
 
-2.  There probably is not much data that Edge Analytics has collected,
-    > so you many not see anything meaningful quite yet. But let’s
-    > generate some sample query data.
-
-    a.  Switch to the browser window tab where you have your Postman
-        client
-
-    b.  Send a ‘/GET hotels’ request from Postman. This will return the
-        list of hotels from BaaS collection.
-
-    c.  Copy the UUID of any hotel entity
-
-    d.  Append that the copied UUID to the URL of ‘/GET hotels’ request
-        > and send another request from Postman.
-
-For eg -
-http://**{org}-{env}**.apigee.net/v1/**{your_initials}**_hotels/800bacba-14d0-11e5-a120-5d76c8c39ab3
-
-NOTE : replace your org, env and **{your_initials}**_hotels with
-your Edge Org and Environment and proxy names.
-
-a.  Invoke ‘/GET hotels’ appending a different UUID (with a hotel from
-    another city).
-
-Bump up the “rate” of Spike Arrest to some arbitrarily high number so
-you can run a few requests through.
-
-```
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<SpikeArrest async="false" continueOnError="false" enabled="true"
-name="Spike-Arrest-10pm">
-<DisplayName>Spike Arrest 10pm</DisplayName>
-<Properties/>
-<Identifier ref="request.header.some-header-name"/>
-<MessageWeight ref="request.header.weight"/>
-<Rate>1000pm</Rate>**
-</SpikeArrest>)
-```
-
-2.  Go back to the Management UI and navigate to Analytics / Reports
-    from the top menu.
-
-    a.  Click on the “Popular Destination” report.
-
-    b.  Edge Analytics performs aggregation on a regular interval, asynchronously with respect to incoming API requests. Therefore, you may have to wait a bit to see the data appear in the chart. After a cycle of aggregation occurs, you will see:
-
-> ![](./media/image19.png)
-
-The final configuration of the custom report will look like the
+  The final configuration of the custom report will look like the
 following :
 
-> ![](./media/image22.png)
+  > ![](./media/image22.png)
 
 **Summary**
 

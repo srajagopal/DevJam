@@ -177,76 +177,97 @@ lab shows you how to build proxies.
     *  From the Environment drop-down, select **test**
     *  From the main menu, select APIs → API Proxies
 
- ![](./media/image45.png)
+ > ![](./media/image45.png)
 
     * To create a new API proxy, select the + API Proxy button to add a new proxy.
 
- ![](./media/image43.png)
+ > ![](./media/image43.png)
 
     * On the New API Proxy form that is displayed, provide information needed to generate an API proxy. Select **Reverse Proxy** and click on **Use OpenAPI** -
 
- ![](./media/image44.png)
+ > ![](./media/image44.png)
 
-    * Click on *apply*
+    * Put in the URL:
+   [*http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec*](http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec)[](http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec)
+   [](http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec) and click on ***apply*** and then hit ***next***
 
- ![](./media/image46.png)
+ > ![](./media/image46.png)
 
- URL:
-[*http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec*](http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec)[](http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec)
-[](http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec)
     * Enter Proxy details
-![](./media/image34.png)
->
-> Existing API:
-> **https://api.usergrid.com/{your-BaaS-org}/sandbox**
->
-> Proxy Name: **{your\_initials}\_hotels**
->
-> Project Base Path: **/v1/{your\_initials}\_hotels**
->
+
+ > ![](./media/image34.png)
+
+    > Proxy Name: **{your\_initials}\_hotels**
+    >
+    > Project Base Path: **/v1/{your\_initials}\_hotels**
+    >
+    > Existing API:
+    > **https://api.usergrid.com/{your-BaaS-org}/sandbox**
+
 **Note**: Replace **{your-BaaS-org}** with the actual name of your API BaaS organization. Replace **{your-initials}** with the initials of your name.
 
-    * Select **all operations** from the OpenAPI spec to proxy
-![](./media/image47.png)
-    * Do not apply any security policy for the proxy (this will be done in the later labs)
-![](./media/image48.png)
-    * Select the **default** virtual host (http only)
-![](./media/image49.png)
-    * Select environments to deploy **test** and click **Build and Deploy**
-![](./media/image06.png)
+Once you've entered these details hit next.
+
+   * Leave all of the **operations** selected from the OpenAPI spec to proxy and hit next
+
+> ![](./media/image47.png)
+
+   * Choose **Pass through (none)** for the authorization in order to choose not to apply any security policy for the proxy (this will be done in the later labs) and hit next
+
+> ![](./media/image48.png)
+
+   * Select only the **default** virtual host (http only) and hit next
+
+> ![](./media/image49.png)
+
+   * Ensure that only the **test** environment is selected to deploy to and click **Build and Deploy**. Once it has built and deployed click the link to view your proxy in the proxy editor.
+
+> ![](./media/image06.png)
 
 * **Deploying and Undeploying a Proxy** to a given environment from the Management UI is simple too.
     * Click on the **Deploy** drop-down on the API Proxy page.
-![](./media/image50.png)
-    * Notice that the proxy we just created is deployed to the **test** environment.
-    * Click on the **test** environment name. This undeploys the proxy from the **test** environment
-    * Click on the **Deploy** drop-down again and select the **test** environment. This re-deploys the proxy to the **test**
+
+    > ![](./media/image50.png)
+
+  * Notice that the proxy we just created is deployed to the **test** environment.
+  * Click on the **test** environment name. This undeploys the proxy from the **test** environment
+  * Click on the **Deploy** drop-down again and select the **test** environment. This re-deploys the proxy to the **test**
     environment
+
 
 *  **Tracing the execution of a proxy** can also be done easily from the Management UI. This is a very powerful capability of the product since it makes it easy to troubleshoot and monitor API  proxies running on Apigee Edge. Trace lets you probe the details of each step through an API proxy flow.
     *  From the **{your\_initials}**\_hotels API Proxy page, click on the **Trace** tab.
-![](./media/image51.png)
+
+    > ![](./media/image51.png)
+
     * Once on the **Trace** tab, pick the correct environment from the **Deployment to Trace** drop-down. In your case there should only be one environment to pick - **Environment test, Revision 1**.
-![](./media/image05.png)
+
+    > ![](./media/image05.png)
+
     * Add **/hotels** to the end of the URL  
     * Click on the **Start Trace Session** button.
     * After the trace session starts, click on the **Send** button in the **Send Requests** section.
-![](./media/image08.png)
+
+    > ![](./media/image08.png)
+
     * You will see the a transaction appear in the **Transactions** section and a visual representation of the executed proxy flow in the **Transaction Map** section.
     * The **Transaction Map** is interactive - click on the various execution steps within the flow and review the information provided in the **Phase Details** section. You will notice that for each step information such as headers, variables, payload, properties and other relevant information is available. This helps you quickly understand exactly what is happening within the proxy flow.
-![](./media/image28.png)
-    * At this point, we will start to use the **Postman** tool as a client to invoke our proxy and continue to use **Postman** throughout the rest of the labs.
-        * Launch **Postman**
-        * Select the **DevJam 2.0** environment.
-![](./media/image30.png)
-        * Open the **DevJam 2.0** project
-        * Select and send the **/GET hotels** request.
-![](./media/image31.png)
+
+> ![](./media/image28.png)
+
+  * At this point, we will start to use the **Postman** tool as a client to invoke our proxy and continue to use **Postman** throughout the rest of the labs.
+      * Launch **Postman**
+      * Select the **DevJam 2.0** environment.
+      > ![](./media/image30.png)
+      * Open the **DevJam 2.0** project
+      * Select and send the **/GET hotels** request.
+
+      > ![](./media/image31.png)
 
 **Note** : Please change the URL to point to your API proxy.
 
 Review the response returned by the proxy. It should be the same response as the one you observed when using the **Trace** tool in the Management UI. Switch to the **Trace** tab of the Apigee Edge Management UI and click on the **Stop Trace** button.
 
 ##Summary
-That completes this hands-on lesson. Simple and quick, but you learned the fundamentals of how to create an API Proxy, how to deploy and
-undeploy it to/from an environment, and how to trace the proxy flow. Throughout the rest of the hands-on labs you will be working with this Management UI to add policies to proxies, testing and tracing these proxies, and learning about the power of the Apigee Edge platform.
+
+That completes this hands-on lesson. Simple and quick, but you learned the fundamentals of how to create an API Proxy, how to deploy and undeploy it to/from an environment, and how to trace the proxy flow. Throughout the rest of the hands-on labs you will be working with this Management UI to add policies to proxies, testing and tracing these proxies, and learning about the power of the Apigee Edge platform.
