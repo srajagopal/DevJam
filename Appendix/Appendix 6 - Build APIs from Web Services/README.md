@@ -68,8 +68,7 @@ into a RESTful API using Apigee’s SOAP to REST API Wizard.
     service, along with some information that API Services uses to model
     the API that will be exposed to developers.
 
-    -   Open up a browser tab and log in to
-        [*http://enterprise.apigee.com*](http://enterprise.apigee.com)
+    -   Open up a browser tab and log in to http://enterprise.apigee.com
 
     -   From the Organization drop-down in the top-right corner, select
         the organization assigned to you.
@@ -102,7 +101,7 @@ into a RESTful API using Apigee’s SOAP to REST API Wizard.
     and click **Validate**
 
 -   Proxy Name: {you\_initials}\_Weather2SOAPAPI
--   Proxy Base Path: /{your\_initials}/v1/weather and click **Next**
+-   Proxy Base Path: /v1/{your\_initials}_weather and click **Next**
 
 3)  Select **REST to SOAP to REST.** Select the WSDL operations to be
     exposed and click **Next**
