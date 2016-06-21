@@ -52,64 +52,22 @@ apps with Apigee Edge.
 
 **Estimated Time: 15 mins**
 
-1)  **Creating an API Proxy** for a node.js backend that you want to
-    expose requires you to provide host the application in Apigee.
+1)  **Create an API Proxy** for a node.js backend
 
-    a.  Open up a browser tab and log in to http://enterprise.apigee.com
+Use the following settings
 
-    b.  From the Organization drop-down in the top-right corner, select
-        the organization assigned to you.
-
-    c.  From the Environment drop-down, select ‘test’
-
-    d.  From the main menu, select APIs → API Proxies
-
-> ![](./media/image19.png)
-
-    e.  To create a new API proxy, select the + API Proxy button to add a
-        new proxy.
-
-    f.  On the New API Proxy form that is displayed, provide information
-        needed to generate an API proxy and click next.
-
-> ![](./media/image24.png)
-
-    h.  Enter the details for your node.js proxy and click next
-
-> ![](./media/image25.png)
-
-Starting Point Type: **New Node.js**
-
-Node.js Server Type : **Node.js Simple “Hello World”**
-Name: **{your\_initials}\_nodeapp**
-Project Base Path: **/v1/{your\_initials}\_nodeapp**
-
-**Note**: Replace **{your-initials}** with the actual initials.
-**Example:** If you name is ‘John Doe’, your API proxy name would be
-‘jd\_mashup’.
-
-  i.  Do not enable security on the proxy and click next.
-
-> ![](./media/image08.png)
-
-  j.  Select the virtual hosts (default) to deploy the proxy and click
-      next
-
-> ![](./media/image26.png)
-
-  k.  Review the detail and click ‘build and deploy’
-
-> ![](./media/image22.png)
-
-  l.  Once the proxy has been deployed, click on the link to open the
-      proxy
-
-> ![](./media/image10.png)
+    -   Proxy Name: {your_initials}_nodeapp
+    -   Proxy Base Path: /v1/{your_initials}_nodeapp
+    -   Source: "Hello World" Sample
+    -   Description: Sample Node.js proxy
+    -   Authorization: Pass through (none)
+    -   Virtual Hosts: default
+    -   Deploy Environments: test
 
 2)  **Using an existing** node.js application that you want to expose
-    requires edit the source code.
+    requires you to edit the source code.
 
-    a.  Switch to the “Develop” tab.
+    a.  Open your new API Proxy and Switch to the “Develop” tab.
 
     b.  Navigate to the “Scripts” section to view the sample node.js
         source code that is created by default.
@@ -119,84 +77,79 @@ Project Base Path: **/v1/{your\_initials}\_nodeapp**
     c.  Replace the code by copying the source you find here:
 
   ```
-  var request = require('request');\
-  var http = require('http');\
-  var urlparse = require('url');\
-  var util = require('util');\
-  \
-  function sendError(resp, code, msg) {\
-  var o = { 'error': msg };\
-  resp.writeHead(code, {'Content-Type': 'application/json'});\
-  resp.end(JSON.stringify(o));\
-  }\
-  \
-  function geocode(postalcode, country, radius, resp) {\
-  var url = util.format(\
-  'http://maps.googleapis.com/maps/api/geocode/json?address=%s&region=%s&sensor=false',\
-  postalcode, country);\
-  \
-  request(url, function(err, result, body) {\
-  if (err) {\
-  sendError(resp, 400,\
-  util.format('Error response %s from geocoding web service', err.message));\
-  return;\
-  }\
-  var geoResponse = JSON.parse(body);\
-  if (geoResponse.status !== 'OK') {\
-  sendError(resp, 500, 'Invalid geocode response');\
-  } else {\
-  getAltitude(geoResponse.results\[0\].geometry.location.lat,\
-  geoResponse.results\[0\].geometry.location.lng, radius, resp);\
-  }\
-  });\
-  }\
-  \
-  function getAltitude(lat, lng, radius, resp) {\
-  var url = util.format(\
-  'http://api.usergrid.com/{your-org}/sandbox/hotels?q=location within %s of %s, %s',\
-  radius, lat, lng);\
-  \
-  request(url, function(err, result, body) {\
-  if (err) {\
-  sendError(resp, 400,\
-  util.format('Error response %s from elevation web service', err.message));\
-  return;\
-  }\
-  \
-  var hotelResponse = JSON.parse(body);\
-  if (hotelResponse.count == '0') {\
-  sendError(resp, 200, 'Sorry! We could not find any hotels with those values');\
-  } else {\
-  makeResponse(lat, lng, hotelResponse.entities, resp);\
-  }\
-  });\
-  }\
-  \
-  function makeResponse(lat, lng, hotels, resp) {\
-  var o = { 'latitude': lat, 'longitide': lng,\
-  'hotels': hotels };\
-  resp.writeHead(200, {'Content-Type': 'application/json'});\
-  resp.end(JSON.stringify(o));\
-  }\
-  \
-  var svr = http.createServer(function(req, resp) {\
-  var parsed = urlparse.parse(req.url, true);\
-  if (!parsed.query.zipcode) {\
-  sendError(resp, 400, 'Missing query parameter "zipcode"');\
-  } else if (!parsed.query.country) {\
-  sendError(resp, 400, 'Missing query parameter "country"');\
-  }else if (!parsed.query.radius) {\
-  sendError(resp, 400, 'Missing query parameter "radius"');\
-  } else {\
-  geocode(parsed.query.zipcode, parsed.query.country, parsed.query.radius, resp);\
-  }\
-  });\
-  \
-  svr.listen(9000, function() {\
-  console.log('Node Mashup sample app is running on port 9000');\
+  var request = require('request');
+  var http = require('http');
+  var urlparse = require('url');
+  var util = require('util');
+
+  function sendError(resp, code, msg) {
+    var o = { 'error': msg };
+    resp.writeHead(code, {'Content-Type': 'application/json'});
+    resp.end(JSON.stringify(o));
+  }
+
+  function geocode(postalcode, country, radius, resp) {
+    var url = util.format('http://maps.googleapis.com/maps/api/geocode/json?address=%s&region=%s&sensor=false',postalcode, country);
+
+    request(url, function(err, result, body) {
+      if (err) {
+        sendError(resp, 400,
+        util.format('Error response %s from geocoding web service', err.message));
+        return;
+      }
+      var geoResponse = JSON.parse(body);
+      if (geoResponse.status !== 'OK') {
+        sendError(resp, 500, 'Invalid geocode response');
+      } else {
+        getAltitude(geoResponse.results[0].geometry.location.lat,
+        geoResponse.results[0].geometry.location.lng, radius, resp);
+      }
+    });
+  }
+
+  function getAltitude(lat, lng, radius, resp) {
+    var url = util.format('http://api.usergrid.com/{your-org}/sandbox/hotels?q=location within %s of %s, %s',radius, lat, lng);
+
+    request(url, function(err, result, body) {
+      if (err) {
+        sendError(resp, 400,
+        util.format('Error response %s from elevation web service', err.message));
+        return;
+      }
+
+      var hotelResponse = JSON.parse(body);
+      if (hotelResponse.count == '0') {
+        sendError(resp, 200, 'Sorry! We could not find any hotels with those values');
+      } else {
+        makeResponse(lat, lng, hotelResponse.entities, resp);
+      }
+    });
+  }
+
+  function makeResponse(lat, lng, hotels, resp) {
+    var o = { 'latitude': lat, 'longitide': lng,'hotels': hotels };
+    resp.writeHead(200, {'Content-Type': 'application/json'});
+    resp.end(JSON.stringify(o));
+  }
+
+  var svr = http.createServer(function(req, resp) {
+    var parsed = urlparse.parse(req.url, true);
+    if (!parsed.query.zipcode) {
+      sendError(resp, 400, 'Missing query parameter "zipcode"');
+    } else if (!parsed.query.country) {
+      sendError(resp, 400, 'Missing query parameter "country"');
+    }else if (!parsed.query.radius) {
+      sendError(resp, 400, 'Missing query parameter "radius"');
+    } else {
+      geocode(parsed.query.zipcode, parsed.query.country, parsed.query.radius, resp);
+    }
+  });
+
+  svr.listen(9000, function() {
+    console.log('Node Mashup sample app is running on port 9000');
   });
   ```
-  
+
 
   d.  Edit the source code and replace **{your-org}** with the actual name
       of your API BaaS organization name.
@@ -216,11 +169,10 @@ Project Base Path: **/v1/{your\_initials}\_nodeapp**
 
 <!-- -->
 
-3)  **Testing the API Proxy with the location query after deploying
-    changes**
+3)  **Testing the API Proxy with the location query after deploying changes**
 
     a.  Click on the ‘Save’ button to save and deploy the changes to the
-        ‘{your\_initials}\_mashup’ API Proxy.
+        ‘{your_initials}_nodeapp’ API Proxy.
 
     b.  Wait for the ‘Successfully saved API Proxy’ message to appear
         and verify that your proxy is deployed to the ‘test’
@@ -229,7 +181,7 @@ Project Base Path: **/v1/{your\_initials}\_nodeapp**
     c.  Go to the ‘Trace’ tab and start a trace session by clicking the
         ‘Start Trace Session’ button
 
-    d.  Use Postman to test the ‘/GET mashup’ request with the following
+    d.  Use Postman to test the ‘/GET nodeapp’ request with the following
         query parameters combinations and review the results being
         returned
 
@@ -238,8 +190,8 @@ Project Base Path: **/v1/{your\_initials}\_nodeapp**
         -   zipcode=94105&country=US&radius=400
         -   No query parameters
 
-Note : Before invoking the API, change the URL to point your API.\
-i.e. **{your\_initials}**\_mashup.
+Note : Before invoking the API, change the URL to point your API.
+i.e. **{your\_initials}**\_nodeapp.
 
 Notice that the responses being returned by the API proxy for the
 various query parameter combinations are different as the location
