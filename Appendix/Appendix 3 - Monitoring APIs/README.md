@@ -41,26 +41,29 @@ status code. Let’s get started -
 
 2.  Select the Organization.
 
-3.  Click ’Add Probe’ to add a new monitoring probe to your API.
+3.  Click ’Create new probe’ to add a new monitoring probe to your API. (If you have not created any probes previously click on 'Create your first probe')
 
-  > ![](./media/image19.jpg)
+  > ![](./media/create_new_probe.png)
 
-4.  For creating a probe, let’s use the following values
-
-    -   Probe Name : {your\_initials}\_probe
-    -   Step Name : Get Hotels
-    -   URI : http://{org}-{env}.apigee.net/v1/**{your\_initials}\_hotels**
+4. Hit the "add new" link to create a new test case, and configure it with a single step
+    -   Test case Name : {your_intials} Test case
+    -   Step Name: Get Hotel
+    -   URI : http://{org}-{env}.apigee.net/v1/{your_initials}_hotels
 
     > Note : Replace org, environment & API proxy values before you Save.
 
     -   Http Method : Get
-    -   Response &gt; Asset &gt; HTTP Code - 2XX
+    -   Response &gt; Assert &gt; HTTP Code - 2XX
 
-  > ![](./media/image22.png)
+  > ![](./media/create_test_case.png)
 
-5.  Click on “Next”.
+5.  Click on “Save”.
 
-6.  Define Alerts by configuring the following values :
+6.  Give your probe a name
+
+    -   Probe Name : {your\_initials}\_probe
+
+7.  Define Alerts by configuring the following values :
 
   -   Run Every : 30 seconds
   -   Raise Alert : enable “If Failure exceeds” and set the value as 5
@@ -68,22 +71,20 @@ status code. Let’s get started -
   -   Notification Destination : Choose Email and provide **your email
     address**.
 
-  > ![](./media/image21.png)
+  > ![](./media/configure_new_probe.png)
 
 7.  Click on “Next”.
 
-8.  Select Run locations : Check all the four locations.
+8.  Select Run locations : Check all the five locations.
 
-9.  Click on “I’m Done”.
-
-  > ![](./media/image24.png)
+9.  Click on “Save”.
 
 10.  This will create a probe in API Health. You can view all your Probes
     from the API Health dashboard.
 
-  >![](./media/image23.png)
+  >![](./media/probe_dashboard.png)
 
-11.  As the Hotels API proxy is protected, all call will fail with 4xx
+11.  As the Hotels API proxy is protected, all calls will fail with 4xx
     errors and you will receive alerts (like the one below) on the
     configured email address.
 
@@ -121,37 +122,6 @@ That completes this hands-on lesson. In this lesson you learned about
 the API monitoring service provided by Apigee. As an assignment
 configure multiple probes and monitor your APIs.
 
-**Bonus Section**
+**Bonus Exercise**
 
-Now lets change the probe definition.
-
-1)  Get OAuth Access Token - Please refer to “Lab 6 - Securing APIs
-    (OAuth)” for instructions to obtain an Access token.
-
-2)  Modify Probe (Set OAuth Access Token in Header) -
-
-    a.  From the API Health Dashboard, click on Edit probe.
-
-> ![](./media/image31.png)
-
-    b.  Click on “Show Advanced” link.
-
-> ![](./media/image32.png)
-
-    c.  Under “Headers” section make the following entry -
-
-```
-Header Name : Authorization
-Header Value : Bearer {Access_Token}
-```
-
-Note : Replace **{Access\_Token}** with the actual Access token you
-obtained in the previous step.
-
-> ![](./media/image33.png)
-
-4)  We will keep other configurations as it is. Click on Next and Save
-    the probe.
-
-5)  This probe should not generate any errors. You will notice errors
-    when the access token expires.
+Use the UI to alter the configuration of your test case to supply the necessary headers so that the probe calls are successful.
