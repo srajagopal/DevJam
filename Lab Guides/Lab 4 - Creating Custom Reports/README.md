@@ -130,8 +130,8 @@ Extract Variable policy on the response path (as shown below).
 [**here**](https://gist.github.com/prithpal/28dd0378ac9bdb88d922)*.
 Click the “Raw” button and copy/paste into your policy editor).*
 
-  Replace {your_initials} with your initials. Note that you will see devjam_**{your_initials}**_city, as a dimension in a
-custom report, whereas devjam_**{your_initials}**_rating as a
+  Replace {your\_initials} with your initials. Note that you will see devjam\_{your\_initials}\_city, as a dimension in a
+custom report, whereas devjam_\{your\_initials}\_rating as a
 metric.
 
   As we will want to send in a few test messages then bump up the “rate” of Spike Arrest to some arbitrarily high number so
