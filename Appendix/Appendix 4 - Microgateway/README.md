@@ -68,13 +68,13 @@ Edge Microgateway.
  > ![](./media/image07.png)
 
 -   node -v v4.2.2 //Node 4.2.2 or later is installed
-> ![](./media/image06.png) 
+> ![](./media/image06.png)
 
 -   Have access to Edge Org
 > ![](./media/image09.png)
 
 -   Have openssl installed and is in path
-> ![](./media/image08.png) 
+> ![](./media/image08.png)
 
 -   curl
 > ![](./media/image11.png)
@@ -84,8 +84,8 @@ Edge Microgateway.
 
 **Configure Edge Micro**
 
--   Unzip the file unzip apigee-edge-micro-1.1.0.zip
--   Go to the bin folder cd apigee-edge-micro-1.1.0/cli/bin
+-   Unzip the file unzip apigee-edge-micro-X.X.X.zip
+-   Go to the bin folder cd apigee-edge-micro-X.X.X/cli
 -   Test the installation by executing the following command. If it
     returns CLI help output, then the installation was successful.
 
@@ -94,37 +94,33 @@ Linux/Mac: ./edgemicro -h
 
 Windows: node edgemicro –h
 
-Usage: edgemicro \[options\] \[command\]
+Usage: edgemicro [options] [command]
 
 Commands:
 agent <action> agent commands, see: "edgemicro agent -h"
 cert <action> certificate commands, see: "edgemicro cert -h"
 token <action> token commands, see: "edgemicro token -h"
 private <action> private commands, see: "edgemicro private -h"
-configure \[options\] automated, one-time setup for a new edgemicro
-instance
-deploy-edge-service \[options\] deploy edge micro support server to
-Apigee
-genkeys \[options\] generate authentication keys
-verify \[options\] verify Edge Micro configuration by testing config
-endpoints
+configure [options] automated, one-time setup for a new edgemicro instance
+deploy-edge-service [options] deploy edge micro support server to Apigee
+genkeys [options] generate authentication keys
+verify [options] verify Edge Micro configuration by testing config endpoints
 
-help \[cmd\] display help for \[cmd\]
+help [cmd] display help for [cmd]
 
 Options:
 -h, --help output usage information
 ```
 
--   Put the cli/bin directory in your PATH variable. This way, you'll be
+-   Put the cli directory in your PATH variable. This way, you'll be
     able to execute Edge Microgateway commands from anywhere.
 
 
 
 Linux/Mac Only:
 ```
-export
-PATH=<Edge\_Micro\_Gateway\_Installaton\_Folder>/cli/bin:\$PATH
-echo \$PATH
+export PATH=<Edge_Micro_Gateway_Installaton_Folder>/cli:$PATH
+echo $PATH
 ```
 
 -   Configure the micro gateway to talk to the Edge deployment on
@@ -178,45 +174,16 @@ secret: xxxx
 edgemicro configuration complete!
 ```
 
--   **Copy the** Key, Secret and vault info, for later parts of
-    the exercise.
+-   **Copy the** Key, and Secret for later parts of the exercise.
 
 -   Using the key and secret you just viewed; verify that the edge micro
     is configured correctly with the Edge Cloud org.
 
 ```
-./edgemicro verify -o <org-name> -e <env-name> -k
-<key> -s <secret>
+./edgemicro verify -o <org-name> -e <env-name> -k <key> -s <secret>
 ```
 
-You should see happy messages. If not, you'll need to stop, and
-diagnose.
-
-***Start the Edge Micro agent***
-
--   Before continuing, open a separate terminal window. This is where
-    > the agent server will run.
-
--   cd to the agent directory.  
-```
-cd ../../agent
-``` 
-
--   Execute this command to start the server:  
-```
-npm start  
-```
-
-    You will see an output from that command:   
-
-```
-> edgemicro-agent@1.1.1 start
-C:\\Users\\nanda\\Documents\\apigee-edge-micro-1.1.1\\agent
-
-> node build/src/index.js
-
-i edge micro agent listening on 9000 
-```
+You should see happy messages. If not, you'll need to stop, and diagnose.
 
 The configuration done so far allows Edge Microgateway to bootstrap
 itself to Apigee Edge. The Edge Microgateway agent manages this
@@ -227,115 +194,63 @@ Edge.
 
 ### Create a passthrough API Proxy
 
-Log in to your organization on Apigee Edge.
+Create a new 'Reverse Proxy' in Apigee Edge, use the following settings
 
--   Select APIs > API Proxies from the top menu.
--   In the API Proxies page, click + API Proxy.
--   In the dialog, configure the proxy as follows: 
-    -   Starting Point Type: **Backend Service**
-    -   Backend Service
-        > URL: http://api.usergrid.com/{org-name}/sandbox/hotels
+    -   Proxy Name: edgemicro_{your_initials}_hotels
+    -   Proxy Base Path: /v1/edgemicro_{your_initials}_hotels
+    -   Existing API: http://api.usergrid.com/{org-name}/sandbox
+    -   Description: Edge Micro Proxy that will run locally to the node.js service
+    -   Authorization: Pass through (none)
+    -   Virtual Hosts: default
+    -   Deploy Environments: test
 
-    -   Name: edgemicro\_{your\_initials}\_hotels
-    -   Project Base Path: /{your-initials}/v1/mghotels
-    -   Description: Edge Micro Proxy that will run locally to the
-        node.js service
-    -   Features: None
-
-> ![](./media/image10.png)
-
-**Note:** Edge μ-gateway-aware proxy names must always begin with the
-prefix **edgemicro\_**
-
--   Click on Build to build and deploy the proxy
-
--   Once the proxy has been deployed, click on the Close button
-
--   Click on the Save button to save and deploy the changes to
-    the hotels API Proxy
+**Note:** Edge μ-gateway-aware proxy names must always begin with the prefix **edgemicro\_**
 
 -   We have created an API Proxy that will be fetched by Edge Micro
     gateway, when it starts locally
 
--   Add the API Proxy you created edgemicro\_<your
-    initials>\_mghotels to the API Product <your initials>
-    Hospitality Basic Product
+-   Add the API Proxy you created to your Hospitality Basic Product
 
     -   From the Apigee Edge Management UI, go to Publish → API Products
-    -   Select the API Product: <your initials> Hospitality Basic
-        Product
+    -   Select your API Product: {your_initials} Hospitality Basic Product
     -   Click on Edit Button on the top right
-    -   Click on + API Proxy button and API Proxy edgemicro\_<your
-        initials>\_mghotels 
+    -   Click on + API Proxy button and add your new API Proxy to the Product
 
-***Start Edge Microgateway***
+***Start the Edge Microgateway***
 
--   Open a new terminal window (not the one where the agent is running)
-    and print out help info for the agentproc command. We're going to
-    use the -c, -k, and -s options to start Edge Microgateway.
+    -   Before continuing, open a separate terminal window. This is where the microgateway will run.
 
-```
-Linux/Mac: ./edgemicro agent proc –h
-Windows: node edgemicro agent proc -h
-```
+    -   Execute this command to start the server:  
+    ```
+    edgemicro start -o <your org> -e <your env> -k <key> -s <secret>
+    ```
 
-**Note:** The tutorial assumes that the cli/bin directory is in your
-PATH. If you do not put it in your PATH, then you need to execute CLI
-commands from the cli/bin directory (cd ../cli/bin and run ./edgemicro
-agent proc -h).
+    Verify that the last few lines of output from that command indicates success:   
 
--   Start Edge Microgateway by executing the following command,
-    providing the key and secret values with the -k and -s
-    parameters, respectively.
-```
-Linux/Mac: ./edgemicro agent proc -c start -k <key> -s
-<secret>
+    ```
+    df7e82c0-378f-11e6-b5e9-314a56237a39 edge micro listening on port 8000
+    edge micro started
+    edgemicro started successfully.
+    ```
 
-Windows: node edgemicro agent proc –c start –k <key> -s
-<secret>
-```
-
--   If the micro gateway is started successfully, you will see something
-    like the following console output:
-```
-{ "pid": 9104, "uid": "MTQ0NzQ1MjU4Nzk0MQ", "running": "true",
-"restarts": 0, "since": "2015-11-13T22: 09: 47.959Z" }
-```
+**Note:** The tutorial assumes that the cli directory is in your
+PATH. If you did not put it in your PATH, then you need to execute CLI
+commands from the cli directory
 
 **Note:** The **UID** is the unique id for this instance of Edge
 Microgateway. You use this ID when retrieving log and monitoring
 information about Edge Microgateway. See the *Edge Microgateway
 Administrator*'s Guide for more information.
 
-**Agent output:** In the terminal where the agent is running, you'll
-see output like this. You may have to scroll up through the terminal
-output to see some of the messages.
-```
-info: config download from
-https://edgemicroservices-us-east-1.apigee.net/edgemicro/bootstrap/organization/amer-partner1/environment/test
-returned 200 OK info: products download from
-https://amer-partner1-test.apigee.net/edgemicro-auth/products returned
-200 OK info: jwt\_public\_key download from
-https://amer-partner1-test.apigee.net/edgemicro-auth/publicKey
-returned 200 OK warning: no edge micro proxies found in org warning:
-no products found in org downloaded jwt\_public\_key '\*\*\*\*\*'
-installed plugin from
-/Users/SandeepM/Apigee/Products/EdgeMicro/apigee-edge-micro-1.1.0/plugins/analytics
-installed plugin from
-/Users/SandeepM/Apigee/Products/EdgeMicro/apigee-edge-micro-1.1.0/plugins/oauth
-MTQ0NzQ0NjgwNzkxOQ edge micro listening on port 8000
-```
 
-At this point, the agent retrieves a payload of Edge Microgateway
+At this point, the microgateway retrieves a payload of Edge Microgateway
 configuration information from Apigee Edge. This information includes:
 
 -   ![](./media/image13.png)
-    The public key we created and
-    stored previously in the Apigee vault.
+    The public key we created and stored previously in the Apigee vault.
 
 -   ![](./media/image12.png)
-    A JSON representation of all Edge
-    Microgatewayaware proxies that exist in
+    A JSON representation of all Edge Microgatewayaware proxies that exist in
     the organization/environment. These are all proxies that are named
     with the prefix edgemicro\_.
 
@@ -344,35 +259,33 @@ configuration information from Apigee Edge. This information includes:
     the API products that exist in the organization.
 
 With this information, Edge Microgateway knows which proxies and proxy
-paths are allowed. If/when configured, it uses the product information
+paths are allowed. If configured, it uses the product information
 to enforce security (in the same way as any API proxy does on Apigee
 Edge, where developer app keys have an association with products).
-We'll go through the steps to secure Edge Microgateway shortly.
 
--   To test our API Proxy, call the
+-   To test our API Proxy, call it via curl:
 ```
-curl -i http://localhost:8000//{your-initials}/v1/mghotels
+curl -i http://localhost:8000/v1/edgemicro_{your_initials}_hotels/hotels
 ```
 
--   If you will see an authorization error, your Micro Gateway is
+-   You should see an authorization error, indicating your Micro Gateway is
     listening for the API you have configured in the previous step
 
 ```
-{"error":"missing\_authorization","error\_description":"Missing
-Authorization header"}
+{"error":"missing_authorization","error_description":"Missing Authorization header"}
 ```
 
--   Run the following command to get the JWT Token
+-   Run the following command to get the JWT Token - replace the orgname with your org name,
+    and take the key and secret from your developer app registered against your
+    API Product
+
 ```
-curl -i -X POST "http://<org
-name>-test.apigee.net/edgemicro-auth/token" \\ -H
-"Content-Type:application/json" \\ -d '{ "grant\_type":
-"client\_credentials", "client\_id":"...CLIENT\_ID\_HERE...",
-"client\_secret": "...CLIENT\_SECRET\_HERE..." }'
+curl -i -X POST "http://{orgname}-test.apigee.net/edgemicro-auth/token" \
+-H "Content-Type:application/json" \
+-d '{ "grant_type": "client_credentials", "client_id":"{key}", "client_secret": "{secret}" }'
 ```
 
-The response you see will have a very long string, looking something
-like so:
+The response you see will have a very long string, looking something like so:
 
 ```
 "eyJ0eXAiOiJKV1QiLc9.eyJhcHBsaWNhdGlvbl9u....kkBnE40jk\_2trmZkP6uf4-mcgUw91-qKofaw"
@@ -381,10 +294,8 @@ like so:
 -   Make the API Call with a bearer token you received in the step above
 
 ```
-curl -i -H "Authorization:Bearer VERY\_LONG\_JWT\_TOKEN\_HERE"
-http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
+curl -i -H "Authorization:Bearer {JWT_TOKEN}" http://localhost:8000/v1/edgemicro_{your_initials}_hotels/hotels
 ```
-
 
 -   You should see the response json:
     ```
@@ -394,7 +305,7 @@ http://localhost:8000/{your-initials}/v1/weather/forecast?zipcode=95113
      "params" : { },
      "path" : "/hotels",
      "uri" : "https://api.usergrid.com/ssridhar/sandbox/hotels",
-     "entities" : \[ {
+     "entities" : [ {
      "uuid" : "7d20227a-5c82-11e5-a131-a7fee2bde904",
      "type" : "hotel",
      "name" : "MotifÃ‚ Seattle",
