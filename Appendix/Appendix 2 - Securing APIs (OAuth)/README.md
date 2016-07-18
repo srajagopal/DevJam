@@ -564,7 +564,7 @@ APIKey QP” policy.
             -   radius: 200
 
         -   Header:
-            -   Authorization**: Bearer {access_token}
+            -   Authorization: Bearer {access_token}
 
 > ![](./media/image28.png)
 
