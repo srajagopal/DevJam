@@ -568,7 +568,7 @@ APIKey QP” policy.
 
 > ![](./media/image28.png)
 
-    **Note**:
+**Note**:
 
     -   Replace the API proxy URL with {your_initials}_hotels URL.
     -   Replace the {access_token} with the value of the ‘access_token’ from the response in the step above.
