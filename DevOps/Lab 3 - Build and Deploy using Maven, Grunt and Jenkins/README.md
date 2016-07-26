@@ -61,7 +61,7 @@ Lab 1 of DevJam is complete
 Perform the following steps to deploy a sample proxy.
 
 -   Download the API Bundle to your local workstation from here:
-    [https://drive.google.com/open?id=0Bwax-2aJ_4zdUEN5Q1BGMjZibG8](https://drive.google.com/open?id=0Bwax-2aJ_4zdUEN5Q1BGMjZibG8)
+    [https://github.com/apigee/DevJam/blob/devopsjam/DevOps/Resources/hotelsapi.zip](https://github.com/apigee/DevJam/blob/devopsjam/DevOps/Resources/hotelsapi.zip)
 
 -   Login to Apigee Edge
     [https://accounts.apigee.com/accounts/sign_in?callback=https://enterprise.apigee.com](https://accounts.apigee.com/accounts/sign_in?callback=https://enterprise.apigee.com)
