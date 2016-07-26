@@ -154,14 +154,14 @@ d.  Under the **“gateway”** folder, create a folder with the name of
 e.  Move the **“apiproxy”** folder under **“hotelsapi”**
 
 f.  Add the
-    [*shared-pom.xml*](https://drive.google.com/open?id=0Bwax-2aJ_4zddVBpYl8tVVdCd3c)
+    [*shared-pom.xml*](https://github.com/apigee/DevJam/blob/devopsjam/DevOps/Resources/shared-pom.xml)
     file under the **gateway** folder
 
 g.  Add the
-    [*pom.xm*](https://drive.google.com/open?id=0Bwax-2aJ_4zdWUhrOE42dmNMSm8)
+    [*pom.xm*](https://github.com/apigee/DevJam/blob/devopsjam/DevOps/Resources/pom.xml)
     file under the **hotelsapi** folder
 
-h.  Add the **config.json.txt** file under the **apiproxy** folder
+h.  Add the [*config.json.txt*](https://github.com/apigee/DevJam/blob/devopsjam/DevOps/Resources/config.json.txt) file under the **apiproxy** folder
 
 **NOTE**: We have named the file **config.json.txt** instead of **config.json**. Leave the file name as-is for now.
 
