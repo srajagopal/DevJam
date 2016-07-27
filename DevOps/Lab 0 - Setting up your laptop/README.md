@@ -52,3 +52,6 @@ Download and intall cURL from here:
 ### PostMan (Chrome Plugin)
 
 [*https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en*](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+
+### RESTClient (FireFox Plugin)
+[*https://addons.mozilla.org/en-US/firefox/addon/restclient/*](https://addons.mozilla.org/en-US/firefox/addon/restclient/)
