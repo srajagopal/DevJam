@@ -1,6 +1,6 @@
-Lab 2: apigeetool
+#Lab 2 -  Using apigeetool
 
-Overview
+##Overview
 
 We have used the management APIs to interact with Edge. There are many
 tools which we have built which leverages the APIs to do specific tasks.
@@ -16,7 +16,6 @@ apigee.
 **Estimated time:**30 mins
 
 **Lab Steps**
--------------
 
 **Phase 1:**I**nstallation**
 
@@ -33,7 +32,10 @@ If you are on linux please download and install from here:
 
 **Step 2.**Install apigeetool
 
-Command:npm install -g apigeetool
+Command:
+```
+npm install -g apigeetool
+```
 
 **NOTE**: The -g option places the apigeetool command in your PATH. On
 "\*nix"-based machines, sudo may be required with the -g option. If you
@@ -42,31 +44,28 @@ manually. Typically, the -g option places modules in:
 /usr/local/lib/node\_modules/apigee-127 on \*nix-based machines.
 
 Or you can install it by cloning it from github:
+```
+$ git clone https://github.com/apigee/apigeetool-node.git
 
-\$ git clone https://github.com/apigee/apigeetool-node.git
-
-Usage: apigeetool &lt;command&gt;
+Usage: apigeetool <command>
 
 Valid commands:
 
 deployproxy Deploy API Proxy
-
 deploynodeapp Deploy Node.js Application
-
 listdeployments List Deployments
-
 undeploy Undeploy Proxy or Node.js Application
-
 fetchproxy Download Proxy bundle
-
 getlogs Get Application logs
-
 delete Delete undeployed Proxy or Node.js Application
+```
 
 Lets see if it has been successfully installed. Go to command like on
 your laptop and type:
 
-\$ apigeetool -h
+```
+$ apigeetool -h
+```
 
 You should see a screen with the available commands.
 
@@ -90,9 +89,7 @@ It will GET the list of all the proxies in a json format from the “test”
 environment.
 
 o = specifies your org
-
 e = specifies the environment
-
 u = username
 
 You will be prompted for password.
@@ -100,19 +97,11 @@ You will be prompted for password.
 Your response will be like this:
 
 "oauth\_devjam2" Revision 1
-
 deployed
-
 environment = test
-
 base path = /
-
-"weatherapi" Revision 1
-
-deployed
-
+"weatherapi" Revision 1 deployed
 environment = test
-
 base path = /
 
 Here you can see the details of each deployed proxy.
@@ -123,8 +112,8 @@ Create a new script called opsjam.js
 
 Put the following script in it:
 
+```
 var express = require('express');
-
 var app = express();
 
 app.set('port', process.env.PORT || 3000); // When running local, app
@@ -133,48 +122,43 @@ will listen on port 3000
 app.get('/hello', renderHello);
 
 function renderHello(req, res) {
-
-// res.writeHead(200, {'Content-Type': 'text/html'});
-
-res.end("Hello World");
+  // res.writeHead(200, {'Content-Type': 'text/html'});
+  res.end("Hello World");
 
 }
 
 var port = 8000;
-
 app.listen(port);
 
 console.log('Server running at http://127.0.0.1:%d/', port);
+```
 
 **Note:** Make sure you are in the same folder where your node script is
 
+```
 apigeetool deploynodeapp -u {username} -o {opsjam\_org\_name} -e test -n
 "YourName node app" -d . -m opsjam.js -p Welcome\_123 -b opsjam
 
 "node app" Revision 1
-
 deployed
-
 environment = test
-
 base path = /
-
 URI = *http://{org-name}-test.apigee.net/*
+```
 
 Once you run the above command apigeetool will bundle the node.js script
 as a node app and will deployed it in the selected org.
 
 Use -V to debug if you need to see what the command is doing.
 
-![](.//media/image03.png){width="4.947916666666667in"
-height="2.3333333333333335in"}
+![](.//media/image03.png)
 
 Go to the UI and go to APIs-&gt;API Proxies and you should be able to
 see your deployed proxy
 
 Once you open the proxy it should look like this:
 
-![](.//media/image05.png){width="6.5in" height="3.4722222222222223in"}
+![](.//media/image05.png)
 
 You can see the code which you just deployed in the Code window. If you
 want you can edit the code in the same window or even add more files to
@@ -187,8 +171,7 @@ Rest Client from an URL like this:
 You should be able to see a Hello World response from your browser which
 looks like this:
 
-![](.//media/image01.png){width="3.9583333333333335in"
-height="1.40625in"}
+![](.//media/image01.png)
 
 You can try out additional operations like retrieving node.js logs,
 deploying/undeploying proxies etc. using the tool.

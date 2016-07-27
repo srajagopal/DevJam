@@ -1,4 +1,4 @@
-#Lab 3 -  Setting up your laptop
+#Lab 0 -  Setting up your laptop
 
 
 ##Git Client
@@ -6,7 +6,7 @@
 Download and install Git Client from here:
 [*https://git-scm.com/downloads*](https://git-scm.com/downloads)
 
-Required for Lab 3 and Lab 6
+Required for Lab 3
 
 ##GitHub Sign up
 
@@ -20,7 +20,7 @@ Required for Lab 3
 Download and install Node.js from here:
 [*https://nodejs.org/en/download/*](https://nodejs.org/en/download/)
 
-Required for Lab 3 and Lab 6
+Required for Lab 3 and Lab 4
 
 ##Optional Tools
 
@@ -34,11 +34,11 @@ Download and install OpenJDK or Oracle JDK from here:
 Download and extract Apache Maven from here:
 [*https://maven.apache.org/download.cgi*](https://maven.apache.org/download.cgi)
 
-### Grunt-Cli
+### Grunt and Grunt-Cli
 
 Install Grunt Command Line Interface by running this command:
 ```
-npm install -g grunt-cli
+npm install -g grunt grunt-cli
 ```
 
 ### cURL
