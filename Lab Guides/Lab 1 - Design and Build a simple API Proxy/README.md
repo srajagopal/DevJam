@@ -226,7 +226,7 @@ http://playground.apistudio.io/9dd084db-7136-460e-8fe8-bde4ecafdc93/spec
 **Note**: In the following, replace **{your-initials}** with the initials of your name. 
   * **Proxy Name**: **{your\_initials}\_hotels**
   * **Project Base Path**: **/v1/{your\_initials}\_hotels**
-  * **Existing API**: **https://api.usergrid.com/dino/workshop**
+  * **Existing API**: **https://api.usergrid.com/nwalters/sandbox**
 
 10. Verify that it looks mostly like this, except with **YOUR** initials in place of dpc: 
 ![](./media/Build-a-Proxy.png)
