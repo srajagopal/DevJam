@@ -343,7 +343,7 @@ organization name.
 
     f.  Call the GET API as follows to get hotels in the city of Burlingame
 
-> http://api.usergrid.com/{your-org}/sandbox/hotels?ql=select%20\*%20where%20city=%27Burlingame%27
+> http://api.usergrid.com/{your-org}/sandbox/hotels?ql=select%20*%20where%20city=%27Burlingame%27
 
 Replace **{your-org}** with the actual name of your API BaaS
 organization name.
