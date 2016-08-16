@@ -6,7 +6,7 @@ All of the material here is released under the [MIT license](LICENSE.md)
 
 ##Agenda
 
-#####Presentation : 30 mins
+####Presentation : 30 mins
 
 #####Product Demo : 30 mins
 
