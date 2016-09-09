@@ -1,6 +1,6 @@
 ![](./media/image01.png)
 
-*Appendix 4 - Apigee Edge Microgateway*
+#Appendix 4 - Apigee Edge Microgateway
 
 Apigee Edge Microgateway is a secure, HTTP-based message processor for
 APIs. Its main job is to process requests and responses to and from
@@ -17,7 +17,7 @@ installation for other aspects of API Management like analytics, and
 developer management. You can install Edge Microgateway in the same data
 center or even on the same machine as your backend services.
 
-**Key features and benefits**
+##Key features and benefits
 
 -   **Traffic management:** APIs proxied through Edge Microgateway never
     need to leave the perimeter of your corporate network. You get the
@@ -52,7 +52,7 @@ center or even on the same machine as your backend services.
     allows Edge Microgateway to collect API data and send it to Apigee
     Edge without affecting latency of the runtime transactions.
 
-**Objectives**
+##Objectives
 
 In this lab you will go through configuring, get working Edge
 Microgateway installation capable of processing an API. You'll make
@@ -60,7 +60,7 @@ several secure, test API calls through Edge Microgateway to the API's
 backend service and see how Apigee Edge processes analytics data from
 Edge Microgateway.
 
-**Prerequisites**
+##Prerequisites
 
 -   Edge Micro ZIP File is downloaded
     to local folder. download
@@ -82,7 +82,7 @@ Edge Microgateway.
 
 **Estimated Time: 60 mins**
 
-**Configure Edge Micro**
+##Configure Edge Micro
 
 -   Unzip the file unzip apigee-edge-micro-X.X.X.zip
 -   Go to the bin folder cd apigee-edge-micro-X.X.X/cli
@@ -117,7 +117,7 @@ Options:
 
 
 
-Linux/Mac Only:
+####Linux/Mac Only:
 ```
 export PATH=<Edge_Micro_Gateway_Installaton_Folder>/cli:$PATH
 echo $PATH
@@ -216,7 +216,7 @@ Create a new 'Reverse Proxy' in Apigee Edge, use the following settings
     -   Click on Edit Button on the top right
     -   Click on + API Proxy button and add your new API Proxy to the Product
 
-***Start the Edge Microgateway***
+###Start the Edge Microgateway
 
     -   Before continuing, open a separate terminal window. This is where the microgateway will run.
 
@@ -322,9 +322,7 @@ You have used the credentials you received from your Edge org on cloud
 and you have used them on your local Micro Gateway. You are able to
 manage your APIs centrally, while the enforcement is happening locally.
 
-Summary
--------
-
+##Summary
 That completes this hands-on lesson. In this lesson you learned about
 setting up an Edge Micro Gateway, creating an API Proxy and
 corresponding life cycle on your Edge org. You now have a fully
