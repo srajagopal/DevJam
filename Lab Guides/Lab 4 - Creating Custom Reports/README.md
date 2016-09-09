@@ -1,6 +1,6 @@
 ![](./media/image14.png)
 
-*Lab 4 - Creating Custom Reports*
+#Lab 4 - Creating Custom Reports
 
 ![](./media/image16.png)
 
