@@ -4,7 +4,7 @@
 
 ![](./media/image48.png)
 
-**Objectives**
+##Objectives
 
 Publishing APIs can be broadly defined by the following tasks:
 
@@ -18,12 +18,12 @@ Publishing APIs can be broadly defined by the following tasks:
     -   Forums, blogs, and other features to foster the developer
         community
 
-**Prerequisites**
+##Prerequisites
 
 -   At a minimum, Lab 1 is completed
 -   A developer portal is provisioned
 
-**Estimated Time: 60 mins**
+##Estimated Time: 60 mins
 
 > ![](./media/image03.png)
 
