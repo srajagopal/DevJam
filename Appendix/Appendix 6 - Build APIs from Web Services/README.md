@@ -1,10 +1,10 @@
 ![](./media/image18.png)
 
-*Appendix 6 - Build APIs from Web Services*
+#Appendix 6 - Build APIs from Web Services
 
 ![](./media/image19.png)
 
-**Overview**
+##Overview
 
 This topic explains how to create API proxies for SOAP-based web
 services. You can create two kinds of SOAP proxies in Edge. One
@@ -20,14 +20,14 @@ into GET requests, which have the advantage of being cacheable. Edge
 also sets up the backend target endpoint, which can vary per SOAP
 operation.
 
-**Other API Policies that are helpful with SOAP Services**
+###Other API Policies that are helpful with SOAP Services
 
-***SOAP Message Validation policy***
+####SOAP Message Validation policy
 
 Validates a message against an XSD schema or WSDL definition and rejects the message if it does not conform
 
-***Inbound authentication and authorization: Validate SAML Assertion
-policy***
+####Inbound authentication and authorization: Validate SAML Assertion
+policy
 
 The SAML policy type enables API proxies to validate SAML assertions
 that are attached to inbound SOAP requests. The SAML policy validates
@@ -36,14 +36,14 @@ rejects them if they are invalid, and sets variables that allow
 additional policies, or the backend services itself, to further validate
 the information in the assertion.
 
-***Outbound token generation: Generate SAML Assertion policy***
+####Outbound token generation: Generate SAML Assertion policy
 
 The SAML policy type enables API proxies to attach SAML assertions to
 outbound XML requests. Those assertions are then available to enable
 backend services to apply further security processing for authentication
 and authorization.
 
-***XSL Transformation policy***
+####XSL Transformation policy
 
 The XSL Transform policy applies custom [Extensible stylesheet language
 transformations (XSLT)](http://en.wikipedia.org/wiki/XSLT) to XML
@@ -52,12 +52,12 @@ XML, HTML, or plain text. The policy is often used to integrate
 applications that support XML, but that require different XML-formats
 for the same data
 
-**Objectives**
+##Objectives
 
 By the end of this lesson, you will have converted an sample web service
 into a RESTful API using Apigee’s SOAP to REST API Wizard.
 
-**Prerequisites**
+##Prerequisites
 
 -   No pre-requisites
 
@@ -148,7 +148,7 @@ into a RESTful API using Apigee’s SOAP to REST API Wizard.
 
 NOTE: The query parameter ‘ZIP’ is case sensitive.
 
-**Summary**
+##Summary
 
 That completes this hands-on lesson. Simple and quick, but you learned
 how quickly you were able to convert an existing SOAP service into API
