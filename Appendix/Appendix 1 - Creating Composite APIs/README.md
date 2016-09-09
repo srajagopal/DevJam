@@ -1,10 +1,10 @@
 ![](./media/image08.png)
 
-*Appendix 1 - Creating Composite APIs*
+#Appendix 1 - Creating Composite APIs
 
 ![](./media/image12.png)
 
-**Overview**
+##Overview
 
 Apigee Edge enables you to 'program' API behavior by using out of the
 box 'policies'. A policy is like a module that implements a specific,
@@ -14,7 +14,7 @@ provide features like security, rate-limiting, transformation, and
 mediation capabilities, saving you from having to code and maintain this
 functionality on your own.
 
-**Policy types**
+####Policy types
 Technically, a policy is an XML-formatted configuration file. Each
 policy type's structure (for example, the required and optional
 configuration elements) is defined by an XML schema.
@@ -55,7 +55,7 @@ This topic demonstrates general interaction, showing you how to create
 Policies, and how to attach them to Flows in an API proxy
 configuration.
 
-**Objectives**
+##Objectives
 
 The goal of this lesson is to get you familiar with how to use the
 Management UI to design and configure different types of policies to the
@@ -71,7 +71,7 @@ format the results to filter out some metadata from the BaaS result.
 navigation, the instructions will become terse and will be provided
 without screenshots unless a new concept is being introduced.
 
-**Prerequisites**
+##Prerequisites
 
 -   Lab 1 is completed
 
@@ -574,7 +574,7 @@ the location query variable, to create a customized response.
         deploy and test again using Postman as described in Step 8 earlier
         in the lesson.
 
-**Summary**
+##Summary
 
 That completes the policy oriented approach to build composite APIs. You
 learned how to use a variety of transformation and extensibility
