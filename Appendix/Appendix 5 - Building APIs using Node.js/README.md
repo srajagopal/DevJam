@@ -1,10 +1,10 @@
 ![](./media/image01.png)
 
-*Appendix 5 - Building APIs using Node.js*
+#Appendix 5 - Building APIs using Node.js
 
 ![](./media/image11.png)
 
-**Overview**
+##Overview
 
 In this lab see how Edge supports programmability with Node.js. Running
 on Edge, Node.js apps take advantage of Edge's enterprise-grade cloud
@@ -31,7 +31,7 @@ applications into the Edge platform. Some common use cases include:
 -   Rapidly develop prototypes of new APIs using frameworks like
     Express, Argo, and Usergrid.
 
-**Section Objectives**
+##Section Objectives
 
 The goal of this section is to get you familiar with using a node.js
 application within Apigee Edge. To illustrate this better, we will
@@ -197,7 +197,7 @@ Notice that the responses being returned by the API proxy for the
 various query parameter combinations are different as the location
 based query finds hotels that match the criteria.
 
-**Summary**
+##Summary
 
 You learned how to deploy an existing node.js application in Apigee Edge
 and expose it as an API. You can think of using node.js with Apigee Edge

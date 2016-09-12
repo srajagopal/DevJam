@@ -1,10 +1,10 @@
 ![](./media/image18.png)
 
-*Appendix 3 - Monitoring your APIs’ Health*
+#Appendix 3 - Monitoring your APIs’ Health
 
 ![](./media/image20.png)
 
-**Overview**
+##Overview
 
 As a digital company, you understand that APIs are critical for your
 business. You want your APIs to function as expected and you want to be
@@ -21,12 +21,12 @@ the cloud, API Health continually measures the success rate and
 performance of APIs, and alerts DevOps teams to any failures or
 slowdowns of their APIs.
 
-**Objectives**
+##Objectives
 
 The objective of this lesson is to get you familiar with Apigee’s API
 Health service.
 
-**Prerequisites**
+##Prerequisites
 -   Lab 1 is completed
 
 **Estimated Time: 30 mins**
@@ -116,12 +116,12 @@ status code. Let’s get started -
 
   > ![](./media/image30.png)
 
-**Summary**
+##Summary
 
 That completes this hands-on lesson. In this lesson you learned about
 the API monitoring service provided by Apigee. As an assignment
 configure multiple probes and monitor your APIs.
 
-**Bonus Exercise**
+##Bonus Exercise
 
 Use the UI to alter the configuration of your test case to supply the necessary headers so that the probe calls are successful.
