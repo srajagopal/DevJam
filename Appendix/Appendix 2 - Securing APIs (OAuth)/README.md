@@ -1,16 +1,16 @@
 ![](./media/image17.png)
 
-*Appendix 3 - Securing APIs (OAuth)*
+#Appendix 2 - Securing APIs (OAuth)
 
 ![](./media/image19.png)
 
-**Overview**
+##Overview
 
 There are several out-of-the-box security policies that Apigee Edge
 provides to protect your APIs. These security policies must be used
 appropriately based upon your use cases. Apigee Edge supports:
 
-***API Keys***
+####API Keys
 
 API key validation is the simplest form of app-based security that you
 can configure for an API. Apps simply present an API key, and Apigee
@@ -21,7 +21,7 @@ and used to access an API. You may find that API keys work better as
 unique app identifiers than as security tokens. For more information,
 see [API Keys](http://apigee.com/docs/api-services/content/api-keys).
 
-***OAuth v2.0***
+####OAuth v2.0
 
 Here's the definition of OAuth from the OAuth 2.0 IETF specification.
 "The OAuth 2.0 authorization framework enables a third-party
@@ -49,7 +49,7 @@ the [OAuth the Big
 Picture](https://pages.apigee.com/oauth-big-picture-ebook.html) Apigee
 eBook.
 
-***OAuth v1.0a***
+####OAuth v1.0a
 
 OAuth 1.0a defines a standard protocol that enables app users to
 authorize apps to consume APIs on their behalf, without requiring app
@@ -62,7 +62,7 @@ developers can use to obtain access tokens. For more information, see
 v1.0a](http://apigee.com/docs/api-services/reference/oauth-10-policy)
 policy.
 
-***SAML***
+####SAML
 
 Apigee Edge enables you to authenticate and authorize apps that are
 capable of presenting SAML tokens. A SAML token is a digitally signed
@@ -77,14 +77,14 @@ to be used when communicating with backend services. For details on
 SAML validation, see [SAML Assertion
 policies](http://apigee.com/docs/api-services/reference/saml-assertion-policy).
 
-**Content Based Security**
+####Content Based Security
 
 Message content is a significant attack vector used by malicious API
 consumers. API Services provides a set of Policy types to mitigate the
 potential for your backend services to be compromised by attackers or
 by malformed request payloads.
 
-***JSON threat protection***
+####JSON threat protection
 
 JSON attacks attempt to use structures that overwhelm JSON parsers to
 crash a service and induce application-level denial-of-service
@@ -96,7 +96,7 @@ type.
 See [JSON Threat Protection
 policy](http://apigee.com/docs/api-services/reference/json-threat-protection-policy).
 
-***XML threat protection***
+####XML threat protection
 
 XML attacks attempt to use structures that overwhelm XML parsers to
 crash a service and induce application-level denial-of-service
@@ -108,7 +108,7 @@ type.
 See [XML Threat Protection
 policy](http://apigee.com/docs/api-services/reference/xml-threat-protection-policy).
 
-***General content protection***
+####General content protection
 
 Some content-based attacks use specific constructs in HTTP headers,
 query parameters, or payload content to attempt to execute code. An
@@ -118,7 +118,7 @@ the Regular Expression Protection Policy type.
 See [Regular Expression Protection
 policy](http://apigee.com/docs/api-services/reference/regular-expression-protection).
 
-***Data Masking***
+####Data Masking
 
 Apigee Edge enables developers to capture message content to enable
 runtime debugging of APIs calls. In many cases, API traffic contains
@@ -139,7 +139,7 @@ Masking](http://apigee.com/docs/api-services/content/data-masking)[
 
 [](http://apigee.com/docs/api-services/content/data-masking)
 
-**Objectives**
+##Objectives
 
 The objective of this lesson is to get you familiar with Apigee Edge
 OAuth 2.0 Token Validation policies.
@@ -152,7 +152,7 @@ security, in this lesson you will replace the API Key Verification
 policy with an OAuth 2.0 Token Validation policy using the
 client-credentials two-legged OAuth flow.
 
-**Prerequisites**
+##Prerequisites
 
 -   At a minimum, Lab 1 is completed.
 -   A preliminary understanding of OAuth 2.0.
@@ -160,7 +160,7 @@ client-credentials two-legged OAuth flow.
 
 **Estimated Time: 60 mins**
 
-**Publishing APIs**
+##Publishing APIs
 
 To make it easier for Developers to consume APIs, Apigee Edge provides
 the capability of publishing APIs. *Publishing* is the process of
@@ -335,7 +335,7 @@ proxy resources. You will use the Consumer Secret (i.e. the API
 Secret) in the next section when the security policy is changed from
 API Key Verification to an OAuth Token Validation policy.
 
-**Add security using OAuth 2.0: Client Credentials Grant**
+###Add security using OAuth 2.0: Client Credentials Grant
 
 For convenience, all organizations on Apigee Edge come preconfigured
 with a set of OAuth 2.0 endpoints that implement the ‘client
@@ -346,7 +346,7 @@ endpoint](http://apigee.com/docs/api-services/tutorials/secure-calls-your-api-th
 This section of the lesson explains how to protect an API using this
 default ‘oauth’ proxy configuration.
 
-**About the client credentials grant type**
+####About the client credentials grant type
 
 The client credentials grant type defines a procedure for issuing
 access tokens in exchange for *App credentials*. These app credentials
@@ -576,7 +576,7 @@ APIKey QP” policy.
     Send the Postman request, and review the Trace for the proxy and the returned
     response to ensure that the flow is working as expected.
 
-**Summary**
+##Summary
 
 That completes this hands-on lesson. In this lesson you learned about
 the various out-of-the-box security related policies that are available
